@@ -3,55 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Welcome to OurApp Site</title>
+  <title>Welcome | OurApp</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       background: #181a1b;
-      color: #f3f3f3;
-      margin: 0;
-      padding: 0;
-      display: flex;
+      color: #e3e3e3;
+      font-family: 'Segoe UI', Arial, sans-serif;
       min-height: 100vh;
-      flex-direction: column;
+      margin: 0;
+      display: flex;
       align-items: center;
       justify-content: center;
     }
-    .container {
+    .card {
       background: #23272b;
-      padding: 2rem 3rem;
-      border-radius: 10px;
-      box-shadow: 0 3px 24px #0008;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px #000a;
+      padding: 2.5rem 2rem 2rem 2rem;
       text-align: center;
+      max-width: 370px;
+      width: 100%;
     }
     h1 {
-      color: #00d8ff;
+      color: #00f0ff;
+      margin-bottom: 0.5em;
+      font-size: 2.3rem;
+    }
+    p {
+      color: #bfc9d1;
+      margin-bottom: 2.2em;
+    }
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      align-items: center;
     }
     a.button {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.75rem 2rem;
-      background: #00d8ff;
-      color: #23272b;
-      border-radius: 6px;
       text-decoration: none;
+      background: linear-gradient(90deg, #00d8ff 0%, #0af 100%);
+      color: #181a1b;
       font-weight: bold;
-      transition: background 0.2s;
+      padding: 0.85em 2em;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+      font-size: 1.12em;
+      box-shadow: 0 3px 12px #00d8ff33;
+      border: none;
+      cursor: pointer;
+      width: 80%;
+      max-width: 250px;
     }
     a.button:hover {
-      background: #009ec3;
+      background: linear-gradient(90deg, #009ec3 0%, #00d8ff 100%);
       color: #fff;
+    }
+    @media (max-width: 600px) {
+      .card { padding: 1.2rem 0.5rem; }
+      h1 { font-size: 1.34rem; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Welcome to OurApp!</h1>
+  <div class="card">
+    <h1>Welcome to OurApp 👋</h1>
     <p>
-      This is your new website homepage.<br>
-      You can edit <code>index.html</code> to make it your own!
+      This is your collaborative project homepage.<br>
+      All your steps, customizations, and links—just as you want them.<br>
+      Edit <code>index.html</code> to make it even more yours!
     </p>
-    <a href="https://github.com/Godsend69/ourapp-site" class="button" target="_blank">View Source on GitHub</a>
+    <div class="buttons">
+      <a href="https://github.com/Godsend69/ourapp-site" class="button" target="_blank">Source on GitHub</a>
+      <a href="https://github.com/Godsend69" class="button" target="_blank">Your GitHub Profile</a>
+      <a href="https://Godsend69.github.io/ourapp-site/" class="button" target="_blank">Live Home</a>
+    </div>
   </div>
 </body>
 </html>
