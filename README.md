@@ -1,70 +1,101 @@
-# my-nodejs-heroku-app
+# vary
 
-<<<<<<< HEAD
-A minimal Node.js/Express app ready for Heroku or local deployment.
+[![NPM Version][npm-image]][npm-url]
+[![NPM Downloads][downloads-image]][downloads-url]
+[![Node.js Version][node-version-image]][node-version-url]
+[![Build Status][travis-image]][travis-url]
+[![Test Coverage][coveralls-image]][coveralls-url]
 
-## Quick Start
+Manipulate the HTTP Vary header
 
-1. Install dependencies:
+## Installation
 
-=======
-![Deploy to Heroku](https://github.com/Godsend69/my-nodejs-heroku-app/actions/workflows/deploy-to-heroku.yml/badge.svg)
+This is a [Node.js](https://nodejs.org/en/) module available through the
+[npm registry](https://www.npmjs.com/). Installation is done using the
+[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally): 
 
-## About
+```sh
+$ npm install vary
+```
 
-This is a sample Node.js application demonstrating continuous deployment to Heroku using GitHub Actions. Every push to the `main` branch automatically triggers a deployment to Heroku, making it easy to keep your app live and up to date.
+## API
 
-## Live Demo
+<!-- eslint-disable no-unused-vars -->
 
-Check out the deployed app: [https://YOUR-HEROKU-APP-NAME.herokuapp.com](https://YOUR-HEROKU-APP-NAME.herokuapp.com)
-> _Replace `YOUR-HEROKU-APP-NAME` above with your actual Heroku app's name._
+```js
+var vary = require('vary')
+```
 
-## Technologies
+### vary(res, field)
 
-- Node.js
-- Express
-- Heroku
-- GitHub Actions
+Adds the given header `field` to the `Vary` response header of `res`.
+This can be a string of a single field, a string of a valid `Vary`
+header, or an array of multiple fields.
 
-## Running Locally
+This will append the header if not already listed, otherwise leaves
+it listed in the current location.
 
-1. **Clone this repository:**
-   ```bash
-   git clone https://github.com/Godsend69/my-nodejs-heroku-app.git
-   cd my-nodejs-heroku-app
-   ```
+<!-- eslint-disable no-undef -->
 
-2. **Install dependencies:**
->>>>>>> cdd8e568c84caef2fc2f608f7ffe7355b65048d7
-   ```bash
-   npm install
-   ```
+```js
+// Append "Origin" to the Vary header of the response
+vary(res, 'Origin')
+```
 
-<<<<<<< HEAD
-2. Run the app:
+### vary.append(header, field)
 
-=======
-3. **Start the app:**
->>>>>>> cdd8e568c84caef2fc2f608f7ffe7355b65048d7
-   ```bash
-   npm start
-   ```
+Adds the given header `field` to the `Vary` response header string `header`.
+This can be a string of a single field, a string of a valid `Vary` header,
+or an array of multiple fields.
 
-<<<<<<< HEAD
-3. Visit [http://localhost:3000](http://localhost:3000) in your browser.
-=======
-   The app will be available at [http://localhost:3000](http://localhost:3000) (or your configured port).
+This will append the header if not already listed, otherwise leaves
+it listed in the current location. The new header string is returned.
 
-## Deployment
+<!-- eslint-disable no-undef -->
 
-This project uses GitHub Actions to automatically deploy to Heroku on every push to `main`.  
-Secrets required for deployment:
-- `HEROKU_API_KEY`
-- `HEROKU_APP_NAME`
+```js
+// Get header string appending "Origin" to "Accept, User-Agent"
+vary.append('Accept, User-Agent', 'Origin')
+```
 
-You can set these in your repository's **Settings > Secrets and variables > Actions**.
+## Examples
 
----
+### Updating the Vary header when content is based on it
 
-Feel free to fork, modify, and use this as a template for your own Node.js + Heroku + GitHub Actions projects!
->>>>>>> cdd8e568c84caef2fc2f608f7ffe7355b65048d7
+```js
+var http = require('http')
+var vary = require('vary')
+
+http.createServer(function onRequest (req, res) {
+  // about to user-agent sniff
+  vary(res, 'User-Agent')
+
+  var ua = req.headers['user-agent'] || ''
+  var isMobile = /mobi|android|touch|mini/i.test(ua)
+
+  // serve site, depending on isMobile
+  res.setHeader('Content-Type', 'text/html')
+  res.end('You are (probably) ' + (isMobile ? '' : 'not ') + 'a mobile user')
+})
+```
+
+## Testing
+
+```sh
+$ npm test
+```
+
+## License
+
+[MIT](LICENSE)
+
+[npm-image]: https://img.shields.io/npm/v/vary.svg
+[npm-url]: https://npmjs.org/package/vary
+[node-version-image]: https://img.shields.io/node/v/vary.svg
+[node-version-url]: https://nodejs.org/en/download
+[travis-image]: https://img.shields.io/travis/jshttp/vary/master.svg
+[travis-url]: https://travis-ci.org/jshttp/vary
+[coveralls-image]: https://img.shields.io/coveralls/jshttp/vary/master.svg
+[coveralls-url]: https://coveralls.io/r/jshttp/vary
+[downloads-image]: https://img.shields.io/npm/dm/vary.svg
+[downloads-url]: https://npmjs.org/package/vary
