@@ -1,0 +1,15 @@
+# Exported from Render on 2025-07-01T05:48:51Z
+services:
+- type: web
+  name: my-nodejs-heroku-app
+  runtime: node
+  repo: https://github.com/Godsend69/my-nodejs-heroku-app
+  plan: free
+  envVars:
+  - key: node_app_variable
+    sync: false
+  region: oregon
+  buildCommand: yarn install
+  startCommand: npm start
+  autoDeployTrigger: commit
+version: "1"

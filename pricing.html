@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pricing | Our App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <!-- Navigation -->
+  <nav class="bg-white shadow p-4 flex gap-6 items-center">
+    <a href="/" class="font-bold text-2xl text-blue-700">OurApp</a>
+    <a href="/dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
+    <a href="/features.html" class="text-gray-800 hover:text-blue-600">Features</a>
+    <a href="/pricing.html" class="text-gray-800 hover:text-blue-600">Pricing</a>
+    <a href="/about.html" class="text-gray-800 hover:text-blue-600">About</a>
+    <a href="/contact.html" class="text-gray-800 hover:text-blue-600">Contact</a>
+    <a href="https://tsaconaspiros.blogspot.com/" target="_blank" rel="noopener" class="text-gray-800 hover:text-blue-600">Blog</a>
+  </nav>
+
+  <!-- Pricing Section -->
+  <main class="flex-grow flex items-center justify-center">
+    <section class="bg-white rounded-xl shadow-xl p-10 max-w-4xl w-full mt-16 mb-16 mx-2 text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-blue-800 mb-4">Pricing</h1>
+      <p class="text-lg mb-8 text-gray-700 font-medium">
+        Choose the plan that's right for you and unlock the full potential of OurApp!
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+        <!-- Free Plan -->
+        <div class="border rounded-lg p-6 flex flex-col items-center bg-gray-50">
+          <h2 class="text-2xl font-bold text-blue-600 mb-2">Free</h2>
+          <div class="text-3xl font-extrabold mb-4">€0</div>
+          <ul class="mb-6 text-gray-700 list-disc list-inside">
+            <li>Basic Dashboard Access</li>
+            <li>Community Forum</li>
+            <li>Limited Inspiration Feed</li>
+            <li>Email Support</li>
+          </ul>
+          <span class="bg-gray-200 text-gray-600 px-4 py-2 rounded-lg font-semibold cursor-default">Current Plan</span>
+        </div>
+        <!-- Pro Plan -->
+        <div class="border-2 border-blue-500 rounded-lg p-6 flex flex-col items-center bg-white shadow-lg">
+          <h2 class="text-2xl font-bold text-blue-600 mb-2">Pro</h2>
+          <div class="text-3xl font-extrabold mb-4">€9<span class="text-lg font-normal">/month</span></div>
+          <ul class="mb-6 text-gray-700 list-disc list-inside">
+            <li>All Free Features</li>
+            <li>Advanced Dashboard Tools</li>
+            <li>Unlimited Project Ideas</li>
+            <li>Priority Support</li>
+            <li>Access to Exclusive Content</li>
+          </ul>
+          <!-- PayPal Button (using your email) -->
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="w-full">
+            <input type="hidden" name="cmd" value="_xclick">
+            <input type="hidden" name="business" value="spirostsaconas@hotmail.com">
+            <input type="hidden" name="item_name" value="Pro Plan Subscription">
+            <input type="hidden" name="currency_code" value="EUR">
+            <input type="hidden" name="amount" value="9.00">
+            <button type="submit"
+              class="bg-blue-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700 transition w-full mt-2">
+              Pay with PayPal
+            </button>
+          </form>
+        </div>
+        <!-- Enterprise Plan -->
+        <div class="border rounded-lg p-6 flex flex-col items-center bg-gray-50">
+          <h2 class="text-2xl font-bold text-blue-600 mb-2">Enterprise</h2>
+          <div class="text-3xl font-extrabold mb-4">Custom</div>
+          <ul class="mb-6 text-gray-700 list-disc list-inside">
+            <li>All Pro Features</li>
+            <li>Custom Integrations</li>
+            <li>Dedicated Account Manager</li>
+            <li>Team Training & Onboarding</li>
+            <li>24/7 Priority Support</li>
+          </ul>
+          <a href="/contact.html"
+            class="bg-blue-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700 transition w-full text-center mt-2">
+            Contact Us
+          </a>
+        </div>
+      </div>
+      <p class="text-xs text-gray-500 mt-8">* The Pro plan is billed monthly via PayPal. Cancel anytime. For Enterprise inquiries, <a href="/contact.html" class="underline text-blue-600">contact us</a>.</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white shadow-inner py-6 text-center text-sm text-gray-500">
+    &copy; 2025 Spiros Tsaconas. All rights reserved.
+  </footer>
+</body>
+</html>

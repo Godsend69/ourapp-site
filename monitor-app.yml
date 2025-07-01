@@ -1,0 +1,21 @@
+name: Monitor App Output
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  check_output:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check homepage for unwanted dashes or symbols
+        run: |
+          output=$(curl -s http://localhost:3000/)
+          # Check for suspicious dashes or symbols: -- — –
+          if echo "$output" | grep -q -- '--\|—\|–'; then
+            echo "❌ Unexpected dashes or symbols found in app output!"
+            exit 1
+          else
+            echo "✅ No unexpected symbols detected."
+          fi
