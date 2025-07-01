@@ -17,21 +17,47 @@
     }
     .card {
       background: #23272b;
-      border-radius: 16px;
+      border-radius: 18px;
       box-shadow: 0 8px 32px #000a;
-      padding: 2.5rem 2rem 2rem 2rem;
+      padding: 2.7rem 2rem 2.2rem 2rem;
       text-align: center;
-      max-width: 370px;
+      max-width: 410px;
       width: 100%;
     }
     h1 {
       color: #00f0ff;
-      margin-bottom: 0.5em;
+      margin-bottom: 0.2em;
       font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .emoji {
+      font-size: 2.2rem;
+      margin-bottom: 0.3em;
+      display: block;
+      animation: wave 1.8s infinite;
+      transform-origin: 70% 70%;
+    }
+    @keyframes wave {
+      0%, 60%, 100% { transform: rotate(0deg);}
+      10% { transform: rotate(14deg);}
+      20% { transform: rotate(-8deg);}
+      30% { transform: rotate(14deg);}
+      40% { transform: rotate(-4deg);}
+      50% { transform: rotate(10deg);}
     }
     p {
       color: #bfc9d1;
-      margin-bottom: 2.2em;
+      margin-bottom: 2em;
+      font-size: 1.1em;
+      line-height: 1.45;
+    }
+    code {
+      background: #181a1b;
+      color: #00f0ff;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-size: 0.97em;
     }
     .buttons {
       display: flex;
@@ -44,29 +70,34 @@
       background: linear-gradient(90deg, #00d8ff 0%, #0af 100%);
       color: #181a1b;
       font-weight: bold;
-      padding: 0.85em 2em;
-      border-radius: 8px;
-      transition: background 0.2s, color 0.2s;
-      font-size: 1.12em;
-      box-shadow: 0 3px 12px #00d8ff33;
+      padding: 0.93em 2em;
+      border-radius: 10px;
+      transition: background 0.2s, color 0.2s, transform 0.15s;
+      font-size: 1.15em;
+      box-shadow: 0 3px 18px #00d8ff44;
       border: none;
       cursor: pointer;
-      width: 80%;
-      max-width: 250px;
+      width: 85%;
+      max-width: 275px;
+      letter-spacing: 0.2px;
     }
     a.button:hover {
       background: linear-gradient(90deg, #009ec3 0%, #00d8ff 100%);
       color: #fff;
+      transform: translateY(-2px) scale(1.025);
     }
     @media (max-width: 600px) {
-      .card { padding: 1.2rem 0.5rem; }
-      h1 { font-size: 1.34rem; }
+      .card { padding: 1.2rem 0.3rem; max-width: 99vw;}
+      h1 { font-size: 1.35rem; }
+      .emoji { font-size: 1.2rem; }
+      a.button { font-size: 1em; width: 97%; }
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>Welcome to OurApp 👋</h1>
+    <h1>Welcome to OurApp</h1>
+    <span class="emoji">👋</span>
     <p>
       This is your collaborative project homepage.<br>
       All your steps, customizations, and links—just as you want them.<br>
