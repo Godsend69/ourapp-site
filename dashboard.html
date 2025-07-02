@@ -7,7 +7,7 @@
   <link rel="icon" href="favicon.ico">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen flex flex-col">
+<body class="bg-gradient-to-br from-pink-50 to-blue-100 min-h-screen flex flex-col">
   <nav class="bg-white shadow p-4 flex gap-6 items-center">
     <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
     <a href="dashboard.html" class="font-semibold text-blue-700 underline">Dashboard</a>
@@ -16,22 +16,32 @@
     <a href="about-us.html" class="text-gray-800 hover:text-blue-600">About</a>
     <a href="contact.html" class="text-gray-800 hover:text-blue-600">Contact</a>
     <a href="blog.html" class="text-gray-800 hover:text-blue-600">Blog</a>
+    <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
   </nav>
-  <main class="flex-grow flex items-center justify-center">
-    <section class="bg-white bg-opacity-95 rounded-xl shadow-xl p-10 max-w-xl w-full my-16 mx-2 text-center">
-      <h1 class="text-4xl font-extrabold text-blue-800 mb-4">Welcome to your Dashboard</h1>
-      <p class="text-lg text-gray-700 mb-6">
-        Here you’ll find a quick overview of your activity and shortcuts to everything important.<br>
-        More dashboard features coming soon!
-      </p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="features.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full font-semibold text-lg shadow">See Features</a>
-        <a href="pricing.html" class="bg-white hover:bg-blue-50 text-blue-700 border border-blue-600 px-6 py-2 rounded-full font-semibold text-lg shadow">View Pricing</a>
-        <a href="contact.html" class="bg-white hover:bg-blue-50 text-blue-700 border border-blue-600 px-6 py-2 rounded-full font-semibold text-lg shadow">Contact Support</a>
+  <main class="flex-grow flex flex-col items-center justify-center">
+    <h1 class="text-4xl font-extrabold text-blue-800 mt-12 mb-4">Welcome to Your Dashboard</h1>
+    <p class="text-gray-700 text-lg max-w-xl text-center mb-10">
+      Quickly access your most important metrics, monitor system health, and manage your application from a single, powerful interface.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl">
+      <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+        <div class="text-blue-700 text-3xl mb-2">📈</div>
+        <div class="font-bold text-xl mb-1">Real-Time Analytics</div>
+        <div class="text-gray-600 text-center">View live usage stats and performance metrics as they happen.</div>
       </div>
-    </section>
+      <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+        <div class="text-blue-700 text-3xl mb-2">⚡</div>
+        <div class="font-bold text-xl mb-1">Quick Actions</div>
+        <div class="text-gray-600 text-center">Deploy updates, manage users, and control integrations in one click.</div>
+      </div>
+      <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+        <div class="text-blue-700 text-3xl mb-2">🔔</div>
+        <div class="font-bold text-xl mb-1">Instant Alerts</div>
+        <div class="text-gray-600 text-center">Never miss a critical update with real-time notifications and error tracking.</div>
+      </div>
+    </div>
   </main>
-  <footer class="bg-white shadow-inner py-6 text-center text-sm text-gray-500">
+  <footer class="bg-white shadow-inner py-6 text-center text-sm text-gray-500 mt-12">
     &copy; 2025 Spiros Tsaconas. All rights reserved.
   </footer>
 </body>
