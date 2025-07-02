@@ -1,34 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <title>Dashboard | OurApp</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OurApp by Spiros Tsaconas</title>
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="OurApp: Automation, monitoring, inspiration and resources by Spiros Tsaconas. Empowering creators and developers to build and grow.">
-  <meta name="keywords" content="automation, monitoring, inspiration, Spiros Tsaconas, OurApp, developer tools, tutorials">
-  <meta name="author" content="Spiros Tsaconas">
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://godsend69.github.io/ourapp-site/">
-  <meta property="og:title" content="OurApp by Spiros Tsaconas">
-  <meta property="og:description" content="Automation, monitoring, and inspiration for creators and developers.">
-  <meta property="og:image" content="https://godsend69.github.io/ourapp-site/og-image.png">
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://godsend69.github.io/ourapp-site/">
-  <meta name="twitter:title" content="OurApp by Spiros Tsaconas">
-  <meta name="twitter:description" content="Automation, monitoring, and inspiration for creators and developers.">
-  <meta name="twitter:image" content="https://godsend69.github.io/ourapp-site/og-image.png">
+  <link rel="icon" href="favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex flex-col min-h-screen">
+<body class="bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen flex flex-col">
   <nav class="bg-white shadow p-4 flex gap-6 items-center">
     <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
-    <a href="dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
+    <a href="dashboard.html" class="font-semibold text-blue-700 underline">Dashboard</a>
     <a href="features.html" class="text-gray-800 hover:text-blue-600">Features</a>
     <a href="pricing.html" class="text-gray-800 hover:text-blue-600">Pricing</a>
     <a href="about-us.html" class="text-gray-800 hover:text-blue-600">About</a>
@@ -36,13 +18,16 @@
     <a href="blog.html" class="text-gray-800 hover:text-blue-600">Blog</a>
   </nav>
   <main class="flex-grow flex items-center justify-center">
-    <section class="bg-white rounded-xl shadow-xl p-10 max-w-2xl w-full my-16 mx-2 text-center">
-      <h1 class="text-4xl font-bold text-blue-800 mb-4">Dashboard</h1>
+    <section class="bg-white bg-opacity-95 rounded-xl shadow-xl p-10 max-w-xl w-full my-16 mx-2 text-center">
+      <h1 class="text-4xl font-extrabold text-blue-800 mb-4">Welcome to your Dashboard</h1>
       <p class="text-lg text-gray-700 mb-6">
-        Welcome to your Dashboard! Here you'll soon be able to track feature usage, manage your projects, and get personalized recommendations.
+        Here you’ll find a quick overview of your activity and shortcuts to everything important.<br>
+        More dashboard features coming soon!
       </p>
-      <div class="bg-blue-50 p-6 rounded-xl text-blue-700 text-lg font-semibold">
-        <span>🚧 This dashboard is under construction. Stay tuned for updates! 🚧</span>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="features.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full font-semibold text-lg shadow">See Features</a>
+        <a href="pricing.html" class="bg-white hover:bg-blue-50 text-blue-700 border border-blue-600 px-6 py-2 rounded-full font-semibold text-lg shadow">View Pricing</a>
+        <a href="contact.html" class="bg-white hover:bg-blue-50 text-blue-700 border border-blue-600 px-6 py-2 rounded-full font-semibold text-lg shadow">Contact Support</a>
       </div>
     </section>
   </main>
