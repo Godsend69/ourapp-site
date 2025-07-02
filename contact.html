@@ -7,7 +7,7 @@
   <link rel="icon" href="favicon.ico">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-br from-yellow-50 to-blue-100 min-h-screen flex flex-col">
+<body class="bg-gradient-to-br from-pink-50 to-blue-100 min-h-screen flex flex-col">
   <nav class="bg-white shadow p-4 flex gap-6 items-center">
     <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
     <a href="dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
@@ -16,29 +16,31 @@
     <a href="about-us.html" class="text-gray-800 hover:text-blue-600">About</a>
     <a href="contact.html" class="font-semibold text-blue-700 underline">Contact</a>
     <a href="blog.html" class="text-gray-800 hover:text-blue-600">Blog</a>
+    <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
   </nav>
   <main class="flex-grow flex items-center justify-center">
-    <section class="bg-white bg-opacity-95 rounded-xl shadow-xl p-10 max-w-xl w-full my-16 mx-2 text-center">
-      <h1 class="text-4xl font-extrabold text-blue-800 mb-4">Contact Us</h1>
-      <p class="text-lg text-gray-700 mb-6">
-        Have a question or need help? Fill out the form below and our team will get back to you as soon as possible!
+    <section class="bg-white bg-opacity-95 rounded-xl shadow-xl p-10 max-w-lg w-full my-16 mx-2">
+      <h1 class="text-3xl font-extrabold text-blue-800 mb-6">Contact Us</h1>
+      <p class="text-gray-700 text-lg mb-8">
+        We'd love to hear from you! Fill out the form below or reach out via email and we'll get back to you as soon as possible.
       </p>
-      <form class="space-y-6" name="contact" method="POST" data-netlify="true">
+      <form class="space-y-6" autocomplete="off">
         <div>
-          <input type="text" name="name" required placeholder="Your Name" class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <label class="block text-gray-700 font-semibold mb-2" for="name">Name</label>
+          <input class="w-full px-4 py-2 rounded border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400" type="text" id="name" name="name" required>
         </div>
         <div>
-          <input type="email" name="email" required placeholder="Your Email" class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <label class="block text-gray-700 font-semibold mb-2" for="email">Email</label>
+          <input class="w-full px-4 py-2 rounded border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400" type="email" id="email" name="email" required>
         </div>
         <div>
-          <textarea name="message" required placeholder="Your Message" rows="4" class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+          <label class="block text-gray-700 font-semibold mb-2" for="message">Message</label>
+          <textarea class="w-full px-4 py-2 rounded border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400" id="message" name="message" rows="5" required></textarea>
         </div>
-        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-full font-semibold shadow">
-          Send Message
-        </button>
+        <button type="submit" class="w-full bg-blue-700 text-white font-bold py-2 rounded hover:bg-blue-800 transition">Send Message</button>
       </form>
-      <div class="mt-8 text-gray-700 text-sm">
-        Or email us directly at: <a href="mailto:info@ourapp.com" class="text-blue-700 underline">info@ourapp.com</a>
+      <div class="mt-8 text-center text-gray-600 text-sm">
+        Or email us at <a href="mailto:info@ourapp.com" class="text-blue-700 underline">info@ourapp.com</a>
       </div>
     </section>
   </main>
