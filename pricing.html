@@ -7,7 +7,7 @@
   <link rel="icon" href="favicon.ico">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-br from-green-50 to-blue-100 min-h-screen flex flex-col">
+<body class="bg-gradient-to-br from-pink-50 to-blue-100 min-h-screen flex flex-col">
   <nav class="bg-white shadow p-4 flex gap-6 items-center">
     <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
     <a href="dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
@@ -16,46 +16,51 @@
     <a href="about-us.html" class="text-gray-800 hover:text-blue-600">About</a>
     <a href="contact.html" class="text-gray-800 hover:text-blue-600">Contact</a>
     <a href="blog.html" class="text-gray-800 hover:text-blue-600">Blog</a>
+    <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
   </nav>
   <main class="flex-grow flex items-center justify-center">
-    <section class="bg-white bg-opacity-95 rounded-xl shadow-xl p-10 max-w-3xl w-full my-16 mx-2 text-center">
-      <h1 class="text-4xl font-extrabold text-blue-800 mb-4">Simple, Transparent Pricing</h1>
-      <p class="text-lg text-gray-700 mb-8">Choose the plan that’s right for you. No hidden fees, cancel anytime.</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <section class="bg-white bg-opacity-95 rounded-xl shadow-xl p-10 max-w-3xl w-full my-16 mx-2">
+      <h1 class="text-3xl font-extrabold text-blue-800 mb-6">Pricing</h1>
+      <p class="text-gray-700 text-lg mb-8">
+        Choose the plan that fits your needs. Simple, transparent pricing for businesses of all sizes.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Free Plan -->
-        <div class="bg-blue-50 rounded-lg p-6 shadow text-center flex flex-col">
-          <h2 class="text-2xl font-bold text-blue-700 mb-2">Free</h2>
-          <div class="text-3xl font-extrabold mb-2">€0</div>
-          <ul class="text-gray-700 text-left flex-1 mb-4 list-disc list-inside">
-            <li>Basic Dashboard</li>
-            <li>Email Support</li>
-            <li>Community Access</li>
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 flex flex-col items-center shadow">
+          <h2 class="text-xl font-bold text-blue-700 mb-2">Starter</h2>
+          <div class="text-3xl font-extrabold text-blue-800 mb-2">Free</div>
+          <ul class="text-gray-700 mb-4 space-y-1 text-center">
+            <li>Basic monitoring</li>
+            <li>Community support</li>
+            <li>Single user</li>
           </ul>
-          <a href="contact.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-semibold">Get Started</a>
+          <button class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition">Get Started</button>
         </div>
         <!-- Pro Plan -->
-        <div class="bg-green-100 rounded-lg p-6 shadow-lg scale-105 border-2 border-blue-700 text-center flex flex-col">
-          <h2 class="text-2xl font-bold text-blue-700 mb-2">Pro</h2>
-          <div class="text-3xl font-extrabold mb-2">€9<span class="text-lg font-normal">/mo</span></div>
-          <ul class="text-gray-700 text-left flex-1 mb-4 list-disc list-inside">
-            <li>All Free Features</li>
-            <li>Advanced Analytics</li>
-            <li>Priority Support</li>
-            <li>Custom Integrations</li>
+        <div class="bg-white border-2 border-blue-600 rounded-lg p-6 flex flex-col items-center shadow-xl scale-105">
+          <h2 class="text-xl font-bold text-blue-700 mb-2">Pro</h2>
+          <div class="text-3xl font-extrabold text-blue-800 mb-2">$19<span class="text-lg font-normal">/mo</span></div>
+          <ul class="text-gray-700 mb-4 space-y-1 text-center">
+            <li>All Starter features</li>
+            <li>Advanced monitoring & alerts</li>
+            <li>Automated deployments</li>
+            <li>Email support</li>
+            <li>Up to 10 users</li>
           </ul>
-          <a href="contact.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-semibold">Start Free Trial</a>
+          <button class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition">Choose Pro</button>
         </div>
-        <!-- Business Plan -->
-        <div class="bg-blue-50 rounded-lg p-6 shadow text-center flex flex-col">
-          <h2 class="text-2xl font-bold text-blue-700 mb-2">Business</h2>
-          <div class="text-3xl font-extrabold mb-2">€29<span class="text-lg font-normal">/mo</span></div>
-          <ul class="text-gray-700 text-left flex-1 mb-4 list-disc list-inside">
-            <li>Everything in Pro</li>
-            <li>API Access</li>
-            <li>Dedicated Account Manager</li>
-            <li>Early Feature Access</li>
+        <!-- Enterprise Plan -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 flex flex-col items-center shadow">
+          <h2 class="text-xl font-bold text-blue-700 mb-2">Enterprise</h2>
+          <div class="text-3xl font-extrabold text-blue-800 mb-2">Custom</div>
+          <ul class="text-gray-700 mb-4 space-y-1 text-center">
+            <li>All Pro features</li>
+            <li>Priority support</li>
+            <li>Custom integrations</li>
+            <li>Dedicated account manager</li>
+            <li>Unlimited users</li>
           </ul>
-          <a href="contact.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-semibold">Contact Sales</a>
+          <button class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition">Contact Sales</button>
         </div>
       </div>
     </section>
