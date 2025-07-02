@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <title>OurApp | Modern Solutions for Your Business</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OurApp | Welcome</title>
-  <meta name="description" content="Welcome to OurApp – automation, inspiration, and resources for creators and developers." />
-  <link rel="icon" href="favicon.ico" />
+  <link rel="icon" href="favicon.ico">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen flex flex-col">
-  <!-- Navigation Bar -->
-  <nav class="bg-white shadow p-4 flex gap-6 items-center sticky top-0 z-10">
+<body class="bg-gradient-to-br from-pink-50 to-blue-100 min-h-screen flex flex-col">
+  <nav class="bg-white shadow p-4 flex gap-6 items-center">
     <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
     <a href="dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
     <a href="features.html" class="text-gray-800 hover:text-blue-600">Features</a>
@@ -18,23 +16,38 @@
     <a href="about-us.html" class="text-gray-800 hover:text-blue-600">About</a>
     <a href="contact.html" class="text-gray-800 hover:text-blue-600">Contact</a>
     <a href="blog.html" class="text-gray-800 hover:text-blue-600">Blog</a>
+    <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
   </nav>
-  <!-- Hero Section -->
-  <main class="flex-grow flex items-center justify-center">
-    <section class="bg-white bg-opacity-90 rounded-xl shadow-xl p-10 max-w-2xl w-full my-16 mx-2 text-center">
-      <h1 class="text-5xl font-extrabold text-blue-800 mb-4">Welcome to OurApp</h1>
-      <p class="text-xl text-gray-700 mb-6">
-        Unlock automation, inspiration, and resources for your creative journey.
-      </p>
-      <div class="flex flex-wrap justify-center gap-4 mb-8">
-        <a href="features.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full font-semibold text-lg shadow">Explore Features</a>
-        <a href="pricing.html" class="bg-white hover:bg-blue-50 text-blue-700 border border-blue-600 px-6 py-2 rounded-full font-semibold text-lg shadow">See Pricing</a>
-        <a href="blog.html" class="bg-white hover:bg-blue-50 text-blue-700 border border-blue-600 px-6 py-2 rounded-full font-semibold text-lg shadow">Inspiration Blog</a>
+  <main class="flex-grow flex flex-col items-center justify-center text-center">
+    <h1 class="text-5xl font-extrabold text-blue-800 mt-20 mb-4">Empowering Modern Businesses</h1>
+    <p class="text-xl text-gray-700 mb-8 max-w-2xl">
+      OurApp provides real-time monitoring, automated deployment, robust security, and seamless integrations to help your business grow and thrive. 
+      Experience reliability and innovation in every feature.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 mb-16">
+      <a href="dashboard.html" class="bg-blue-700 text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-blue-800 transition">Go to Dashboard</a>
+      <a href="features.html" class="bg-white border border-blue-300 text-blue-700 px-8 py-3 rounded-lg font-bold text-lg hover:bg-blue-50 transition">See Features</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl">
+      <div class="bg-white bg-opacity-90 rounded-xl shadow p-6 flex flex-col items-center">
+        <div class="text-blue-700 text-4xl mb-2">🔍</div>
+        <div class="font-bold text-xl mb-1">Real-Time Monitoring</div>
+        <div class="text-gray-600 text-center">Instantly track app performance, errors, and user metrics for peace of mind.</div>
       </div>
-      <div class="text-gray-500 mt-6 text-sm">
-        &copy; 2025 Spiros Tsaconas. All rights reserved.
+      <div class="bg-white bg-opacity-90 rounded-xl shadow p-6 flex flex-col items-center">
+        <div class="text-blue-700 text-4xl mb-2">⚡</div>
+        <div class="font-bold text-xl mb-1">Automated Deployments</div>
+        <div class="text-gray-600 text-center">Deploy seamlessly with CI/CD tools and ensure zero downtime for your users.</div>
       </div>
-    </section>
+      <div class="bg-white bg-opacity-90 rounded-xl shadow p-6 flex flex-col items-center">
+        <div class="text-blue-700 text-4xl mb-2">🛡️</div>
+        <div class="font-bold text-xl mb-1">Enterprise Security</div>
+        <div class="text-gray-600 text-center">Protect your data and users with industry-leading security solutions.</div>
+      </div>
+    </div>
   </main>
+  <footer class="bg-white shadow-inner py-6 text-center text-sm text-gray-500 mt-12">
+    &copy; 2025 Spiros Tsaconas. All rights reserved.
+  </footer>
 </body>
 </html>
