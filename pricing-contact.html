@@ -1,52 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact for Upgrade</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f9f9f9; padding: 2em; }
-    .contact-form { max-width: 400px; margin: auto; background: white; padding: 2em; border-radius: 8px; box-shadow: 0 0 10px #ddd; }
-    .contact-form input, .contact-form textarea { width: 100%; margin-bottom: 1em; padding: 0.8em; border: 1px solid #ccc; border-radius: 4px; }
-    .contact-form button { background: #007bff; color: white; padding: 0.8em 1.2em; border: none; border-radius: 4px; cursor: pointer; font-size: 1em; }
-    .contact-form button:hover { background: #0056b3; }
-  </style>
-</head>
-<body>
-  <div class="contact-form">
-    <h2>Contact for Upgrade</h2>
-    <form id="upgradeForm">
-      <label for="name">Your Name</label>
-      <input type="text" id="name" required>
-      <label for="email">Your Email</label>
-      <input type="email" id="email" required>
-      <label for="plan">Plan of Interest</label>
-      <select id="plan" required>
-        <option value="Pro">Pro</option>
-        <option value="Enterprise">Enterprise</option>
-      </select>
-      <label for="message">Your Message</label>
-      <textarea id="message" rows="4" placeholder="Any specific requests or questions?"></textarea>
-      <button type="submit">Send Request</button>
-    </form>
+<!-- Pricing Section -->
+<div class="pricing">
+  <h2>Our Pricing</h2>
+  <div class="plan">
+    <h3>Pro Plan</h3>
+    <p>Everything you need for small teams.</p>
+    <a href="pricing-contact.html" class="pricing-btn">Contact for Pro</a>
   </div>
-  <script>
-    document.getElementById('upgradeForm').onsubmit = function(e) {
-      e.preventDefault();
-      var name = encodeURIComponent(document.getElementById('name').value);
-      var email = encodeURIComponent(document.getElementById('email').value);
-      var plan = encodeURIComponent(document.getElementById('plan').value);
-      var message = encodeURIComponent(document.getElementById('message').value);
+  <div class="plan">
+    <h3>Enterprise Plan</h3>
+    <p>Best for large organizations with custom needs.</p>
+    <a href="pricing-contact.html" class="pricing-btn">Contact for Enterprise</a>
+  </div>
+</div>
 
-      var mailto = 'mailto:spirostsaconas1969@gmail.com'
-        + '?subject=' + plan + '%20Upgrade%20Request'
-        + '&body=Name:%20' + name
-        + '%0AEmail:%20' + email
-        + '%0APlan:%20' + plan
-        + '%0AMessage:%20' + message;
-
-      window.location.href = mailto;
-    };
-  </script>
-</body>
-</html>
+<!-- Optional: Add some basic styling if you want the buttons to stand out -->
+<style>
+.pricing {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #eee;
+}
+.plan {
+  margin-bottom: 30px;
+}
+.pricing-btn {
+  display: inline-block;
+  background: #007bff;
+  color: #fff;
+  padding: 0.7em 1.5em;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.pricing-btn:hover {
+  background: #0056b3;
+}
+</style>
