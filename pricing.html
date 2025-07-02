@@ -2,71 +2,101 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Pricing | OurApp</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="favicon.ico">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Our Pricing</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6fa;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 12px #e0e0e0;
+      padding: 2em;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #222;
+    }
+    .pricing {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 2em;
+      flex-wrap: wrap;
+    }
+    .plan {
+      background: #f8faff;
+      border: 1px solid #dde5ee;
+      border-radius: 8px;
+      padding: 2em 1.5em;
+      width: 320px;
+      margin: 1em 0.5em;
+      box-shadow: 0 2px 8px #f0f0f0;
+      text-align: center;
+      transition: box-shadow 0.2s;
+    }
+    .plan:hover {
+      box-shadow: 0 4px 16px #ccc;
+    }
+    .plan h3 {
+      margin-top: 0;
+      color: #007bff;
+    }
+    .plan p {
+      color: #555;
+      margin-bottom: 1.5em;
+    }
+    .pricing-btn {
+      display: inline-block;
+      background: #007bff;
+      color: #fff;
+      padding: 0.8em 2em;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1em;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .pricing-btn:hover {
+      background: #0056b3;
+    }
+    @media (max-width: 700px) {
+      .pricing {
+        flex-direction: column;
+        align-items: center;
+      }
+      .plan {
+        width: 90%;
+      }
+    }
+  </style>
 </head>
-<body class="bg-gradient-to-br from-pink-50 to-blue-100 min-h-screen flex flex-col">
-  <nav class="bg-white shadow p-4 flex gap-6 items-center">
-    <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
-    <a href="dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
-    <a href="features.html" class="text-gray-800 hover:text-blue-600">Features</a>
-    <a href="pricing.html" class="font-semibold text-blue-700 underline">Pricing</a>
-    <a href="about-us.html" class="text-gray-800 hover:text-blue-600">About</a>
-    <a href="contact.html" class="text-gray-800 hover:text-blue-600">Contact</a>
-    <a href="blog.html" class="text-gray-800 hover:text-blue-600">Blog</a>
-    <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
-  </nav>
-  <main class="flex-grow flex items-center justify-center">
-    <section class="bg-white bg-opacity-95 rounded-xl shadow-xl p-10 max-w-3xl w-full my-16 mx-2">
-      <h1 class="text-3xl font-extrabold text-blue-800 mb-6">Pricing</h1>
-      <p class="text-gray-700 text-lg mb-8">
-        Choose the plan that fits your needs. Simple, transparent pricing for businesses of all sizes.
-      </p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Free Plan -->
-        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 flex flex-col items-center shadow">
-          <h2 class="text-xl font-bold text-blue-700 mb-2">Starter</h2>
-          <div class="text-3xl font-extrabold text-blue-800 mb-2">Free</div>
-          <ul class="text-gray-700 mb-4 space-y-1 text-center">
-            <li>Basic monitoring</li>
-            <li>Community support</li>
-            <li>Single user</li>
-          </ul>
-          <button class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition">Get Started</button>
-        </div>
-        <!-- Pro Plan -->
-        <div class="bg-white border-2 border-blue-600 rounded-lg p-6 flex flex-col items-center shadow-xl scale-105">
-          <h2 class="text-xl font-bold text-blue-700 mb-2">Pro</h2>
-          <div class="text-3xl font-extrabold text-blue-800 mb-2">$19<span class="text-lg font-normal">/mo</span></div>
-          <ul class="text-gray-700 mb-4 space-y-1 text-center">
-            <li>All Starter features</li>
-            <li>Advanced monitoring & alerts</li>
-            <li>Automated deployments</li>
-            <li>Email support</li>
-            <li>Up to 10 users</li>
-          </ul>
-          <button class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition">Choose Pro</button>
-        </div>
-        <!-- Enterprise Plan -->
-        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 flex flex-col items-center shadow">
-          <h2 class="text-xl font-bold text-blue-700 mb-2">Enterprise</h2>
-          <div class="text-3xl font-extrabold text-blue-800 mb-2">Custom</div>
-          <ul class="text-gray-700 mb-4 space-y-1 text-center">
-            <li>All Pro features</li>
-            <li>Priority support</li>
-            <li>Custom integrations</li>
-            <li>Dedicated account manager</li>
-            <li>Unlimited users</li>
-          </ul>
-          <button class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition">Contact Sales</button>
-        </div>
+<body>
+  <div class="container">
+    <h1>Our Pricing</h1>
+    <p style="text-align:center; color:#555;">
+      Choose the plan that best fits your needs and contact us for upgrades or questions.
+    </p>
+
+    <div class="pricing">
+      <div class="plan">
+        <h3>Pro Plan</h3>
+        <p>Everything you need for your growing team. Includes advanced features and priority support.</p>
+        <a href="pricing-contact.html" class="pricing-btn">Contact for Pro</a>
       </div>
-    </section>
-  </main>
-  <footer class="bg-white shadow-inner py-6 text-center text-sm text-gray-500">
-    &copy; 2025 Spiros Tsaconas. All rights reserved.
-  </footer>
+      <div class="plan">
+        <h3>Enterprise Plan</h3>
+        <p>Best for large organizations with custom needs, dedicated onboarding, and premium support.</p>
+        <a href="pricing-contact.html" class="pricing-btn">Contact for Enterprise</a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
