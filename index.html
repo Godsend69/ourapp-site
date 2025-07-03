@@ -45,6 +45,47 @@
       </div>
     </div>
   </main>
+  <!-- Like & Comment Section (Unified, Simple, No Backend) -->
+  <div id="like-comment-section" style="max-width:600px;margin:2em auto 3em auto;padding:1.5em 1em 1em 1em;border:1px solid #ddd;border-radius:0.8em;background:#f8f8ff;">
+    <!-- Like Button -->
+    <div style="display:flex;align-items:center;gap:1em;margin-bottom:1em;">
+      <button id="like-btn" style="padding:0.5em 1.2em;font-size:1.1em;border-radius:0.5em;border:1px solid #aaa;background:#f0f0f0;cursor:pointer;">
+        👍 Like <span id="like-count">0</span>
+      </button>
+      <span style="color:#555;font-size:0.98em;">Show some love for this page!</span>
+    </div>
+    <!-- Comments -->
+    <div>
+      <div style="font-weight:bold;font-size:1.07em;margin-bottom:0.4em;">Comments</div>
+      <div id="comments-list" style="min-height:2em;margin-bottom:0.7em;"></div>
+      <textarea id="comment-input" rows="2" style="width:100%;padding:0.5em;border-radius:0.3em;border:1px solid #bbb;" placeholder="Write a comment..."></textarea>
+      <button id="add-comment" style="margin-top:0.5em;padding:0.4em 1em;border-radius:0.4em;border:1px solid #aaa;background:#f0f0f0;cursor:pointer;">Add Comment</button>
+    </div>
+  </div>
+  <script>
+    // Like button
+    let likeCount = 0;
+    const likeBtn = document.getElementById('like-btn');
+    const likeDisplay = document.getElementById('like-count');
+    likeBtn.addEventListener('click', function() {
+      likeCount++;
+      likeDisplay.textContent = likeCount;
+    });
+
+    // Comments section
+    const comments = [];
+    const commentInput = document.getElementById('comment-input');
+    const addCommentBtn = document.getElementById('add-comment');
+    const commentsList = document.getElementById('comments-list');
+    addCommentBtn.addEventListener('click', function() {
+      const value = commentInput.value.trim();
+      if (value) {
+        comments.push(value);
+        commentsList.innerHTML = comments.map(c => `<div style="border-bottom:1px dashed #eee;padding:0.4em 0;">${c}</div>`).join('');
+        commentInput.value = '';
+      }
+    });
+  </script>
   <footer class="bg-white shadow-inner py-6 text-center text-sm text-gray-500 mt-12">
     &copy; 2025 Spiros Tsaconas. All rights reserved.
   </footer>
