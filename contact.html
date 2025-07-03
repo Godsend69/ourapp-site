@@ -3,47 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <title>Contact | OurApp</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="favicon.ico">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-br from-pink-50 to-blue-100 min-h-screen flex flex-col">
+<body class="bg-blue-50 min-h-screen flex flex-col">
   <nav class="bg-white shadow p-4 flex gap-6 items-center">
     <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
     <a href="dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
     <a href="features.html" class="text-gray-800 hover:text-blue-600">Features</a>
     <a href="pricing.html" class="text-gray-800 hover:text-blue-600">Pricing</a>
     <a href="about-us.html" class="text-gray-800 hover:text-blue-600">About</a>
-    <a href="contact.html" class="font-semibold text-blue-700 underline">Contact</a>
+    <a href="contact.html" class="text-gray-800 hover:text-blue-600 font-bold underline underline-offset-4">Contact</a>
     <a href="blog.html" class="text-gray-800 hover:text-blue-600">Blog</a>
     <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
   </nav>
   <main class="flex-grow flex items-center justify-center">
-    <section class="bg-white bg-opacity-95 rounded-xl shadow-xl p-10 max-w-lg w-full my-16 mx-2">
-      <h1 class="text-3xl font-extrabold text-blue-800 mb-6">Contact Us</h1>
-      <p class="text-gray-700 text-lg mb-8">
-        We'd love to hear from you! Fill out the form below or reach out via email and we'll get back to you as soon as possible.
+    <section class="bg-white rounded-xl shadow-2xl p-10 max-w-xl w-full my-16 mx-2 text-center">
+      <h1 class="text-4xl font-extrabold text-blue-800 mb-6">Contact Us</h1>
+      <p class="mb-8 text-gray-700 text-base md:text-lg">
+        We'd love to hear from you! Fill out the form below or reach us by email.
       </p>
-      <form class="space-y-6" autocomplete="off">
-        <div>
-          <label class="block text-gray-700 font-semibold mb-2" for="name">Name</label>
-          <input class="w-full px-4 py-2 rounded border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400" type="text" id="name" name="name" required>
-        </div>
-        <div>
-          <label class="block text-gray-700 font-semibold mb-2" for="email">Email</label>
-          <input class="w-full px-4 py-2 rounded border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400" type="email" id="email" name="email" required>
-        </div>
-        <div>
-          <label class="block text-gray-700 font-semibold mb-2" for="message">Message</label>
-          <textarea class="w-full px-4 py-2 rounded border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400" id="message" name="message" rows="5" required></textarea>
-        </div>
-        <button type="submit" class="w-full bg-blue-700 text-white font-bold py-2 rounded hover:bg-blue-800 transition">Send Message</button>
+      <form class="flex flex-col gap-4 items-center" autocomplete="off">
+        <input type="text" placeholder="Your Name" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300" required>
+        <input type="email" placeholder="Your Email" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300" required>
+        <textarea placeholder="Your Message" rows="4" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300" required></textarea>
+        <button type="submit" class="bg-blue-700 text-white px-6 py-2 rounded font-bold hover:bg-blue-800 transition">Send Message</button>
       </form>
-      <div class="mt-8 text-center text-gray-600 text-sm">
-        Or email us at <a href="mailto:info@ourapp.com" class="text-blue-700 underline">info@ourapp.com</a>
+      <div class="mt-8 text-gray-600 text-sm">
+        Or email us directly at <a href="mailto:support@ourapp.com" class="text-blue-700 font-semibold hover:underline">support@ourapp.com</a>
       </div>
     </section>
   </main>
+  <!-- Like & Comment Section (Unified, Simple, No Backend) -->
+  <div id="like-comment-section" style="max-width:600px;margin:2em auto 3em auto;padding:1.5em 1em 1em 1em;border:1px solid #ddd;border-radius:0.8em;background:#f8f8ff;">
+    <!-- Like Button -->
+    <div style="display:flex;align-items:center;gap:1em;margin-bottom:1em;">
+      <button id="like-btn" style="padding:0.5em 1.2em;font-size:1.1em;border-radius:0.5em;border:1px solid #aaa;background:#f0f0f0;cursor:pointer;">
+        👍 Like <span id="like-count">0</span>
+      </button>
+      <span style="color:#555;font-size:0.98em;">Show some love for this page!</span>
+    </div>
+    <!-- Comments -->
+    <div>
+      <div style="font-weight:bold;font-size:1.07em;margin-bottom:0.4em;">Comments</div>
+      <div id="comments-list" style="min-height:2em;margin-bottom:0.7em;"></div>
+      <textarea id="comment-input" rows="2" style="width:100%;padding:0.5em;border-radius:0.3em;border:1px solid #bbb;" placeholder="Write a comment..."></textarea>
+      <button id="add-comment" style="margin-top:0.5em;padding:0.4em 1em;border-radius:0.4em;border:1px solid #aaa;background:#f0f0f0;cursor:pointer;">Add Comment</button>
+    </div>
+  </div>
+  <script>
+    // Like button
+    let likeCount = 0;
+    const likeBtn = document.getElementById('like-btn');
+    const likeDisplay = document.getElementById('like-count');
+    likeBtn.addEventListener('click', function() {
+      likeCount++;
+      likeDisplay.textContent = likeCount;
+    });
+
+    // Comments section
+    const comments = [];
+    const commentInput = document.getElementById('comment-input');
+    const addCommentBtn = document.getElementById('add-comment');
+    const commentsList = document.getElementById('comments-list');
+    addCommentBtn.addEventListener('click', function() {
+      const value = commentInput.value.trim();
+      if (value) {
+        comments.push(value);
+        commentsList.innerHTML = comments.map(c => `<div style="border-bottom:1px dashed #eee;padding:0.4em 0;">${c}</div>`).join('');
+        commentInput.value = '';
+      }
+    });
+  </script>
+  <!-- Footer -->
   <footer class="bg-white shadow-inner py-6 text-center text-sm text-gray-500">
     &copy; 2025 Spiros Tsaconas. All rights reserved.
   </footer>
