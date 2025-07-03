@@ -3,14 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Dashboard | OurApp</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="favicon.ico">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-br from-pink-50 to-blue-100 min-h-screen flex flex-col">
+<body class="bg-gray-50 min-h-screen flex flex-col">
   <nav class="bg-white shadow p-4 flex gap-6 items-center">
     <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
-    <a href="dashboard.html" class="font-semibold text-blue-700 underline">Dashboard</a>
+    <a href="dashboard.html" class="text-gray-800 hover:text-blue-600 font-bold underline underline-offset-4">Dashboard</a>
     <a href="features.html" class="text-gray-800 hover:text-blue-600">Features</a>
     <a href="pricing.html" class="text-gray-800 hover:text-blue-600">Pricing</a>
     <a href="about-us.html" class="text-gray-800 hover:text-blue-600">About</a>
@@ -18,29 +16,70 @@
     <a href="blog.html" class="text-gray-800 hover:text-blue-600">Blog</a>
     <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
   </nav>
-  <main class="flex-grow flex flex-col items-center justify-center">
-    <h1 class="text-4xl font-extrabold text-blue-800 mt-12 mb-4">Welcome to Your Dashboard</h1>
-    <p class="text-gray-700 text-lg max-w-xl text-center mb-10">
-      Quickly access your most important metrics, monitor system health, and manage your application from a single, powerful interface.
+  <main class="flex-grow flex flex-col items-center justify-center text-center">
+    <h1 class="text-4xl font-extrabold text-blue-800 mt-16 mb-6">Dashboard</h1>
+    <p class="text-lg text-gray-700 mb-8 max-w-2xl">
+      Welcome to your Dashboard. Here you can monitor your app's metrics, control deployments, and see real-time insights.
     </p>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl">
-      <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
-        <div class="text-blue-700 text-3xl mb-2">📈</div>
-        <div class="font-bold text-xl mb-1">Real-Time Analytics</div>
-        <div class="text-gray-600 text-center">View live usage stats and performance metrics as they happen.</div>
+    <div class="w-full max-w-3xl grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <div class="bg-white rounded-xl shadow p-6 flex flex-col items-center">
+        <div class="text-blue-700 text-3xl mb-1">📊</div>
+        <div class="font-bold text-lg mb-1">Analytics</div>
+        <div class="text-gray-600 text-center">Track user activity and key business metrics.</div>
       </div>
-      <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
-        <div class="text-blue-700 text-3xl mb-2">⚡</div>
-        <div class="font-bold text-xl mb-1">Quick Actions</div>
-        <div class="text-gray-600 text-center">Deploy updates, manage users, and control integrations in one click.</div>
+      <div class="bg-white rounded-xl shadow p-6 flex flex-col items-center">
+        <div class="text-blue-700 text-3xl mb-1">🚀</div>
+        <div class="font-bold text-lg mb-1">Deployments</div>
+        <div class="text-gray-600 text-center">Manage and deploy new versions with one click.</div>
       </div>
-      <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
-        <div class="text-blue-700 text-3xl mb-2">🔔</div>
-        <div class="font-bold text-xl mb-1">Instant Alerts</div>
-        <div class="text-gray-600 text-center">Never miss a critical update with real-time notifications and error tracking.</div>
+      <div class="bg-white rounded-xl shadow p-6 flex flex-col items-center">
+        <div class="text-blue-700 text-3xl mb-1">🔔</div>
+        <div class="font-bold text-lg mb-1">Notifications</div>
+        <div class="text-gray-600 text-center">Stay up to date with important alerts.</div>
       </div>
     </div>
   </main>
+  <!-- Like & Comment Section (Unified, Simple, No Backend) -->
+  <div id="like-comment-section" style="max-width:600px;margin:2em auto 3em auto;padding:1.5em 1em 1em 1em;border:1px solid #ddd;border-radius:0.8em;background:#f8f8ff;">
+    <!-- Like Button -->
+    <div style="display:flex;align-items:center;gap:1em;margin-bottom:1em;">
+      <button id="like-btn" style="padding:0.5em 1.2em;font-size:1.1em;border-radius:0.5em;border:1px solid #aaa;background:#f0f0f0;cursor:pointer;">
+        👍 Like <span id="like-count">0</span>
+      </button>
+      <span style="color:#555;font-size:0.98em;">Show some love for this page!</span>
+    </div>
+    <!-- Comments -->
+    <div>
+      <div style="font-weight:bold;font-size:1.07em;margin-bottom:0.4em;">Comments</div>
+      <div id="comments-list" style="min-height:2em;margin-bottom:0.7em;"></div>
+      <textarea id="comment-input" rows="2" style="width:100%;padding:0.5em;border-radius:0.3em;border:1px solid #bbb;" placeholder="Write a comment..."></textarea>
+      <button id="add-comment" style="margin-top:0.5em;padding:0.4em 1em;border-radius:0.4em;border:1px solid #aaa;background:#f0f0f0;cursor:pointer;">Add Comment</button>
+    </div>
+  </div>
+  <script>
+    // Like button
+    let likeCount = 0;
+    const likeBtn = document.getElementById('like-btn');
+    const likeDisplay = document.getElementById('like-count');
+    likeBtn.addEventListener('click', function() {
+      likeCount++;
+      likeDisplay.textContent = likeCount;
+    });
+
+    // Comments section
+    const comments = [];
+    const commentInput = document.getElementById('comment-input');
+    const addCommentBtn = document.getElementById('add-comment');
+    const commentsList = document.getElementById('comments-list');
+    addCommentBtn.addEventListener('click', function() {
+      const value = commentInput.value.trim();
+      if (value) {
+        comments.push(value);
+        commentsList.innerHTML = comments.map(c => `<div style="border-bottom:1px dashed #eee;padding:0.4em 0;">${c}</div>`).join('');
+        commentInput.value = '';
+      }
+    });
+  </script>
   <footer class="bg-white shadow-inner py-6 text-center text-sm text-gray-500 mt-12">
     &copy; 2025 Spiros Tsaconas. All rights reserved.
   </footer>
