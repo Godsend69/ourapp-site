@@ -29,13 +29,15 @@
           countSpan.textContent = count;
         });
       });
-      // Comment Toggle Logic
-      document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
-        toggle.addEventListener('click', function() {
-          let box = toggle.parentElement.querySelector('.comment-section');
-          box.classList.toggle('hidden');
-        });
-      });
+      // Comment Toggle Logic (improved: works with any structure)
+document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
+  toggle.addEventListener('click', function() {
+    let detailsBlock = toggle.closest('details');
+    if (!detailsBlock) return;
+    let box = detailsBlock.querySelector('.comment-section');
+    if (box) box.classList.toggle('hidden');
+  });
+});
       // Comment Submit Logic
       document.querySelectorAll('.comment-form').forEach(function(form) {
         form.addEventListener('submit', function(e) {
