@@ -51,9 +51,10 @@
     .feature-card:hover {
       box-shadow: 0 6px 18px #dce6fa;
     }
-    .feature-card img {
-      height: 40px;
-      margin-bottom: 0.7em;
+    .feature-icon {
+      font-size: 2.5em;
+      margin-bottom: 0.5em;
+      display: block;
     }
     .feature-card h2 {
       margin: 1em 0 0.5em 0;
@@ -157,7 +158,7 @@
     <div class="dashboard-features">
       <!-- Analytics Card -->
       <div class="feature-card">
-        <img src="analytics-icon.png" alt="Analytics Icon">
+        <span class="feature-icon">📊</span>
         <h2>
           <a href="analytics-details.html">
             <b>Analytics</b>
@@ -168,7 +169,7 @@
       </div>
       <!-- Deployments Card -->
       <div class="feature-card">
-        <img src="deployments-icon.png" alt="Deployments Icon">
+        <span class="feature-icon">🚀</span>
         <h2>
           <a href="deployments-details.html">
             <b>Deployments</b>
@@ -179,7 +180,7 @@
       </div>
       <!-- Notifications Card -->
       <div class="feature-card">
-        <img src="notifications-icon.png" alt="Notifications Icon">
+        <span class="feature-icon">🔔</span>
         <h2>
           <a href="notifications-details.html">
             <b>Notifications</b>
@@ -197,5 +198,17 @@
       <button class="add-comment-btn">Add Comment</button>
     </div>
   </div>
+  <script>
+    // Like button logic
+    const likeBtn = document.querySelector('.like-button');
+    const likeCount = document.getElementById('like-count');
+
+    if (likeBtn && likeCount) {
+      likeBtn.addEventListener('click', function() {
+        let count = parseInt(likeCount.textContent, 10);
+        likeCount.textContent = count + 1;
+      });
+    }
+  </script>
 </body>
 </html>
