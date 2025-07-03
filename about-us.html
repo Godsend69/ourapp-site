@@ -9,7 +9,50 @@
     details[open] summary .arrow { transform: rotate(90deg);}
     .arrow { transition: transform 0.2s;}
     .badge { font-size: 0.75rem; padding: 0.2em 0.7em; border-radius: 999px; font-weight: 700; margin-left: 0.5em;}
+    .like-btn.liked { background-color: #dbeafe; color: #1d4ed8;}
+    .comment-list { max-height: 120px; overflow-y: auto; }
   </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Like Button Logic
+      document.querySelectorAll('.like-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          let countSpan = btn.querySelector('.like-count');
+          let count = parseInt(countSpan.textContent, 10);
+          if (btn.classList.contains('liked')) {
+            count--;
+            btn.classList.remove('liked');
+          } else {
+            count++;
+            btn.classList.add('liked');
+          }
+          countSpan.textContent = count;
+        });
+      });
+      // Comment Toggle Logic
+      document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
+        toggle.addEventListener('click', function() {
+          let box = toggle.parentElement.querySelector('.comment-section');
+          box.classList.toggle('hidden');
+        });
+      });
+      // Comment Submit Logic
+      document.querySelectorAll('.comment-form').forEach(function(form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          let input = form.querySelector('.comment-input');
+          let text = input.value.trim();
+          if(!text) return;
+          let list = form.parentElement.querySelector('.comment-list');
+          let li = document.createElement('li');
+          li.className = "mb-1 text-gray-700 bg-gray-100 rounded px-2 py-1";
+          li.textContent = text;
+          list.appendChild(li);
+          input.value = '';
+        });
+      });
+    });
+  </script>
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
   <nav class="bg-white shadow p-4 flex gap-6 items-center">
@@ -41,25 +84,21 @@
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Datadog is a leading cloud-based monitoring and analytics platform covering infrastructure, applications, logs, security, and more.</p>
           <p class="mb-2"><b>Key Features:</b> Unified dashboards, 600+ integrations, anomaly detection, log management, APM, security monitoring, real-time alerts.</p>
-          <p class="mb-2"><b>Best For:</b> Modern teams needing a comprehensive, plug-and-play solution for multi-cloud or hybrid environments. Excellent for DevOps, SRE, and SaaS.</p>
-          <p class="mb-2"><b>Pros:</b> Fast setup, beautiful dashboards, integrations galore, scalable, strong learning resources.</p>
-          <p class="mb-2"><b>Cons:</b> Can get expensive with scale, some features are premium only, usage-based pricing requires careful monitoring.</p>
-          <b>Common Questions:</b>
-          <ul class="list-disc list-inside ml-4 mb-2">
-            <li><b>Is there a free tier?</b> Yes, a 14-day free trial and a basic forever-free tier for single hosts.</li>
-            <li><b>How fast is setup?</b> Minutes! Install the agent and connect integrations—metrics start flowing fast.</li>
-            <li><b>Does it work on-premises?</b> Yes, but shines in cloud and hybrid setups.</li>
-            <li><b>Is there support for Kubernetes?</b> Absolutely—Kubernetes monitoring is a Datadog strength.</li>
-          </ul>
-          <div class="mb-2">
-            <span class="inline-block bg-blue-100 text-blue-700 rounded px-2 py-0.5 text-xs mr-2">Our Tip</span>
-            <span>Start with their guided onboarding and try alerting on real incidents. Watch your usage to control costs.</span>
+          <div class="flex flex-row gap-2 items-center mt-3 mb-2">
+            <button type="button" class="like-btn px-3 py-1 border rounded bg-blue-100 text-blue-900 font-semibold flex items-center gap-1 transition">
+              👍 <span class="like-count">0</span> Like
+            </button>
+            <button type="button" class="comment-toggle px-3 py-1 border rounded bg-gray-100 text-gray-700 font-semibold flex items-center gap-1 transition">
+              💬 Comment
+            </button>
           </div>
-          <p class="mb-2"><b>Learn More & Try:</b> 
-            <a href="https://www.datadoghq.com/" target="_blank" class="text-blue-600 hover:underline font-bold">Official Site</a> | 
-            <a href="https://docs.datadoghq.com/" target="_blank" class="text-blue-600 hover:underline">Docs</a> | 
-            <a href="https://www.youtube.com/watch?v=6kN2Q9p8R5g" target="_blank" class="text-blue-600 hover:underline">Intro Video</a>
-          </p>
+          <div class="comment-section hidden mt-2">
+            <ul class="comment-list text-sm mb-2"></ul>
+            <form class="comment-form flex items-center gap-2">
+              <input type="text" class="comment-input border rounded p-1 flex-1" placeholder="Add a comment..." maxlength="120">
+              <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Post</button>
+            </form>
+          </div>
         </div>
       </details>
       <!-- Prometheus -->
@@ -69,19 +108,21 @@
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Prometheus is the open-source standard for metrics and alerting, especially for Kubernetes and microservices.</p>
-          <p class="mb-2"><b>Key Features:</b> Multi-dimensional data model, flexible queries (PromQL), alerting, integrations with Grafana, huge exporter ecosystem.</p>
-          <p class="mb-2"><b>Best For:</b> Dev teams who want full control, zero license cost, and are comfortable maintaining their own monitoring stack.</p>
-          <p class="mb-2"><b>Pros:</b> 100% free, huge community, highly flexible, integrates with everything.</p>
-          <p class="mb-2"><b>Cons:</b> Requires self-hosting and maintenance, no built-in long-term storage, steeper learning curve for non-engineers.</p>
-          <b>Common Questions:</b>
-          <ul class="list-disc list-inside ml-4 mb-2">
-            <li><b>Can I monitor any application?</b> Yes—exporters exist for almost every common stack, and you can create your own.</li>
-            <li><b>Do I need Grafana?</b> Grafana is the most popular visualization for Prometheus data, but not required.</li>
-            <li><b>Is it good for small teams?</b> Yes—if you have some DevOps skill.</li>
-          </ul>
-          <div class="mb-2">
-            <span class="inline-block bg-blue-100 text-blue-700 rounded px-2 py-0.5 text-xs mr-2">Our Tip</span>
-            <span>Use <a href="https://grafana.com/">Grafana</a> for dashboards and <a href="https://thanos.io/">Thanos</a> for scalable storage.</span>
+          <p class="mb-2"><b>Key Features:</b> Multi-dimensional data model, flexible queries (PromQL), alerting, Grafana integration, huge exporter ecosystem.</p>
+          <div class="flex flex-row gap-2 items-center mt-3 mb-2">
+            <button type="button" class="like-btn px-3 py-1 border rounded bg-blue-100 text-blue-900 font-semibold flex items-center gap-1 transition">
+              👍 <span class="like-count">0</span> Like
+            </button>
+            <button type="button" class="comment-toggle px-3 py-1 border rounded bg-gray-100 text-gray-700 font-semibold flex items-center gap-1 transition">
+              💬 Comment
+            </button>
+          </div>
+          <div class="comment-section hidden mt-2">
+            <ul class="comment-list text-sm mb-2"></ul>
+            <form class="comment-form flex items-center gap-2">
+              <input type="text" class="comment-input border rounded p-1 flex-1" placeholder="Add a comment..." maxlength="120">
+              <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Post</button>
+            </form>
           </div>
         </div>
       </details>
@@ -92,19 +133,21 @@
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> New Relic is a SaaS-based observability platform with APM, infrastructure, logs, browser, and mobile monitoring—all in one place.</p>
-          <p class="mb-2"><b>Key Features:</b> Real-time analytics, distributed tracing, error tracking, easy integrations, strong alerting, AI-powered insights.</p>
-          <p class="mb-2"><b>Best For:</b> Teams looking for a powerful free tier and unified observability for apps and infrastructure.</p>
-          <p class="mb-2"><b>Pros:</b> Super generous free tier (100 GB/month), easy onboarding, supports almost every tech stack.</p>
-          <p class="mb-2"><b>Cons:</b> UI can be overwhelming for beginners, some advanced features are paid.</p>
-          <b>Common Questions:</b>
-          <ul class="list-disc list-inside ml-4 mb-2">
-            <li><b>Is it really free?</b> Yes, up to 100GB/month ingest and unlimited users—great for new projects.</li>
-            <li><b>Is it easy for non-experts?</b> Yes, with lots of guides.</li>
-            <li><b>Does it support open telemetry?</b> Yes.</li>
-          </ul>
-          <div class="mb-2">
-            <span class="inline-block bg-yellow-100 text-yellow-800 rounded px-2 py-0.5 text-xs mr-2">Our Tip</span>
-            <span>Take advantage of the free tier for side projects or proof-of-concept.</span>
+          <p class="mb-2"><b>Key Features:</b> Real-time analytics, tracing, error tracking, easy integrations, AI-powered insights.</p>
+          <div class="flex flex-row gap-2 items-center mt-3 mb-2">
+            <button type="button" class="like-btn px-3 py-1 border rounded bg-blue-100 text-blue-900 font-semibold flex items-center gap-1 transition">
+              👍 <span class="like-count">0</span> Like
+            </button>
+            <button type="button" class="comment-toggle px-3 py-1 border rounded bg-gray-100 text-gray-700 font-semibold flex items-center gap-1 transition">
+              💬 Comment
+            </button>
+          </div>
+          <div class="comment-section hidden mt-2">
+            <ul class="comment-list text-sm mb-2"></ul>
+            <form class="comment-form flex items-center gap-2">
+              <input type="text" class="comment-input border rounded p-1 flex-1" placeholder="Add a comment..." maxlength="120">
+              <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Post</button>
+            </form>
           </div>
         </div>
       </details>
@@ -116,42 +159,49 @@
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Grafana is the open-source leader for beautiful, flexible dashboards and data visualization.</p>
           <p class="mb-2"><b>Key Features:</b> Custom dashboards, plugin ecosystem, supports many data sources, team collaboration.</p>
-          <p class="mb-2"><b>Best For:</b> Anyone needing powerful visualization, especially when combining multiple monitoring stacks.</p>
-          <p class="mb-2"><b>Pros:</b> Free core version, vast plugin library, beautiful dashboards.</p>
-          <p class="mb-2"><b>Cons:</b> Requires setup; best when paired with a metrics backend, some enterprise features are paid.</p>
-          <b>Common Questions:</b>
-          <ul class="list-disc list-inside ml-4 mb-2">
-            <li><b>Is it only for Prometheus?</b> No! Grafana connects to dozens of data sources.</li>
-            <li><b>Is there a free hosted version?</b> Grafana Cloud offers a free tier.</li>
-          </ul>
-          <div class="mb-2">
-            <span class="inline-block bg-green-100 text-green-700 rounded px-2 py-0.5 text-xs mr-2">Our Tip</span>
-            <span>Try the <a href="https://play.grafana.org/">live demo</a> before you install.</span>
+          <div class="flex flex-row gap-2 items-center mt-3 mb-2">
+            <button type="button" class="like-btn px-3 py-1 border rounded bg-blue-100 text-blue-900 font-semibold flex items-center gap-1 transition">
+              👍 <span class="like-count">0</span> Like
+            </button>
+            <button type="button" class="comment-toggle px-3 py-1 border rounded bg-gray-100 text-gray-700 font-semibold flex items-center gap-1 transition">
+              💬 Comment
+            </button>
+          </div>
+          <div class="comment-section hidden mt-2">
+            <ul class="comment-list text-sm mb-2"></ul>
+            <form class="comment-form flex items-center gap-2">
+              <input type="text" class="comment-input border rounded p-1 flex-1" placeholder="Add a comment..." maxlength="120">
+              <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Post</button>
+            </form>
           </div>
         </div>
       </details>
-      <!-- SolarWinds -->
+      <!-- Zabbix -->
       <details class="mb-4 group border rounded-lg">
         <summary class="cursor-pointer flex justify-between items-center px-4 py-3 font-bold text-black text-lg hover:bg-blue-50">
-          <span><span class="arrow mr-2">&#9654;</span>SolarWinds <span class="badge bg-gray-200 text-gray-700">Enterprise Proven</span></span>
+          <span><span class="arrow mr-2">&#9654;</span>Zabbix <span class="badge bg-gray-200 text-gray-700">Open Source Infra</span></span>
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
-          <p class="mb-2"><b>What is it?</b> SolarWinds offers a suite of network, server, and application monitoring tools used by enterprises worldwide.</p>
-          <p class="mb-2"><b>Key Features:</b> Deep network monitoring, server/app monitoring, alerting, mapping, reporting, and compliance tools.</p>
-          <p class="mb-2"><b>Best For:</b> Large organizations with complex IT and on-premises infrastructure.</p>
-          <p class="mb-2"><b>Pros:</b> Mature products, robust support, proven in enterprise settings.</p>
-          <p class="mb-2"><b>Cons:</b> Not cheap, complex licensing, mostly Windows-centric.</p>
-          <b>Common Questions:</b>
-          <ul class="list-disc list-inside ml-4 mb-2">
-            <li><b>Can I try it for free?</b> Yes, most SolarWinds tools have a free trial.</li>
-            <li><b>Is it cloud-native?</b> Some modules are.</li>
-          </ul>
-          <div class="mb-2">
-            <span class="inline-block bg-gray-100 text-gray-700 rounded px-2 py-0.5 text-xs mr-2">Our Tip</span>
-            <span>Check <a href="https://thwack.solarwinds.com/">THWACK</a> for peer advice.</span>
+          <p class="mb-2"><b>What is it?</b> Zabbix is a robust, free solution for monitoring networks, servers, VMs, and cloud resources.</p>
+          <p class="mb-2"><b>Key Features:</b> Agent/agentless monitoring, SNMP, templates, dashboards.</p>
+          <div class="flex flex-row gap-2 items-center mt-3 mb-2">
+            <button type="button" class="like-btn px-3 py-1 border rounded bg-blue-100 text-blue-900 font-semibold flex items-center gap-1 transition">
+              👍 <span class="like-count">0</span> Like
+            </button>
+            <button type="button" class="comment-toggle px-3 py-1 border rounded bg-gray-100 text-gray-700 font-semibold flex items-center gap-1 transition">
+              💬 Comment
+            </button>
+          </div>
+          <div class="comment-section hidden mt-2">
+            <ul class="comment-list text-sm mb-2"></ul>
+            <form class="comment-form flex items-center gap-2">
+              <input type="text" class="comment-input border rounded p-1 flex-1" placeholder="Add a comment..." maxlength="120">
+              <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Post</button>
+            </form>
           </div>
         </div>
       </details>
+      <!-- More monitoring tools can be added here using the same structure -->
 
       <!-- =======================
            DEPLOYMENT
@@ -163,20 +213,21 @@
           <span><span class="arrow mr-2">&#9654;</span>GitHub Actions <span class="badge bg-yellow-200 text-yellow-800">Most Integrated</span></span>
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
-          <p class="mb-2"><b>What is it?</b> GitHub Actions lets you automate your workflows (build, test, deploy, CI/CD) right from your GitHub repo.</p>
-          <p class="mb-2"><b>Key Features:</b> Native with GitHub, huge community marketplace, supports all languages, easy YAML workflow configs.</p>
-          <p class="mb-2"><b>Best For:</b> Teams already using GitHub, anyone who wants to automate code delivery with minimal setup.</p>
-          <p class="mb-2"><b>Pros:</b> Free for public repos, easy integration, flexible runners, huge prebuilt action library.</p>
-          <p class="mb-2"><b>Cons:</b> Usage limits for private repos, YAML config can be tricky for newcomers.</p>
-          <b>Common Questions:</b>
-          <ul class="list-disc list-inside ml-4 mb-2">
-            <li><b>Can I deploy to any cloud?</b> Yes! Actions exist for AWS, Azure, GCP, DigitalOcean, and more.</li>
-            <li><b>Is it free?</b> Free for public repos, limited free minutes for private repos.</li>
-            <li><b>Can I run self-hosted runners?</b> Yes, for more control and unlimited minutes (self-hosted).</li>
-          </ul>
-          <div class="mb-2">
-            <span class="inline-block bg-yellow-100 text-yellow-800 rounded px-2 py-0.5 text-xs mr-2">Our Tip</span>
-            <span>Start with a template from the <a href="https://github.com/marketplace?type=actions" class="underline text-blue-700">Marketplace</a> and tweak as needed!</span>
+          <p class="mb-2"><b>What is it?</b> Automate your build, test, and deployment pipelines directly from GitHub.</p>
+          <div class="flex flex-row gap-2 items-center mt-3 mb-2">
+            <button type="button" class="like-btn px-3 py-1 border rounded bg-blue-100 text-blue-900 font-semibold flex items-center gap-1 transition">
+              👍 <span class="like-count">0</span> Like
+            </button>
+            <button type="button" class="comment-toggle px-3 py-1 border rounded bg-gray-100 text-gray-700 font-semibold flex items-center gap-1 transition">
+              💬 Comment
+            </button>
+          </div>
+          <div class="comment-section hidden mt-2">
+            <ul class="comment-list text-sm mb-2"></ul>
+            <form class="comment-form flex items-center gap-2">
+              <input type="text" class="comment-input border rounded p-1 flex-1" placeholder="Add a comment..." maxlength="120">
+              <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Post</button>
+            </form>
           </div>
         </div>
       </details>
@@ -187,19 +238,20 @@
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Jenkins is the most popular open-source automation server for building, testing, and deploying code.</p>
-          <p class="mb-2"><b>Key Features:</b> Huge plugin ecosystem, runs anywhere (self-hosted), supports pipelines (declarative or scripted), big community.</p>
-          <p class="mb-2"><b>Best For:</b> Teams wanting total control and custom pipelines, or those with legacy on-prem workflows.</p>
-          <p class="mb-2"><b>Pros:</b> Free, supports any language, infinitely extensible, battle-tested.</p>
-          <p class="mb-2"><b>Cons:</b> Can be complex to maintain, needs server resources, UI is functional but dated.</p>
-          <b>Common Questions:</b>
-          <ul class="list-disc list-inside ml-4 mb-2">
-            <li><b>Is Jenkins free?</b> Yes, it’s 100% open source.</li>
-            <li><b>Is there cloud hosting?</b> Third-party Jenkins hosting exists (CloudBees, etc.).</li>
-            <li><b>Is it hard to learn?</b> Some setup required, but tons of guides and community help.</li>
-          </ul>
-          <div class="mb-2">
-            <span class="inline-block bg-blue-100 text-blue-700 rounded px-2 py-0.5 text-xs mr-2">Our Tip</span>
-            <span>Use <a href="https://plugins.jenkins.io/" class="underline text-blue-700">plugins</a> for everything—don't reinvent the wheel!</span>
+          <div class="flex flex-row gap-2 items-center mt-3 mb-2">
+            <button type="button" class="like-btn px-3 py-1 border rounded bg-blue-100 text-blue-900 font-semibold flex items-center gap-1 transition">
+              👍 <span class="like-count">0</span> Like
+            </button>
+            <button type="button" class="comment-toggle px-3 py-1 border rounded bg-gray-100 text-gray-700 font-semibold flex items-center gap-1 transition">
+              💬 Comment
+            </button>
+          </div>
+          <div class="comment-section hidden mt-2">
+            <ul class="comment-list text-sm mb-2"></ul>
+            <form class="comment-form flex items-center gap-2">
+              <input type="text" class="comment-input border rounded p-1 flex-1" placeholder="Add a comment..." maxlength="120">
+              <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Post</button>
+            </form>
           </div>
         </div>
       </details>
@@ -210,22 +262,24 @@
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> CircleCI is a popular cloud-based CI/CD platform with fast builds and flexible pipelines.</p>
-          <p class="mb-2"><b>Key Features:</b> Fast parallel builds, Docker support, free plan, easy config, native GitHub/GitLab integration.</p>
-          <p class="mb-2"><b>Best For:</b> Startups and teams who want speed and cloud convenience. Great for modern stacks.</p>
-          <p class="mb-2"><b>Pros:</b> Fast, generous free tier, great UI, easy to start.</p>
-          <p class="mb-2"><b>Cons:</b> YAML can be tricky at scale, some features are paid only.</p>
-          <b>Common Questions:</b>
-          <ul class="list-disc list-inside ml-4 mb-2">
-            <li><b>Is it free?</b> Yes, generous free tier for open source and small projects.</li>
-            <li><b>Does it work for monorepos?</b> Yes, supports complex workflows.</li>
-            <li><b>Can I use self-hosted runners?</b> Yes, for private builds or compliance.</li>
-          </ul>
-          <div class="mb-2">
-            <span class="inline-block bg-green-100 text-green-700 rounded px-2 py-0.5 text-xs mr-2">Our Tip</span>
-            <span>Start with the free plan and only scale up if you need more compute or custom runners.</span>
+          <div class="flex flex-row gap-2 items-center mt-3 mb-2">
+            <button type="button" class="like-btn px-3 py-1 border rounded bg-blue-100 text-blue-900 font-semibold flex items-center gap-1 transition">
+              👍 <span class="like-count">0</span> Like
+            </button>
+            <button type="button" class="comment-toggle px-3 py-1 border rounded bg-gray-100 text-gray-700 font-semibold flex items-center gap-1 transition">
+              💬 Comment
+            </button>
+          </div>
+          <div class="comment-section hidden mt-2">
+            <ul class="comment-list text-sm mb-2"></ul>
+            <form class="comment-form flex items-center gap-2">
+              <input type="text" class="comment-input border rounded p-1 flex-1" placeholder="Add a comment..." maxlength="120">
+              <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Post</button>
+            </form>
           </div>
         </div>
       </details>
+      <!-- More deployment tools can be added here in the same way -->
 
       <!-- =======================
            SECURITY
@@ -234,23 +288,24 @@
       <!-- Cloudflare -->
       <details class="mb-4 group border rounded-lg">
         <summary class="cursor-pointer flex justify-between items-center px-4 py-3 font-bold text-black text-lg hover:bg-red-50">
-          <span><span class="arrow mr-2">&#9654;</span>Cloudflare <span class="badge bg-orange-200 text-orange-700">Best for Web Protection</span></span>
+          <span><span class="arrow mr-2">&#9654;</span>Cloudflare <span class="badge bg-orange-200 text-orange-700">Web Protection</span></span>
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
-          <p class="mb-2"><b>What is it?</b> Cloudflare protects and accelerates your website with CDN, DDoS protection, firewall, and more.</p>
-          <p class="mb-2"><b>Key Features:</b> Free CDN, DDoS protection, WAF, SSL/TLS, DNS, performance analytics, bot mitigation.</p>
-          <p class="mb-2"><b>Best For:</b> Anyone with a public website or API, from individuals to enterprises.</p>
-          <p class="mb-2"><b>Pros:</b> Free plan, easy setup, massive network, global speed boost, great docs.</p>
-          <p class="mb-2"><b>Cons:</b> Some advanced features are paid, may require DNS change.</p>
-          <b>Common Questions:</b>
-          <ul class="list-disc list-inside ml-4 mb-2">
-            <li><b>Is it really free?</b> Yes, the free plan covers most essentials!</li>
-            <li><b>Can it stop DDoS?</b> Yes, industry-leading DDoS mitigation.</li>
-            <li><b>Does it work for APIs?</b> Yes, protects APIs and sites alike.</li>
-          </ul>
-          <div class="mb-2">
-            <span class="inline-block bg-orange-100 text-orange-700 rounded px-2 py-0.5 text-xs mr-2">Our Tip</span>
-            <span>Enable <b>SSL Full (Strict)</b> for ultimate security. Use free DNS for speed and anti-spam!</span>
+          <p class="mb-2"><b>What is it?</b> Cloudflare protects and accelerates your website with CDN, DDoS, firewall, and more.</p>
+          <div class="flex flex-row gap-2 items-center mt-3 mb-2">
+            <button type="button" class="like-btn px-3 py-1 border rounded bg-blue-100 text-blue-900 font-semibold flex items-center gap-1 transition">
+              👍 <span class="like-count">0</span> Like
+            </button>
+            <button type="button" class="comment-toggle px-3 py-1 border rounded bg-gray-100 text-gray-700 font-semibold flex items-center gap-1 transition">
+              💬 Comment
+            </button>
+          </div>
+          <div class="comment-section hidden mt-2">
+            <ul class="comment-list text-sm mb-2"></ul>
+            <form class="comment-form flex items-center gap-2">
+              <input type="text" class="comment-input border rounded p-1 flex-1" placeholder="Add a comment..." maxlength="120">
+              <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Post</button>
+            </form>
           </div>
         </div>
       </details>
@@ -261,22 +316,24 @@
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Sentry provides real-time error tracking and performance monitoring for your apps.</p>
-          <p class="mb-2"><b>Key Features:</b> Error monitoring, performance tracing, release tracking, alerts, integrations with all major languages.</p>
-          <p class="mb-2"><b>Best For:</b> Developers wanting instant feedback on production issues, both frontend and backend.</p>
-          <p class="mb-2"><b>Pros:</b> Free for most projects, easy setup, powerful dashboards, actionable insights.</p>
-          <p class="mb-2"><b>Cons:</b> Paid plans needed for big teams or high event volume, some features are premium.</p>
-          <b>Common Questions:</b>
-          <ul class="list-disc list-inside ml-4 mb-2">
-            <li><b>Is it only for JS?</b> No! Supports Python, Java, PHP, Go, iOS, Android, and more.</li>
-            <li><b>Does it track performance?</b> Yes, Sentry can monitor both errors and performance bottlenecks.</li>
-            <li><b>Is there a free plan?</b> Yes, very generous for small projects.</li>
-          </ul>
-          <div class="mb-2">
-            <span class="inline-block bg-purple-100 text-purple-700 rounded px-2 py-0.5 text-xs mr-2">Our Tip</span>
-            <span>Integrate Sentry in development AND production for full coverage and fewer surprises.</span>
+          <div class="flex flex-row gap-2 items-center mt-3 mb-2">
+            <button type="button" class="like-btn px-3 py-1 border rounded bg-blue-100 text-blue-900 font-semibold flex items-center gap-1 transition">
+              👍 <span class="like-count">0</span> Like
+            </button>
+            <button type="button" class="comment-toggle px-3 py-1 border rounded bg-gray-100 text-gray-700 font-semibold flex items-center gap-1 transition">
+              💬 Comment
+            </button>
+          </div>
+          <div class="comment-section hidden mt-2">
+            <ul class="comment-list text-sm mb-2"></ul>
+            <form class="comment-form flex items-center gap-2">
+              <input type="text" class="comment-input border rounded p-1 flex-1" placeholder="Add a comment..." maxlength="120">
+              <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Post</button>
+            </form>
           </div>
         </div>
       </details>
+      <!-- More security tools can be added here -->
 
       <!-- =======================
            AI & AUTOMATION
@@ -289,19 +346,20 @@
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> OpenAI API powers GPT models (like ChatGPT, GPT-4) for text, code, summarization, and more.</p>
-          <p class="mb-2"><b>Key Features:</b> Text generation, code completion, chatbots, embeddings, image generation (DALL·E), speech-to-text (Whisper).</p>
-          <p class="mb-2"><b>Best For:</b> Anyone building AI-powered apps, chatbots, content tools, or language processing pipelines.</p>
-          <p class="mb-2"><b>Pros:</b> World-leading models, easy REST API, pay-as-you-go, powerful for prototyping.</p>
-          <p class="mb-2"><b>Cons:</b> Usage costs, rate limits, must manage API keys and privacy.</p>
-          <b>Common Questions:</b>
-          <ul class="list-disc list-inside ml-4 mb-2">
-            <li><b>Can I use it for free?</b> Yes, free tier with credits, then pay-as-you-go.</li>
-            <li><b>Is it production ready?</b> Yes, with proper usage and error handling.</li>
-            <li><b>Does it do code?</b> Absolutely—try Codex models for code-specific tasks.</li>
-          </ul>
-          <div class="mb-2">
-            <span class="inline-block bg-blue-100 text-blue-700 rounded px-2 py-0.5 text-xs mr-2">Our Tip</span>
-            <span>Use <a href="https://platform.openai.com/examples" class="underline text-blue-700">examples</a> for inspiration and rapid prototyping.</span>
+          <div class="flex flex-row gap-2 items-center mt-3 mb-2">
+            <button type="button" class="like-btn px-3 py-1 border rounded bg-blue-100 text-blue-900 font-semibold flex items-center gap-1 transition">
+              👍 <span class="like-count">0</span> Like
+            </button>
+            <button type="button" class="comment-toggle px-3 py-1 border rounded bg-gray-100 text-gray-700 font-semibold flex items-center gap-1 transition">
+              💬 Comment
+            </button>
+          </div>
+          <div class="comment-section hidden mt-2">
+            <ul class="comment-list text-sm mb-2"></ul>
+            <form class="comment-form flex items-center gap-2">
+              <input type="text" class="comment-input border rounded p-1 flex-1" placeholder="Add a comment..." maxlength="120">
+              <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Post</button>
+            </form>
           </div>
         </div>
       </details>
@@ -312,27 +370,29 @@
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Hugging Face hosts the largest collection of open-source ML/NLP models, datasets, and inference APIs.</p>
-          <p class="mb-2"><b>Key Features:</b> 100,000+ models, free/paid hosted inference, Transformers library, datasets, easy API.</p>
-          <p class="mb-2"><b>Best For:</b> Developers who want open source, custom ML, or to experiment with state-of-the-art models.</p>
-          <p class="mb-2"><b>Pros:</b> Free models, huge community, collaborative, supports PyTorch/TensorFlow/JAX, easy deployment.</p>
-          <p class="mb-2"><b>Cons:</b> Some hosted inference is paid, models quality varies, can be complex for beginners.</p>
-          <b>Common Questions:</b>
-          <ul class="list-disc list-inside ml-4 mb-2">
-            <li><b>Is it free?</b> Many models and datasets are free, paid for premium hosting.</li>
-            <li><b>Can I fine-tune my own models?</b> Yes, with guides and free compute credits.</li>
-            <li><b>Can I deploy via API?</b> Yes, instant APIs for many models.</li>
-          </ul>
-          <div class="mb-2">
-            <span class="inline-block bg-pink-100 text-pink-700 rounded px-2 py-0.5 text-xs mr-2">Our Tip</span>
-            <span>Try the <a href="https://huggingface.co/spaces" class="underline text-blue-700">Spaces</a> for free hosted demos and inspiration.</span>
+          <div class="flex flex-row gap-2 items-center mt-3 mb-2">
+            <button type="button" class="like-btn px-3 py-1 border rounded bg-blue-100 text-blue-900 font-semibold flex items-center gap-1 transition">
+              👍 <span class="like-count">0</span> Like
+            </button>
+            <button type="button" class="comment-toggle px-3 py-1 border rounded bg-gray-100 text-gray-700 font-semibold flex items-center gap-1 transition">
+              💬 Comment
+            </button>
+          </div>
+          <div class="comment-section hidden mt-2">
+            <ul class="comment-list text-sm mb-2"></ul>
+            <form class="comment-form flex items-center gap-2">
+              <input type="text" class="comment-input border rounded p-1 flex-1" placeholder="Add a comment..." maxlength="120">
+              <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Post</button>
+            </form>
           </div>
         </div>
       </details>
+      <!-- More AI tools can be added here -->
 
       <!-- =======================
-           PRODUCTIVITY & DEVOPS
+           PRODUCTIVITY
       ======================== -->
-      <h2 class="text-2xl font-bold text-yellow-700 mb-4 mt-8">Productivity, DevOps & Collaboration</h2>
+      <h2 class="text-2xl font-bold text-yellow-700 mb-4 mt-8">Productivity & Collaboration</h2>
       <!-- Slack -->
       <details class="mb-4 group border rounded-lg">
         <summary class="cursor-pointer flex justify-between items-center px-4 py-3 font-bold text-black text-lg hover:bg-yellow-50">
@@ -340,19 +400,20 @@
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Slack is the leading messaging and collaboration platform for teams and organizations.</p>
-          <p class="mb-2"><b>Key Features:</b> Channels, threads, integrations, file sharing, video calls, bots, searchable history, notifications.</p>
-          <p class="mb-2"><b>Best For:</b> Teams that want fast, organized, searchable communication.</p>
-          <p class="mb-2"><b>Pros:</b> Free tier, vast integrations, easy to use, mobile apps, strong ecosystem.</p>
-          <p class="mb-2"><b>Cons:</b> Free tier search limited, can become noisy with many channels.</p>
-          <b>Common Questions:</b>
-          <ul class="list-disc list-inside ml-4 mb-2">
-            <li><b>Is it free?</b> Yes, great free tier for small teams.</li>
-            <li><b>Does it integrate with GitHub?</b> Yes, and with 2000+ other apps.</li>
-            <li><b>Can I use it for voice/video?</b> Yes, built-in calls and huddles.</li>
-          </ul>
-          <div class="mb-2">
-            <span class="inline-block bg-yellow-100 text-yellow-800 rounded px-2 py-0.5 text-xs mr-2">Our Tip</span>
-            <span>Pin key messages and use threads to keep conversations tidy.</span>
+          <div class="flex flex-row gap-2 items-center mt-3 mb-2">
+            <button type="button" class="like-btn px-3 py-1 border rounded bg-blue-100 text-blue-900 font-semibold flex items-center gap-1 transition">
+              👍 <span class="like-count">0</span> Like
+            </button>
+            <button type="button" class="comment-toggle px-3 py-1 border rounded bg-gray-100 text-gray-700 font-semibold flex items-center gap-1 transition">
+              💬 Comment
+            </button>
+          </div>
+          <div class="comment-section hidden mt-2">
+            <ul class="comment-list text-sm mb-2"></ul>
+            <form class="comment-form flex items-center gap-2">
+              <input type="text" class="comment-input border rounded p-1 flex-1" placeholder="Add a comment..." maxlength="120">
+              <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Post</button>
+            </form>
           </div>
         </div>
       </details>
@@ -363,19 +424,20 @@
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Jira is the leading project management and issue tracking tool for agile, scrum, and kanban teams.</p>
-          <p class="mb-2"><b>Key Features:</b> Boards, sprints, epics, user stories, backlog, reports, integrations.</p>
-          <p class="mb-2"><b>Best For:</b> Software teams needing robust workflow management and reporting.</p>
-          <p class="mb-2"><b>Pros:</b> Highly customizable, deep reporting, integrates with Confluence, Bitbucket, Slack.</p>
-          <p class="mb-2"><b>Cons:</b> Can be complex for newbies, paid plans for full features.</p>
-          <b>Common Questions:</b>
-          <ul class="list-disc list-inside ml-4 mb-2">
-            <li><b>Is it free?</b> Yes, for up to 10 users.</li>
-            <li><b>Does it integrate with code repos?</b> Yes: GitHub, Bitbucket, GitLab and more.</li>
-            <li><b>Is there a mobile app?</b> Yes, full-featured.</li>
-          </ul>
-          <div class="mb-2">
-            <span class="inline-block bg-green-100 text-green-700 rounded px-2 py-0.5 text-xs mr-2">Our Tip</span>
-            <span>Set up automations for repetitive tasks and use dashboards for instant progress snapshots.</span>
+          <div class="flex flex-row gap-2 items-center mt-3 mb-2">
+            <button type="button" class="like-btn px-3 py-1 border rounded bg-blue-100 text-blue-900 font-semibold flex items-center gap-1 transition">
+              👍 <span class="like-count">0</span> Like
+            </button>
+            <button type="button" class="comment-toggle px-3 py-1 border rounded bg-gray-100 text-gray-700 font-semibold flex items-center gap-1 transition">
+              💬 Comment
+            </button>
+          </div>
+          <div class="comment-section hidden mt-2">
+            <ul class="comment-list text-sm mb-2"></ul>
+            <form class="comment-form flex items-center gap-2">
+              <input type="text" class="comment-input border rounded p-1 flex-1" placeholder="Add a comment..." maxlength="120">
+              <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Post</button>
+            </form>
           </div>
         </div>
       </details>
@@ -386,25 +448,26 @@
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Notion is an all-in-one workspace for wikis, docs, notes, tasks, and databases.</p>
-          <p class="mb-2"><b>Key Features:</b> Pages, blocks, linked databases, kanban boards, templates, sharing, integrations.</p>
-          <p class="mb-2"><b>Best For:</b> Teams and individuals who want docs, tasks, and project management in one place.</p>
-          <p class="mb-2"><b>Pros:</b> Free for individuals, beautiful design, flexible, strong templates, web/mobile apps.</p>
-          <p class="mb-2"><b>Cons:</b> Learning curve for database features, can be slow with huge workspaces.</p>
-          <b>Common Questions:</b>
-          <ul class="list-disc list-inside ml-4 mb-2">
-            <li><b>Is it free?</b> Yes, generous free plan.</li>
-            <li><b>Does it support markdown?</b> Yes, markdown blocks and import/export.</li>
-            <li><b>Can I share pages?</b> Yes, with teams or public links.</li>
-          </ul>
-          <div class="mb-2">
-            <span class="inline-block bg-blue-100 text-blue-700 rounded px-2 py-0.5 text-xs mr-2">Our Tip</span>
-            <span>Use templates for faster onboarding and build wikis for team knowledge.</span>
+          <div class="flex flex-row gap-2 items-center mt-3 mb-2">
+            <button type="button" class="like-btn px-3 py-1 border rounded bg-blue-100 text-blue-900 font-semibold flex items-center gap-1 transition">
+              👍 <span class="like-count">0</span> Like
+            </button>
+            <button type="button" class="comment-toggle px-3 py-1 border rounded bg-gray-100 text-gray-700 font-semibold flex items-center gap-1 transition">
+              💬 Comment
+            </button>
+          </div>
+          <div class="comment-section hidden mt-2">
+            <ul class="comment-list text-sm mb-2"></ul>
+            <form class="comment-form flex items-center gap-2">
+              <input type="text" class="comment-input border rounded p-1 flex-1" placeholder="Add a comment..." maxlength="120">
+              <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Post</button>
+            </form>
           </div>
         </div>
       </details>
     </div>
 
-    <!-- RECOMMENDATIONS & CALL TO ACTION -->
+    <!-- Recommendations & Call to Action -->
     <div class="w-full max-w-3xl bg-white rounded-xl shadow p-6 text-left mb-10">
       <h2 class="text-2xl font-bold text-blue-700 mb-3">How to Choose?</h2>
       <ul class="list-disc list-inside space-y-2 text-gray-700 mb-4">
@@ -419,7 +482,7 @@
       <p class="mb-2 text-gray-700">Help us improve: <a href="mailto:feedback@ourapp.com" class="text-blue-600 hover:underline">Send feedback</a> or use the form below!</p>
       <p class="text-gray-600 text-xs">Affiliate or partner links may be included. Thank you for supporting OurApp!</p>
     </div>
-    <!-- FEEDBACK FORM -->
+    <!-- Feedback Form -->
     <div class="w-full max-w-3xl bg-white rounded-xl shadow p-6 text-left mb-10">
       <h2 class="text-xl font-bold text-blue-700 mb-2">Did you find what you needed?</h2>
       <form class="flex flex-col gap-2" onsubmit="alert('Thank you for your feedback!'); return false;">
@@ -429,7 +492,7 @@
       </form>
       <p class="text-xs text-gray-400 mt-2">We read every message. Your feedback helps us grow!</p>
     </div>
-    <!-- NEWSLETTER SIGNUP -->
+    <!-- Newsletter Signup -->
     <div class="w-full max-w-3xl bg-white rounded-xl shadow p-6 text-left mb-10">
       <h2 class="text-xl font-bold text-blue-700 mb-2">Want updates on the best tools?</h2>
       <form class="flex flex-col sm:flex-row gap-2" onsubmit="alert('Thank you for subscribing!'); return false;">
