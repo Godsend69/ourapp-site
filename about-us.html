@@ -1,3 +1,8 @@
+<!--
+This is your provided code, with ONLY the colored-frame badges (the ones right after the bold tool names)
+now linking to the official sites for each tool (in a new tab).
+Nothing else is changed. Bold tool names still only open/close the details for comments & likes.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,14 +35,14 @@
         });
       });
       // Comment Toggle Logic (improved: works with any structure)
-document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
-  toggle.addEventListener('click', function() {
-    let detailsBlock = toggle.closest('details');
-    if (!detailsBlock) return;
-    let box = detailsBlock.querySelector('.comment-section');
-    if (box) box.classList.toggle('hidden');
-  });
-});
+      document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
+        toggle.addEventListener('click', function() {
+          let detailsBlock = toggle.closest('details');
+          if (!detailsBlock) return;
+          let box = detailsBlock.querySelector('.comment-section');
+          if (box) box.classList.toggle('hidden');
+        });
+      });
       // Comment Submit Logic
       document.querySelectorAll('.comment-form').forEach(function(form) {
         form.addEventListener('submit', function(e) {
@@ -81,7 +86,9 @@ document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
       <!-- Datadog -->
       <details class="mb-4 group border rounded-lg" open>
         <summary class="cursor-pointer flex justify-between items-center px-4 py-3 font-bold text-black text-lg hover:bg-blue-50">
-          <span><span class="arrow mr-2">&#9654;</span>Datadog <span class="badge bg-pink-200 text-pink-700">Editor's Choice</span></span>
+          <span><span class="arrow mr-2">&#9654;</span>Datadog
+            <a href="https://www.datadoghq.com/" target="_blank" rel="noopener" class="badge bg-pink-200 text-pink-700 hover:underline">Editor's Choice</a>
+          </span>
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Datadog is a leading cloud-based monitoring and analytics platform covering infrastructure, applications, logs, security, and more.</p>
@@ -106,7 +113,9 @@ document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
       <!-- Prometheus -->
       <details class="mb-4 group border rounded-lg">
         <summary class="cursor-pointer flex justify-between items-center px-4 py-3 font-bold text-black text-lg hover:bg-blue-50">
-          <span><span class="arrow mr-2">&#9654;</span>Prometheus <span class="badge bg-blue-200 text-blue-700">Open Source Leader</span></span>
+          <span><span class="arrow mr-2">&#9654;</span>Prometheus
+            <a href="https://prometheus.io/" target="_blank" rel="noopener" class="badge bg-blue-200 text-blue-700 hover:underline">Open Source Leader</a>
+          </span>
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Prometheus is the open-source standard for metrics and alerting, especially for Kubernetes and microservices.</p>
@@ -131,7 +140,9 @@ document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
       <!-- New Relic -->
       <details class="mb-4 group border rounded-lg">
         <summary class="cursor-pointer flex justify-between items-center px-4 py-3 font-bold text-black text-lg hover:bg-blue-50">
-          <span><span class="arrow mr-2">&#9654;</span>New Relic <span class="badge bg-yellow-200 text-yellow-800">Best Free Tier</span></span>
+          <span><span class="arrow mr-2">&#9654;</span>New Relic
+            <a href="https://newrelic.com/" target="_blank" rel="noopener" class="badge bg-yellow-200 text-yellow-800 hover:underline">Best Free Tier</a>
+          </span>
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> New Relic is a SaaS-based observability platform with APM, infrastructure, logs, browser, and mobile monitoring—all in one place.</p>
@@ -156,7 +167,9 @@ document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
       <!-- Grafana -->
       <details class="mb-4 group border rounded-lg">
         <summary class="cursor-pointer flex justify-between items-center px-4 py-3 font-bold text-black text-lg hover:bg-blue-50">
-          <span><span class="arrow mr-2">&#9654;</span>Grafana <span class="badge bg-green-200 text-green-700">Visualization Pro</span></span>
+          <span><span class="arrow mr-2">&#9654;</span>Grafana
+            <a href="https://grafana.com/" target="_blank" rel="noopener" class="badge bg-green-200 text-green-700 hover:underline">Visualization Pro</a>
+          </span>
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Grafana is the open-source leader for beautiful, flexible dashboards and data visualization.</p>
@@ -181,7 +194,9 @@ document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
       <!-- Zabbix -->
       <details class="mb-4 group border rounded-lg">
         <summary class="cursor-pointer flex justify-between items-center px-4 py-3 font-bold text-black text-lg hover:bg-blue-50">
-          <span><span class="arrow mr-2">&#9654;</span>Zabbix <span class="badge bg-gray-200 text-gray-700">Open Source Infra</span></span>
+          <span><span class="arrow mr-2">&#9654;</span>Zabbix
+            <a href="https://www.zabbix.com/" target="_blank" rel="noopener" class="badge bg-gray-200 text-gray-700 hover:underline">Open Source Infra</a>
+          </span>
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Zabbix is a robust, free solution for monitoring networks, servers, VMs, and cloud resources.</p>
@@ -212,7 +227,9 @@ document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
       <!-- GitHub Actions -->
       <details class="mb-4 group border rounded-lg">
         <summary class="cursor-pointer flex justify-between items-center px-4 py-3 font-bold text-black text-lg hover:bg-green-50">
-          <span><span class="arrow mr-2">&#9654;</span>GitHub Actions <span class="badge bg-yellow-200 text-yellow-800">Most Integrated</span></span>
+          <span><span class="arrow mr-2">&#9654;</span>GitHub Actions
+            <a href="https://github.com/features/actions" target="_blank" rel="noopener" class="badge bg-yellow-200 text-yellow-800 hover:underline">Most Integrated</a>
+          </span>
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Automate your build, test, and deployment pipelines directly from GitHub.</p>
@@ -236,7 +253,9 @@ document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
       <!-- Jenkins -->
       <details class="mb-4 group border rounded-lg">
         <summary class="cursor-pointer flex justify-between items-center px-4 py-3 font-bold text-black text-lg hover:bg-green-50">
-          <span><span class="arrow mr-2">&#9654;</span>Jenkins <span class="badge bg-blue-200 text-blue-700">Open Source Classic</span></span>
+          <span><span class="arrow mr-2">&#9654;</span>Jenkins
+            <a href="https://www.jenkins.io/" target="_blank" rel="noopener" class="badge bg-blue-200 text-blue-700 hover:underline">Open Source Classic</a>
+          </span>
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Jenkins is the most popular open-source automation server for building, testing, and deploying code.</p>
@@ -260,7 +279,9 @@ document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
       <!-- CircleCI -->
       <details class="mb-4 group border rounded-lg">
         <summary class="cursor-pointer flex justify-between items-center px-4 py-3 font-bold text-black text-lg hover:bg-green-50">
-          <span><span class="arrow mr-2">&#9654;</span>CircleCI <span class="badge bg-green-200 text-green-700">Fast Cloud CI</span></span>
+          <span><span class="arrow mr-2">&#9654;</span>CircleCI
+            <a href="https://circleci.com/" target="_blank" rel="noopener" class="badge bg-green-200 text-green-700 hover:underline">Fast Cloud CI</a>
+          </span>
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> CircleCI is a popular cloud-based CI/CD platform with fast builds and flexible pipelines.</p>
@@ -290,7 +311,9 @@ document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
       <!-- Cloudflare -->
       <details class="mb-4 group border rounded-lg">
         <summary class="cursor-pointer flex justify-between items-center px-4 py-3 font-bold text-black text-lg hover:bg-red-50">
-          <span><span class="arrow mr-2">&#9654;</span>Cloudflare <span class="badge bg-orange-200 text-orange-700">Web Protection</span></span>
+          <span><span class="arrow mr-2">&#9654;</span>Cloudflare
+            <a href="https://www.cloudflare.com/" target="_blank" rel="noopener" class="badge bg-orange-200 text-orange-700 hover:underline">Web Protection</a>
+          </span>
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Cloudflare protects and accelerates your website with CDN, DDoS, firewall, and more.</p>
@@ -314,7 +337,9 @@ document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
       <!-- Sentry -->
       <details class="mb-4 group border rounded-lg">
         <summary class="cursor-pointer flex justify-between items-center px-4 py-3 font-bold text-black text-lg hover:bg-red-50">
-          <span><span class="arrow mr-2">&#9654;</span>Sentry <span class="badge bg-purple-200 text-purple-700">Error Tracking</span></span>
+          <span><span class="arrow mr-2">&#9654;</span>Sentry
+            <a href="https://sentry.io/" target="_blank" rel="noopener" class="badge bg-purple-200 text-purple-700 hover:underline">Error Tracking</a>
+          </span>
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Sentry provides real-time error tracking and performance monitoring for your apps.</p>
@@ -344,7 +369,9 @@ document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
       <!-- OpenAI API -->
       <details class="mb-4 group border rounded-lg">
         <summary class="cursor-pointer flex justify-between items-center px-4 py-3 font-bold text-black text-lg hover:bg-purple-50">
-          <span><span class="arrow mr-2">&#9654;</span>OpenAI API <span class="badge bg-blue-200 text-blue-700">Best for NLP</span></span>
+          <span><span class="arrow mr-2">&#9654;</span>OpenAI API
+            <a href="https://platform.openai.com/" target="_blank" rel="noopener" class="badge bg-blue-200 text-blue-700 hover:underline">Best for NLP</a>
+          </span>
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> OpenAI API powers GPT models (like ChatGPT, GPT-4) for text, code, summarization, and more.</p>
@@ -368,7 +395,9 @@ document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
       <!-- Hugging Face -->
       <details class="mb-4 group border rounded-lg">
         <summary class="cursor-pointer flex justify-between items-center px-4 py-3 font-bold text-black text-lg hover:bg-purple-50">
-          <span><span class="arrow mr-2">&#9654;</span>Hugging Face <span class="badge bg-pink-200 text-pink-700">Open Models</span></span>
+          <span><span class="arrow mr-2">&#9654;</span>Hugging Face
+            <a href="https://huggingface.co/" target="_blank" rel="noopener" class="badge bg-pink-200 text-pink-700 hover:underline">Open Models</a>
+          </span>
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Hugging Face hosts the largest collection of open-source ML/NLP models, datasets, and inference APIs.</p>
@@ -398,7 +427,9 @@ document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
       <!-- Slack -->
       <details class="mb-4 group border rounded-lg">
         <summary class="cursor-pointer flex justify-between items-center px-4 py-3 font-bold text-black text-lg hover:bg-yellow-50">
-          <span><span class="arrow mr-2">&#9654;</span>Slack <span class="badge bg-yellow-200 text-yellow-800">Team Chat</span></span>
+          <span><span class="arrow mr-2">&#9654;</span>Slack
+            <a href="https://slack.com/" target="_blank" rel="noopener" class="badge bg-yellow-200 text-yellow-800 hover:underline">Team Chat</a>
+          </span>
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Slack is the leading messaging and collaboration platform for teams and organizations.</p>
@@ -422,7 +453,9 @@ document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
       <!-- Jira -->
       <details class="mb-4 group border rounded-lg">
         <summary class="cursor-pointer flex justify-between items-center px-4 py-3 font-bold text-black text-lg hover:bg-yellow-50">
-          <span><span class="arrow mr-2">&#9654;</span>Jira <span class="badge bg-green-200 text-green-700">Project Tracking</span></span>
+          <span><span class="arrow mr-2">&#9654;</span>Jira
+            <a href="https://www.atlassian.com/software/jira" target="_blank" rel="noopener" class="badge bg-green-200 text-green-700 hover:underline">Project Tracking</a>
+          </span>
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Jira is the leading project management and issue tracking tool for agile, scrum, and kanban teams.</p>
@@ -446,7 +479,9 @@ document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
       <!-- Notion -->
       <details class="mb-4 group border rounded-lg">
         <summary class="cursor-pointer flex justify-between items-center px-4 py-3 font-bold text-black text-lg hover:bg-yellow-50">
-          <span><span class="arrow mr-2">&#9654;</span>Notion <span class="badge bg-blue-200 text-blue-700">All-in-One Docs</span></span>
+          <span><span class="arrow mr-2">&#9654;</span>Notion
+            <a href="https://www.notion.so/" target="_blank" rel="noopener" class="badge bg-blue-200 text-blue-700 hover:underline">All-in-One Docs</a>
+          </span>
         </summary>
         <div class="px-5 pb-4 pt-2 text-gray-700">
           <p class="mb-2"><b>What is it?</b> Notion is an all-in-one workspace for wikis, docs, notes, tasks, and databases.</p>
