@@ -9,52 +9,91 @@
     .sphere-container {
       perspective: 1000px;
     }
-    .sphere {
-      transition: transform 0.4s cubic-bezier(.23,1.02,.61,.98), box-shadow 0.4s;
-      transform-style: preserve-3d;
-      box-shadow: 0 4px 32px 0 rgba(0,0,0,0.17);
-      border-radius: 50%;
-      background: radial-gradient(circle at 60% 40%, #fff4, #000c 78%);
-      cursor: pointer;
+    .sphere-frame {
       position: relative;
+      width: 350px;
+      height: 350px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sphere {
+      transition: transform 0.45s cubic-bezier(.23,1.02,.61,.98), box-shadow 0.45s;
+      transform-style: preserve-3d;
+      box-shadow: 0 8px 48px 0 rgba(0,0,0,0.25);
+      border-radius: 50%;
+      cursor: pointer;
+      background: radial-gradient(circle at 60% 40%, #fff5, #000c 85%);
+      position: relative;
+      width: 230px;
+      height: 230px;
+      z-index: 2;
+      /* Slight shadow for more 3D look */
+      filter: drop-shadow(0 7px 24px #2228);
     }
     .sphere:hover {
-      transform: scale(1.13) rotateY(18deg) rotateX(8deg);
-      box-shadow: 0 8px 48px 0 #60a5fa77, 0 1.5px 6px #fff2;
-      z-index: 2;
+      transform: scale(1.22) rotateY(18deg) rotateX(8deg);
+      box-shadow: 0 16px 80px 0 #60a5fa77, 0 2.5px 9px #fff2;
+      z-index: 3;
     }
-    .circle-text-link {
+    .sphere img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
       display: block;
-      width: 320px;
-      height: 320px;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 2px 24px #0004;
+    }
+    /* CIRCULAR TEXT */
+    .circle-text-link {
+      width: 340px;
+      height: 340px;
+      display: block;
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
+      z-index: 5;
       pointer-events: auto;
-      z-index: 20;
       text-decoration: none;
+      transition: filter 0.2s;
+      /* keep the ring at a distance from the sphere */
+      filter: drop-shadow(0 6px 21px #4b5563cc);
+    }
+    .circle-svg-text {
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      /* For 3D shadow */
+      filter: drop-shadow(0 8px 18px #0007);
     }
     .circle-svg-text text {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: bold;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
       fill: #fff;
-      text-shadow: 1px 1px 4px #111b;
+      text-shadow: 1px 2px 7px #222b, 0 0 2px #60a5fa90;
       cursor: pointer;
-      transition: fill 0.2s;
+      transition: fill 0.23s, text-shadow 0.23s;
+      paint-order: stroke fill;
+      stroke: #1e293b44;
+      stroke-width: 1;
     }
-    .circle-text-link:hover .circle-svg-text text {
-      fill: #60a5fa;
-      text-shadow: 0 0 6px #60a5faa4;
-    }
-    /* Make sure the actual image is always above the SVG ring */
-    .sphere img {
-      position: relative;
-      z-index: 1;
+    .circle-text-link:hover .circle-svg-text text,
+    .circle-text-link:focus .circle-svg-text text {
+      fill: #fbbf24;
+      text-shadow: 0 0 12px #fbbf24cc, 0 0 2px #fff;
+      stroke: #fff3;
     }
     /* Hide the old straight text */
     .old-straight-text {
       display: none !important;
+    }
+    @media (max-width: 700px) {
+      .sphere-frame, .circle-text-link { width: 240px; height: 240px; }
+      .sphere { width: 145px; height: 145px; }
+      .circle-svg-text text { font-size: 13px; }
     }
   </style>
 </head>
@@ -79,47 +118,47 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-12 w-full max-w-6xl items-end justify-items-center">
         <!-- OUR DESTINY (Earth) -->
         <div class="sphere-container flex flex-col items-center relative">
-          <div class="relative w-80 h-80 flex items-center justify-center">
+          <div class="sphere-frame">
             <a href="https://www.google.com/search?q=OUR+DESTINY+IS+CONNECTED+WITH+THE+DESTINY+OF+OUR+PLANET&sxsrf=AE3TifN0RPAApmarUPbSoeiBqGCMKTt0Rw%3A1751646900780&uact=5"
                class="circle-text-link"
-               target="_blank" rel="noopener noreferrer" title="OUR DESTINY">
-              <svg class="circle-svg-text" viewBox="0 0 320 320">
+               target="_blank" rel="noopener noreferrer" title="OUR DESTINY IS CONNECTED WITH THE DESTINY OF OUR PLANET">
+              <svg class="circle-svg-text" viewBox="0 0 340 340">
                 <defs>
-                  <path id="destiny-circle" d="M160,20a140,140 0 1,1 -0.01,0z"/>
+                  <path id="destiny-circle" d="M170,30a140,140 0 1,1 -0.01,0z"/>
                 </defs>
                 <text>
-                  <textPath xlink:href="#destiny-circle" startOffset="10%">
-                    OUR DESTINY
+                  <textPath xlink:href="#destiny-circle" startOffset="7%">
+                    OUR DESTINY IS CONNECTED WITH THE DESTINY OF OUR PLANET
                   </textPath>
                 </text>
               </svg>
             </a>
-            <div class="sphere w-64 h-64 md:w-72 md:h-72 bg-gradient-to-br from-blue-400 via-blue-700 to-black overflow-hidden flex items-center justify-center border-4 border-blue-300 shadow-lg hover:border-blue-500">
-              <img src="assets/depositphotos_4958984-stock-photo-comet-passing-earth-nebula-cloud.jpg" alt="Our Destiny - Earth" class="w-full h-full object-cover rounded-full shadow-xl" draggable="false" style="mix-blend-mode: lighten;">
+            <div class="sphere bg-gradient-to-br from-blue-400 via-blue-700 to-black border-4 border-blue-300 shadow-lg hover:border-blue-500">
+              <img src="assets/depositphotos_4958984-stock-photo-comet-passing-earth-nebula-cloud.jpg" alt="Our Destiny - Earth" draggable="false" style="mix-blend-mode: lighten;">
             </div>
           </div>
           <div class="old-straight-text mt-6 text-2xl text-blue-200 font-bold tracking-wide drop-shadow-xl">OUR DESTINY</div>
         </div>
         <!-- KNOWLEDGE OF DESTINY & DESTINY OF KNOWLEDGE (Wikipedia) -->
         <div class="sphere-container flex flex-col items-center relative">
-          <div class="relative w-80 h-80 flex items-center justify-center">
+          <div class="sphere-frame">
             <a href="https://www.google.com/search?q=The+concepts+of+%22knowledge+of+destiny%22+and+%22destiny+of+knowledge%22+are+intertwined+with+theological+discussions+about+God%27s+sovereignty%2C+human+free+will%2C+and+the+nature+of+knowledge+itself&ie=UTF-8"
                class="circle-text-link"
-               target="_blank" rel="noopener noreferrer" title="KNOWLEDGE OF DESTINY & DESTINY OF KNOWLEDGE">
-              <svg class="circle-svg-text" viewBox="0 0 320 320">
+               target="_blank" rel="noopener noreferrer" title="KNOWLEDGE OF DESTINY AND DESTINY OF KNOWLEDGE">
+              <svg class="circle-svg-text" viewBox="0 0 340 340">
                 <defs>
-                  <path id="knowledge-circle" d="M160,20a140,140 0 1,1 -0.01,0z"/>
+                  <path id="knowledge-circle" d="M170,30a140,140 0 1,1 -0.01,0z"/>
                 </defs>
                 <text>
-                  <textPath xlink:href="#knowledge-circle" startOffset="1%">
-                    KNOWLEDGE OF DESTINY &amp; DESTINY OF KNOWLEDGE
+                  <textPath xlink:href="#knowledge-circle" startOffset="2%">
+                    THE KNOWLEDGE OF DESTINY &amp; THE DESTINY OF KNOWLEDGE
                   </textPath>
                 </text>
               </svg>
             </a>
-            <div class="sphere w-64 h-64 md:w-72 md:h-72 bg-gradient-to-br from-gray-100 via-gray-400 to-gray-700 overflow-hidden flex items-center justify-center border-4 border-gray-300 shadow-lg hover:border-yellow-400 relative">
+            <div class="sphere bg-gradient-to-br from-gray-100 via-gray-400 to-gray-700 border-4 border-gray-300 shadow-lg hover:border-yellow-400">
               <div class="absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" style="width:90%;height:90%;border-radius:50%;box-shadow:0 0 36px 12px #3b82f666,0 0 0 7px #93c5fd44 inset;"></div>
-              <img src="assets/wikipedia-logo-wikipedia-the-free-encyclopedia-6.png" alt="Knowledge Destiny Sphere" class="w-48 h-48 object-contain rounded-full z-20 relative" draggable="false">
+              <img src="assets/wikipedia-logo-wikipedia-the-free-encyclopedia-6.png" alt="Knowledge Destiny Sphere" class="w-32 h-32 object-contain rounded-full z-20 relative" draggable="false">
             </div>
           </div>
           <div class="old-straight-text mt-6 text-lg text-yellow-200 font-bold tracking-wide drop-shadow-xl max-w-xs">
@@ -128,24 +167,23 @@
         </div>
         <!-- OUR DESTINY TOGETHER (AI Sphere) -->
         <div class="sphere-container flex flex-col items-center relative">
-          <div class="relative w-80 h-80 flex items-center justify-center">
+          <div class="sphere-frame">
             <a href="https://www.google.com/search?q=HUMANS+IN+SYNERGY+WITH+AI+IS+OUR+DESTINY+TOGETHER&sxsrf=AE3TifPOAxheNEpyxwnnwyMz1pJg9Qns7A%3A1751647242757"
                class="circle-text-link"
-               target="_blank" rel="noopener noreferrer" title="OUR DESTINY TOGETHER">
-              <svg class="circle-svg-text" viewBox="0 0 320 320">
+               target="_blank" rel="noopener noreferrer" title="HUMANS IN SYNERGY WITH AI IS OUR DESTINY TOGETHER">
+              <svg class="circle-svg-text" viewBox="0 0 340 340">
                 <defs>
-                  <path id="together-circle" d="M160,20a140,140 0 1,1 -0.01,0z"/>
+                  <path id="together-circle" d="M170,30a140,140 0 1,1 -0.01,0z"/>
                 </defs>
                 <text>
-                  <textPath xlink:href="#together-circle" startOffset="5%">
-                    OUR DESTINY TOGETHER
+                  <textPath xlink:href="#together-circle" startOffset="6%">
+                    HUMANS IN SYNERGY WITH AI IS OUR DESTINY TOGETHER
                   </textPath>
                 </text>
               </svg>
             </a>
-            <div class="sphere w-64 h-64 md:w-72 md:h-72 bg-gradient-to-br from-cyan-400 via-blue-800 to-black overflow-hidden flex items-center justify-center border-4 border-cyan-300 shadow-lg hover:border-pink-400 relative">
-              <img src="assets/1748525111651.jpeg" alt="Our Destiny Together - AI Sphere" class="w-full h-full object-cover rounded-full shadow-xl" draggable="false" style="mix-blend-mode: lighten;">
-              <!-- (Optional) You can keep the "The Human-AI Partnership..." SVG if you want double text ring, or remove for clarity -->
+            <div class="sphere bg-gradient-to-br from-cyan-400 via-blue-800 to-black border-4 border-cyan-300 shadow-lg hover:border-pink-400">
+              <img src="assets/1748525111651.jpeg" alt="Our Destiny Together - AI Sphere" draggable="false" style="mix-blend-mode: lighten;">
             </div>
           </div>
           <div class="old-straight-text mt-6 text-2xl text-pink-200 font-bold tracking-wide drop-shadow-xl">OUR DESTINY TOGETHER</div>
