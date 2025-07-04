@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SPHERES OF DESTINY | OurApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .sphere-container {
+      perspective: 1000px;
+    }
+    .sphere {
+      transition: transform 0.4s cubic-bezier(.23,1.02,.61,.98), box-shadow 0.4s;
+      transform-style: preserve-3d;
+      box-shadow: 0 4px 32px 0 rgba(0,0,0,0.17);
+      border-radius: 50%;
+      background: radial-gradient(circle at 60% 40%, #fff4, #000c 78%);
+      cursor: pointer;
+      position: relative;
+    }
+    .sphere:hover {
+      transform: scale(1.13) rotateY(18deg) rotateX(8deg);
+      box-shadow: 0 8px 48px 0 #60a5fa77, 0 1.5px 6px #fff2;
+      z-index: 2;
+    }
+    .ai-text-circle {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      pointer-events: none;
+    }
+    .ai-text-circle svg {
+      width: 100%; height: 100%;
+      position: absolute; top: 0; left: 0;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-950 to-blue-600 min-h-screen flex flex-col">
+  <nav class="bg-white shadow p-4 flex gap-6 items-center">
+    <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
+    <a href="dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
+    <a href="features.html" class="text-gray-800 hover:text-blue-600">Features</a>
+    <a href="pricing.html" class="text-gray-800 hover:text-blue-600">Pricing</a>
+    <a href="about-us.html" class="text-gray-800 hover:text-blue-600">About</a>
+    <a href="contact.html" class="text-gray-800 hover:text-blue-600">Contact</a>
+    <a href="blog.html" class="text-gray-800 hover:text-blue-600">Blog</a>
+    <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
+    <a href="spheres-of-destiny.html" class="text-pink-700 font-bold underline underline-offset-4">SPHERES OF DESTINY</a>
+  </nav>
+  <main class="flex-grow flex flex-col items-center justify-center text-center">
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg mt-12 mb-8 tracking-tight">SPHERES OF DESTINY</h1>
+    <div class="w-full flex flex-col items-center mb-12">
+      <p class="text-xl text-blue-100 mb-8 max-w-2xl font-semibold drop-shadow">
+        Witness three spheres, three visions. Hover and click to explore our destiny, knowledge, and partnership with AI.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 w-full max-w-6xl items-end justify-items-center">
+        <!-- OUR DESTINY (Earth) -->
+        <div class="sphere-container flex flex-col items-center">
+          <a href="https://www.google.com/search?q=earth+3d+images" target="_blank" rel="noopener noreferrer" title="Explore 3D Earth">
+            <div class="sphere w-64 h-64 md:w-72 md:h-72 bg-gradient-to-br from-blue-400 via-blue-700 to-black overflow-hidden flex items-center justify-center border-4 border-blue-300 shadow-lg hover:border-blue-500">
+              <img src="assets/depositphotos_4958984-stock-photo-comet-passing-earth-nebula-cloud.jpg" alt="Our Destiny - Earth" class="w-full h-full object-cover rounded-full shadow-xl" draggable="false" style="mix-blend-mode: lighten;">
+            </div>
+          </a>
+          <div class="mt-6 text-2xl text-blue-200 font-bold tracking-wide drop-shadow-xl">OUR DESTINY</div>
+        </div>
+        <!-- KNOWLEDGE OF DESTINY & DESTINY OF KNOWLEDGE (Wikipedia) -->
+        <div class="sphere-container flex flex-col items-center">
+          <a href="https://www.google.com/search?q=wikipedia+knowledge+3d+sphere" target="_blank" rel="noopener noreferrer" title="Explore Knowledge">
+            <div class="sphere w-64 h-64 md:w-72 md:h-72 bg-gradient-to-br from-gray-100 via-gray-400 to-gray-700 overflow-hidden flex items-center justify-center border-4 border-gray-300 shadow-lg hover:border-yellow-400 relative">
+              <!-- blue "aura" to make it unique -->
+              <div class="absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" style="width:90%;height:90%;border-radius:50%;box-shadow:0 0 36px 12px #3b82f666,0 0 0 7px #93c5fd44 inset;"></div>
+              <img src="assets/wikipedia-logo-wikipedia-the-free-encyclopedia-6.png" alt="Knowledge Destiny Sphere" class="w-48 h-48 object-contain rounded-full z-20 relative" draggable="false">
+            </div>
+          </a>
+          <div class="mt-6 text-lg text-yellow-200 font-bold tracking-wide drop-shadow-xl max-w-xs">
+            KNOWLEDGE OF DESTINY & DESTINY OF KNOWLEDGE
+          </div>
+        </div>
+        <!-- OUR DESTINY TOGETHER (AI Sphere) -->
+        <div class="sphere-container flex flex-col items-center relative">
+          <a href="https://www.google.com/search?q=The+Human-AI+Partnership+Navigating+the+Future+of+Knowledge+Management" target="_blank" rel="noopener noreferrer" title="The Human-AI Partnership">
+            <div class="sphere w-64 h-64 md:w-72 md:h-72 bg-gradient-to-br from-cyan-400 via-blue-800 to-black overflow-hidden flex items-center justify-center border-4 border-cyan-300 shadow-lg hover:border-pink-400 relative">
+              <img src="assets/1748525111651.jpeg" alt="Our Destiny Together - AI Sphere" class="w-full h-full object-cover rounded-full shadow-xl" draggable="false" style="mix-blend-mode: lighten;">
+              <!-- SVG text circle -->
+              <span class="ai-text-circle">
+                <svg viewBox="0 0 400 400">
+                  <defs>
+                    <path id="textcircle" d="M200,30a170,170 0 1,1 -0.01,0z" />
+                  </defs>
+                  <text font-size="22" fill="#fff4" font-weight="bold" letter-spacing="1.5">
+                    <textPath xlink:href="#textcircle" startOffset="7%">
+                      The Human-AI Partnership: Navigating the Future of Knowledge Management • 
+                    </textPath>
+                  </text>
+                </svg>
+              </span>
+            </div>
+          </a>
+          <div class="mt-6 text-2xl text-pink-200 font-bold tracking-wide drop-shadow-xl">OUR DESTINY TOGETHER</div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="bg-white shadow-inner py-6 text-center text-sm text-gray-500 mt-12">
+    &copy; 2025 Spiros Tsaconas. All rights reserved.
+  </footer>
+</body>
+</html>
