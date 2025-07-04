@@ -21,8 +21,8 @@
     <p class="text-lg text-gray-700 mb-10 max-w-2xl">
       Choose a plan that fits your needs. Enjoy flexibility and value with OurApp.
     </p>
-    <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-      <div class="bg-white rounded-xl shadow p-6 flex flex-col items-center border-2 border-blue-200">
+    <div class="w-full max-w-xl flex flex-col items-center mb-10">
+      <div class="bg-white rounded-xl shadow p-6 flex flex-col items-center border-2 border-blue-200 w-full">
         <div class="font-bold text-lg mb-2 text-blue-700">Starter</div>
         <div class="text-3xl font-extrabold mb-2 text-blue-900">Free</div>
         <div class="text-gray-700 mb-4">For individuals and hobby projects</div>
@@ -30,29 +30,37 @@
           <li>Basic analytics</li>
           <li>Community support</li>
         </ul>
-        <button class="bg-blue-100 text-blue-700 font-bold px-6 py-2 rounded-lg hover:bg-blue-200 transition">Get Started</button>
+        <button id="free-btn" class="bg-blue-100 text-blue-700 font-bold px-6 py-2 rounded-lg hover:bg-blue-200 transition">Get Started</button>
       </div>
-      <div class="bg-white rounded-xl shadow p-6 flex flex-col items-center border-2 border-pink-300">
-        <div class="font-bold text-lg mb-2 text-pink-700">Pro</div>
-        <div class="text-3xl font-extrabold mb-2 text-pink-900">$19/mo</div>
-        <div class="text-gray-700 mb-4">For teams and growing businesses</div>
-        <ul class="text-gray-600 mb-6 text-left list-disc list-inside">
-          <li>All Starter features</li>
-          <li>Advanced analytics</li>
-          <li>Priority support</li>
-        </ul>
-        <button class="bg-pink-100 text-pink-700 font-bold px-6 py-2 rounded-lg hover:bg-pink-200 transition">Upgrade</button>
+    </div>
+
+    <!-- Donation Section -->
+    <div class="w-full max-w-xl flex flex-col items-center mb-10">
+      <div class="bg-white rounded-xl shadow p-6 flex flex-col items-center border-2 border-yellow-300 w-full">
+        <div class="font-bold text-lg mb-2 text-yellow-700">Support Our Journey</div>
+        <div class="text-xl font-semibold mb-2 text-yellow-900">Donate</div>
+        <div class="text-gray-700 mb-4 text-center">
+          Your kindness keeps us going! Every donation, big or small, helps us grow and continue serving the community. 
+          <br>
+          Thank you for believing in us and helping to shape a better future. 
+          <span class="font-bold text-yellow-700 block mt-2">With gratitude, <br> The OurApp Team</span>
+        </div>
+        <div class="text-gray-700 mb-2 font-semibold">IBAN:</div>
+        <div class="bg-gray-100 px-4 py-2 rounded font-mono text-gray-800 select-all mb-4">
+          GR7302602680000480101379916
+        </div>
+        <div class="text-xs text-gray-500 text-center">
+          Donations are voluntary and non-refundable. We appreciate your support!
+        </div>
       </div>
-      <div class="bg-white rounded-xl shadow p-6 flex flex-col items-center border-2 border-blue-300">
-        <div class="font-bold text-lg mb-2 text-blue-700">Enterprise</div>
-        <div class="text-3xl font-extrabold mb-2 text-blue-900">Contact</div>
-        <div class="text-gray-700 mb-4">For large organizations</div>
-        <ul class="text-gray-600 mb-6 text-left list-disc list-inside">
-          <li>All Pro features</li>
-          <li>Custom solutions</li>
-          <li>Dedicated support</li>
-        </ul>
-        <button class="bg-blue-100 text-blue-700 font-bold px-6 py-2 rounded-lg hover:bg-blue-200 transition">Contact Us</button>
+    </div>
+    
+    <!-- Buy us a coffee Modal -->
+    <div id="coffee-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+      <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center max-w-xs w-full">
+        <div class="text-2xl font-bold mb-2 text-yellow-700">☕ Buy us a coffee!</div>
+        <p class="mb-4 text-gray-700">If you enjoy using OurApp, consider supporting us with a small donation or just spreading the word. Every little bit helps and gives us energy to keep building!</p>
+        <button id="close-coffee" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-800 transition mb-1">Close</button>
       </div>
     </div>
   </main>
@@ -94,6 +102,23 @@
         comments.push(value);
         commentsList.innerHTML = comments.map(c => `<div style="border-bottom:1px dashed #eee;padding:0.4em 0;">${c}</div>`).join('');
         commentInput.value = '';
+      }
+    });
+
+    // Modal for Buy us a coffee
+    const freeBtn = document.getElementById('free-btn');
+    const coffeeModal = document.getElementById('coffee-modal');
+    const closeCoffee = document.getElementById('close-coffee');
+    freeBtn.addEventListener('click', function() {
+      coffeeModal.classList.remove('hidden');
+    });
+    closeCoffee.addEventListener('click', function() {
+      coffeeModal.classList.add('hidden');
+    });
+    // Close modal if background clicked
+    coffeeModal.addEventListener('click', function(e) {
+      if (e.target === coffeeModal) {
+        coffeeModal.classList.add('hidden');
       }
     });
   </script>
