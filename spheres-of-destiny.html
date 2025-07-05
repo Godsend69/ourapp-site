@@ -60,7 +60,7 @@
       padding-top: 2.5rem;
       padding-bottom: 3rem;
     }
-    h1 {
+    .headline-link {
       font-family: 'Orbitron', 'Montserrat', Arial, sans-serif;
       font-size: clamp(2.7rem, 6vw, 4.8rem);
       font-weight: 900;
@@ -69,6 +69,14 @@
       margin-bottom: 1.1rem;
       text-shadow: 0 4px 80px #60a5fa99, 0 2px 0 #1e293b, 0 8px 40px #0e1a36cc;
       text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      transition: color 0.2s, text-shadow 0.2s;
+      cursor: pointer;
+    }
+    .headline-link:hover {
+      color: #fbbf24;
+      text-shadow: 0 0 30px #fbbf24ee, 0 0 19px #fff;
     }
     .subtitle {
       color: #e2e8f0;
@@ -89,75 +97,34 @@
       margin-top: 2.5rem;
       flex-wrap: wrap;
     }
-    .sphere-wrap {
-      position: relative;
+    .sphere-img-clean {
       width: 270px;
       height: 270px;
+      object-fit: contain;
+      background: none;
+      border: none;
       margin: 1.7vw 1vw 2vw 1vw;
-      z-index: 1;
-      min-width: 180px;
-      min-height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      box-shadow: none;
       transition: transform 0.7s cubic-bezier(.2,1.5,.4,1);
+      cursor: pointer;
+      display: block;
+      padding: 0;
     }
-    .sphere-wrap:hover {
+    .sphere-img-clean:hover {
       transform: scale(1.5);
       z-index: 100;
     }
-    .sphere-img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: contain;
-      border-radius: 0;
-      background: none;
-      pointer-events: none;
-      user-select: none;
-      z-index: 1;
-      position: relative;
-    }
-    .ribbon-svg {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 2;
-      overflow: visible;
-    }
-    .ribbon-text {
-      font-family: 'Orbitron', 'Montserrat', Arial, sans-serif;
-      font-weight: 900;
-      font-size: 1.06rem;
-      fill: #fffbe8;
-      letter-spacing: 0.09em;
-      text-shadow: 0 2px 16px #af8804, 0 0 3px #fffbe888;
-      filter: drop-shadow(0 0 2px #bfae6a);
-      pointer-events: none;
-      user-select: none;
-    }
-    .ribbon-band {
-      /* The SVG path will be gold by default */
-      fill: none;
-      stroke: #cba242;
-      stroke-width: 32;
-      filter: drop-shadow(0 0 8px #bfae6a88);
-    }
     @media (max-width: 1200px) {
-      .sphere-wrap { width: 200px; height: 200px;}
-      .ribbon-text { font-size: 0.83rem;}
+      .sphere-img-clean { width: 200px; height: 200px;}
     }
     @media (max-width: 730px) {
       .spheres-cosmos { flex-direction: column; gap: 3vw;}
-      .sphere-wrap { width: 132px; height: 132px;}
-      .ribbon-text { font-size: 0.63rem;}
+      .sphere-img-clean { width: 132px; height: 132px;}
     }
     @media (max-width: 420px) {
       nav { gap: 0.5rem; padding: 0.5rem; font-size: 0.92rem;}
-      .sphere-wrap { width: 70px; height: 70px;}
-      .ribbon-text { font-size: 0.43rem;}
-      h1 { font-size: 2rem;}
+      .sphere-img-clean { width: 70px; height: 70px;}
+      .headline-link { font-size: 2rem;}
     }
     footer {
       background: rgba(255,255,255,0.09);
@@ -186,48 +153,19 @@
     <a href="spheres-of-destiny.html" class="active">SPHERES OF DESTINY</a>
   </nav>
   <main>
-    <h1>SPHERES OF DESTINY</h1>
+    <a class="headline-link"
+      href="https://www.google.com/search?q=SPHERES+OF+DESTINY&ie=UTF-8"
+      target="_blank"
+      rel="noopener"
+      title="Google Search: SPHERES OF DESTINY"
+    >SPHERES OF DESTINY</a>
     <div class="subtitle">
-      Witness three spheres, three visions. Hover and click the golden ribbon on each sphere to explore our destiny, knowledge, and partnership with AI.
+      Witness three spheres, three visions, one destiny, knowledge, and partnership with AI.
     </div>
     <div class="spheres-cosmos">
-      <!-- SPHERE 1: EARTH -->
-      <div class="sphere-wrap">
-        <img class="sphere-img" src="assets/ChatGPT Image Jul 5, 2025, 03_57_47 AM.png" alt="Earth sphere">
-        <svg class="ribbon-svg" viewBox="0 0 270 270">
-          <!-- The ribbon path: hand-crafted to pass from front, middle -->
-          <path class="ribbon-band" id="ribbon1" d="M 30 145 Q 135 110 240 145" />
-          <text class="ribbon-text">
-            <textPath xlink:href="#ribbon1" startOffset="5%">
-              OUR DESTINY IS CONNECTED WITH THE DESTINY OF OUR PLANET
-            </textPath>
-          </text>
-        </svg>
-      </div>
-      <!-- SPHERE 2: KNOWLEDGE/HANDSHAKE -->
-      <div class="sphere-wrap">
-        <img class="sphere-img" src="assets/ChatGPT Image Jul 5, 2025, 04_12_22 AM.png" alt="Knowledge sphere">
-        <svg class="ribbon-svg" viewBox="0 0 270 270">
-          <path class="ribbon-band" id="ribbon2" d="M 30 145 Q 135 110 240 145" />
-          <text class="ribbon-text">
-            <textPath xlink:href="#ribbon2" startOffset="6%">
-              THE KNOWLEDGE OF DESTINY & THE DESTINY OF KNOWLEDGE
-            </textPath>
-          </text>
-        </svg>
-      </div>
-      <!-- SPHERE 3: AI NET -->
-      <div class="sphere-wrap">
-        <img class="sphere-img" src="assets/ChatGPT Image Jul 5, 2025, 04_39_35 AM.png" alt="AI Network sphere">
-        <svg class="ribbon-svg" viewBox="0 0 270 270">
-          <path class="ribbon-band" id="ribbon3" d="M 30 145 Q 135 110 240 145" />
-          <text class="ribbon-text">
-            <textPath xlink:href="#ribbon3" startOffset="9%">
-              HUMANS IN SYNERGY WITH AI IS OUR DESTINY TOGETHER
-            </textPath>
-          </text>
-        </svg>
-      </div>
+      <img class="sphere-img-clean" src="assets/ChatGPT Image Jul 5, 2025, 03_57_47 AM.png" alt="Earth sphere">
+      <img class="sphere-img-clean" src="assets/ChatGPT Image Jul 5, 2025, 04_12_22 AM.png" alt="Knowledge sphere">
+      <img class="sphere-img-clean" src="assets/ChatGPT Image Jul 5, 2025, 04_39_35 AM.png" alt="AI Network sphere">
     </div>
   </main>
   <footer>
