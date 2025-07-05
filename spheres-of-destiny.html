@@ -89,141 +89,74 @@
       margin-top: 2.5rem;
       flex-wrap: wrap;
     }
-    .sphere-orbit-wrap {
+    .sphere-wrap {
       position: relative;
-      width: 370px;
-      height: 370px;
-      margin: 1.7vw 1vw 2vw 1vw;
-      z-index: 1;
-      min-width: 240px;
-      min-height: 240px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    /* 3D Sphere Look */
-    .sphere-planet {
-      position: absolute;
-      left: 50%; top: 50%;
-      transform: translate(-50%, -50%);
       width: 270px;
       height: 270px;
-      border-radius: 50%;
-      background: radial-gradient(ellipse at 60% 40%, #fff 0%, #bae6fd33 14%, #2563eb8f 60%, #151e2e 100%);
-      box-shadow:
-        0 8px 120px 0 #3b82f6cc,
-        0 4px 80px #0ff8,
-        0 0 0 32px #60a5fa2a inset,
-        0 0 120px #1e293b66;
-      filter: blur(0.2px);
-      overflow: hidden;
+      margin: 1.7vw 1vw 2vw 1vw;
+      z-index: 1;
+      min-width: 180px;
+      min-height: 180px;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 5;
-      animation: sphereFloat 10s ease-in-out infinite;
-      transition: box-shadow 0.4s;
+      transition: transform 0.7s cubic-bezier(.2,1.5,.4,1);
     }
-    .sphere-planet img {
-      width: 99%;
-      height: 99%;
-      border-radius: 50%;
-      object-fit: cover;
-      filter: drop-shadow(0 0 60px #60a5fa88) brightness(1.12) contrast(1.08) saturate(1.09);
-      z-index: 8;
+    .sphere-wrap:hover {
+      transform: scale(1.5);
+      z-index: 100;
+    }
+    .sphere-img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      border-radius: 0;
+      background: none;
       pointer-events: none;
       user-select: none;
-      animation: yawn 10s 1s infinite ease-in-out alternate;
+      z-index: 1;
+      position: relative;
     }
-    /* Cosmic Glow and Reflection */
-    .sphere-glow {
+    .ribbon-svg {
       position: absolute;
-      left: 50%; top: 50%;
-      transform: translate(-50%, -50%);
-      width: 340px; height: 340px;
-      border-radius: 50%;
-      background: radial-gradient(ellipse at 55% 38%, #fbbf245d 0%, #60a5fa2f 25%, #0ea5e9 35%, #0ea5e900 100%);
-      filter: blur(18px) brightness(1.15);
-      opacity: 0.75;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
       z-index: 2;
-      pointer-events: none;
-      mix-blend-mode: lighten;
-      animation: glowPulse 7.5s infinite alternate;
+      overflow: visible;
     }
-    @keyframes sphereFloat {
-      0% { transform: translate(-50%, -50%) scale(1) rotateZ(0deg); }
-      50% { transform: translate(-50%, -52%) scale(1.04) rotateZ(2deg);}
-      100% { transform: translate(-50%, -50%) scale(1) rotateZ(0deg);}
-    }
-    @keyframes yawn {
-      45% {transform: scaleY(1) scaleX(1);}
-      50% {transform: scaleY(1.025) scaleX(.995);}
-      55% {transform: scaleY(1) scaleX(1);}
-    }
-    @keyframes glowPulse {
-      0% { opacity: 0.65;}
-      60% { opacity: 0.90;}
-      100% { opacity: 0.65;}
-    }
-    /* Magic Circular Text Orbit */
-    .orbit-text {
-      position: absolute;
-      left: 50%; top: 50%;
-      width: 370px;
-      height: 370px;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 30;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      will-change: transform, filter;
-      filter: drop-shadow(0 0 30px #fff8) drop-shadow(0 10px 24px #2563eb99);
-      user-select: none;
-    }
-    .orbit-text span {
-      position: absolute;
-      left: 50%; top: 50%;
-      transform-origin: 0 135px;
+    .ribbon-text {
       font-family: 'Orbitron', 'Montserrat', Arial, sans-serif;
       font-weight: 900;
-      font-size: 1.32rem;
-      letter-spacing: 0.23em;
-      color: #f3f4f6;
-      text-shadow: 0 2px 18px #fff6, 0 2px 24px #60a5fa, 0 0 10px #0ff7;
-      pointer-events: auto;
-      cursor: pointer;
-      opacity: 0.96;
-      transition: color 0.2s, text-shadow 0.2s;
-      filter: blur(0.2px);
+      font-size: 1.06rem;
+      fill: #fffbe8;
+      letter-spacing: 0.09em;
+      text-shadow: 0 2px 16px #af8804, 0 0 3px #fffbe888;
+      filter: drop-shadow(0 0 2px #bfae6a);
+      pointer-events: none;
+      user-select: none;
     }
-    .orbit-text span:hover {
-      color: #fbbf24;
-      text-shadow: 0 0 30px #fbbf24ee, 0 0 19px #fff;
-      z-index: 99;
-      filter: blur(0px);
+    .ribbon-band {
+      /* The SVG path will be gold by default */
+      fill: none;
+      stroke: #cba242;
+      stroke-width: 32;
+      filter: drop-shadow(0 0 8px #bfae6a88);
     }
-    /* Responsive tweaks */
     @media (max-width: 1200px) {
-      .sphere-orbit-wrap,
-      .orbit-text { width: 270px; height: 270px;}
-      .sphere-planet { width: 200px; height: 200px;}
-      .sphere-glow { width: 250px; height: 250px;}
-      .orbit-text span { font-size: 0.97rem; transform-origin: 0 99px;}
+      .sphere-wrap { width: 200px; height: 200px;}
+      .ribbon-text { font-size: 0.83rem;}
     }
     @media (max-width: 730px) {
       .spheres-cosmos { flex-direction: column; gap: 3vw;}
-      .sphere-orbit-wrap, .orbit-text { width: 200px; height: 200px; min-width: 150px;}
-      .sphere-planet { width: 132px; height: 132px;}
-      .sphere-glow { width: 160px; height: 160px;}
-      .orbit-text span { font-size: 0.72rem; transform-origin: 0 70px;}
+      .sphere-wrap { width: 132px; height: 132px;}
+      .ribbon-text { font-size: 0.63rem;}
     }
     @media (max-width: 420px) {
       nav { gap: 0.5rem; padding: 0.5rem; font-size: 0.92rem;}
-      .sphere-orbit-wrap, .orbit-text { width: 125px; height: 125px;}
-      .sphere-planet { width: 70px; height: 70px;}
-      .sphere-glow { width: 90px; height: 90px;}
-      .orbit-text span { font-size: 0.55rem; transform-origin: 0 40px;}
+      .sphere-wrap { width: 70px; height: 70px;}
+      .ribbon-text { font-size: 0.43rem;}
       h1 { font-size: 2rem;}
     }
     footer {
@@ -255,77 +188,50 @@
   <main>
     <h1>SPHERES OF DESTINY</h1>
     <div class="subtitle">
-      Witness three spheres, three visions. Hover and click the glowing words around each sphere to explore our destiny, knowledge, and partnership with AI.
+      Witness three spheres, three visions. Hover and click the golden ribbon on each sphere to explore our destiny, knowledge, and partnership with AI.
     </div>
     <div class="spheres-cosmos">
       <!-- SPHERE 1: EARTH -->
-      <div class="sphere-orbit-wrap">
-        <div class="sphere-glow"></div>
-        <div class="sphere-planet" style="background: radial-gradient(ellipse at 65% 40%, #fff 0%, #60a5fa2f 18%, #bae6fd00 34%, #2563eb44 74%, #151e2e 100%);">
-          <img src="assets/ChatGPT Image Jul 5, 2025, 03_57_47 AM.png" alt="Earth sphere">
-        </div>
-        <div class="orbit-text" id="orbit1"></div>
+      <div class="sphere-wrap">
+        <img class="sphere-img" src="assets/ChatGPT Image Jul 5, 2025, 03_57_47 AM.png" alt="Earth sphere">
+        <svg class="ribbon-svg" viewBox="0 0 270 270">
+          <!-- The ribbon path: hand-crafted to pass from front, middle -->
+          <path class="ribbon-band" id="ribbon1" d="M 30 145 Q 135 110 240 145" />
+          <text class="ribbon-text">
+            <textPath xlink:href="#ribbon1" startOffset="5%">
+              OUR DESTINY IS CONNECTED WITH THE DESTINY OF OUR PLANET
+            </textPath>
+          </text>
+        </svg>
       </div>
-      <!-- SPHERE 2: KNOWLEDGE/WIKIPEDIA -->
-      <div class="sphere-orbit-wrap">
-        <div class="sphere-glow"></div>
-        <div class="sphere-planet" style="background: radial-gradient(ellipse at 62% 48%, #fff 0%, #d4d7dd33 12%, #888 34%, #4b5563 74%, #151e2e 100%);">
-          <img src="assets/ChatGPT Image Jul 5, 2025, 04_12_22 AM.png" alt="Knowledge sphere">
-        </div>
-        <div class="orbit-text" id="orbit2"></div>
+      <!-- SPHERE 2: KNOWLEDGE/HANDSHAKE -->
+      <div class="sphere-wrap">
+        <img class="sphere-img" src="assets/ChatGPT Image Jul 5, 2025, 04_12_22 AM.png" alt="Knowledge sphere">
+        <svg class="ribbon-svg" viewBox="0 0 270 270">
+          <path class="ribbon-band" id="ribbon2" d="M 30 145 Q 135 110 240 145" />
+          <text class="ribbon-text">
+            <textPath xlink:href="#ribbon2" startOffset="6%">
+              THE KNOWLEDGE OF DESTINY & THE DESTINY OF KNOWLEDGE
+            </textPath>
+          </text>
+        </svg>
       </div>
       <!-- SPHERE 3: AI NET -->
-      <div class="sphere-orbit-wrap">
-        <div class="sphere-glow"></div>
-        <div class="sphere-planet" style="background: radial-gradient(ellipse at 63% 44%, #fff 0%, #60a5fa2f 16%, #0ff8 54%, #2563eb42 89%, #151e2e 100%);">
-          <img src="assets/ChatGPT Image Jul 5, 2025, 04_39_35 AM.png" alt="AI Network sphere">
-        </div>
-        <div class="orbit-text" id="orbit3"></div>
+      <div class="sphere-wrap">
+        <img class="sphere-img" src="assets/ChatGPT Image Jul 5, 2025, 04_39_35 AM.png" alt="AI Network sphere">
+        <svg class="ribbon-svg" viewBox="0 0 270 270">
+          <path class="ribbon-band" id="ribbon3" d="M 30 145 Q 135 110 240 145" />
+          <text class="ribbon-text">
+            <textPath xlink:href="#ribbon3" startOffset="9%">
+              HUMANS IN SYNERGY WITH AI IS OUR DESTINY TOGETHER
+            </textPath>
+          </text>
+        </svg>
       </div>
     </div>
   </main>
   <footer>
     &copy; 2025 Spiros Tsaconas. All rights reserved.
   </footer>
-  <script>
-    // Magic circular text generator!
-    function createOrbitText(text, containerId, linkUrl) {
-      const container = document.getElementById(containerId);
-      container.innerHTML = "";
-      const chars = text.split("");
-      const radius = container.offsetWidth / 2.05;
-      const degStep = 360 / chars.length;
-      for (let i = 0; i < chars.length; i++) {
-        const charSpan = document.createElement("span");
-        charSpan.innerText = chars[i];
-        const deg = i * degStep - 90; // Start at top
-        charSpan.style.transform = `rotate(${deg}deg) translateY(-${radius}px) rotate(${deg*-1}deg)`;
-        if (chars[i] !== " ") {
-          charSpan.title = text;
-          charSpan.onclick = (e) => { 
-            e.stopPropagation(); 
-            window.open(linkUrl, '_blank'); 
-          };
-        }
-        container.appendChild(charSpan);
-      }
-    }
-    // Spheres orbit text and links
-    createOrbitText(
-      "OUR DESTINY IS CONNECTED WITH THE DESTINY OF OUR PLANET",
-      "orbit1",
-      "https://www.google.com/search?q=OUR+DESTINY+IS+CONNECTED+WITH+THE+DESTINY+OF+OUR+PLANET"
-    );
-    createOrbitText(
-      "THE KNOWLEDGE OF DESTINY & THE DESTINY OF KNOWLEDGE",
-      "orbit2",
-      "https://www.google.com/search?q=The+concepts+of+%22knowledge+of+destiny%22+and+%22destiny+of+knowledge%22"
-    );
-    createOrbitText(
-      "HUMANS IN SYNERGY WITH AI IS OUR DESTINY TOGETHER",
-      "orbit3",
-      "https://www.google.com/search?q=HUMANS+IN+SYNERGY+WITH+AI+IS+OUR+DESTINY+TOGETHER"
-    );
-  </script>
 </body>
 </html>
