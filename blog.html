@@ -2,85 +2,190 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Blog | OurApp</title>
+  <title>OurApp Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Pink clickable full background */
-    .pink-bg-link {
-      position: fixed;
-      inset: 0;
-      background: #fdf2f8;
-      opacity: 0.81;
-      z-index: 0;
-      pointer-events: auto;
-      transition: background 0.18s, opacity 0.18s;
-    }
-    .pink-bg-link:hover {
-      background: #f472b6;
-      opacity: 0.98;
-    }
-    @media (max-width: 900px) {
-      .pink-bg-link { display: none; }
-    }
-    .main-content-z {
-      position: relative;
-      z-index: 1;
-    }
-    .clickable-headline {
+    .like-btn.liked { background-color: #dbeafe; color: #1d4ed8;}
+    .comment-list { max-height: 120px; overflow-y: auto; }
+    .badge-link {
       display: inline-block;
-      color: #1e40af;
+      margin: 0.4em 0.6em 0.4em 0;
+      padding: 0.5em 1.1em;
+      border-radius: 999px;
+      font-weight: 700;
+      color: white;
+      font-size: 1.05rem;
+      background: #6366f1;
       text-decoration: none;
-      transition: color 0.18s;
+      transition: background 0.18s, box-shadow 0.18s;
+      box-shadow: 0 2px 8px #818cf850;
     }
-    .clickable-headline:hover {
-      color: #f472b6;
+    .badge-link:hover {
+      background: #06b6d4;
+      box-shadow: 0 4px 12px #06b6d480;
       text-decoration: underline;
-      text-shadow: 0 0 6px #fbcfe8;
     }
-    .clickable-section-title {
-      color: #2563eb;
-      text-decoration: none;
-      transition: color 0.18s;
-      cursor: pointer;
-      display: inline-block;
-    }
-    .clickable-section-title:hover {
-      color: #be185d;
-      text-decoration: underline;
-      text-shadow: 0 0 6px #f472b6;
+    .comment-board-section {
+      background: #f3f4f6;
+      border-radius: 1.2em;
+      margin-top: 2em;
+      padding: 1.7em 1.3em 1.3em 1.3em;
+      box-shadow: 0 2px 12px #818cf815;
     }
   </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Like Button Logic
+      document.querySelectorAll('.like-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          let countSpan = btn.querySelector('.like-count');
+          let count = parseInt(countSpan.textContent, 10);
+          if (btn.classList.contains('liked')) {
+            count--;
+            btn.classList.remove('liked');
+          } else {
+            count++;
+            btn.classList.add('liked');
+          }
+          countSpan.textContent = count;
+        });
+      });
+      // Comment Toggle
+      document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
+        toggle.addEventListener('click', function() {
+          let detailsBlock = toggle.closest('.blog-post-card');
+          if (!detailsBlock) return;
+          let box = detailsBlock.querySelector('.comment-section');
+          if (box) box.classList.toggle('hidden');
+        });
+      });
+      // Comment Submit Logic per post
+      document.querySelectorAll('.comment-form').forEach(function(form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          let input = form.querySelector('.comment-input');
+          let text = input.value.trim();
+          if(!text) return;
+          let list = form.parentElement.querySelector('.comment-list');
+          let li = document.createElement('li');
+          li.className = "mb-1 text-gray-700 bg-gray-100 rounded px-2 py-1";
+          li.textContent = text;
+          list.appendChild(li);
+          input.value = '';
+        });
+      });
+      // Blog Board logic
+      const boardForm = document.getElementById('board-form');
+      if (boardForm) {
+        boardForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          let input = boardForm.querySelector('.board-input');
+          let text = input.value.trim();
+          if(!text) return;
+          let list = document.getElementById('board-list');
+          let li = document.createElement('li');
+          li.className = "mb-1 text-gray-700 bg-white rounded px-2 py-1";
+          li.textContent = text;
+          list.appendChild(li);
+          input.value = '';
+        });
+      }
+    });
+  </script>
 </head>
-<body class="bg-pink-50 min-h-screen flex flex-col relative">
-  <!-- Pink Clickable Full Background -->
-  <a 
-    class="pink-bg-link"
-    href="https://www.google.com/search?q=pink+color+in+indastry&ie=UTF-8"
-    target="_blank"
-    title="Pink color in industry"
-    aria-label="Pink Industry"
-    tabindex="-1"
-  ></a>
-  <nav class="bg-white shadow p-4 flex gap-6 items-center main-content-z">
+<body class="bg-pink-50 min-h-screen flex flex-col">
+  <!-- Navbar -->
+  <nav class="bg-white shadow p-4 flex gap-6 items-center">
     <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
     <a href="dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
     <a href="features.html" class="text-gray-800 hover:text-blue-600">Features</a>
     <a href="pricing.html" class="text-gray-800 hover:text-blue-600">Pricing</a>
     <a href="about-us.html" class="text-gray-800 hover:text-blue-600">About</a>
     <a href="contact.html" class="text-gray-800 hover:text-blue-600">Contact</a>
-    <a href="blog.html" class="text-gray-800 hover:text-blue-600 font-bold underline underline-offset-4">Blog</a>
+    <a href="blog.html" class="font-bold underline underline-offset-4 text-blue-800">Blog</a>
     <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
   </nav>
-  <main class="main-content-z flex-grow flex flex-col items-center justify-center text-center">
-    <!-- Clickable headline #1 -->
-    <h1 class="text-4xl font-extrabold text-blue-800 mt-14 mb-8">
-      <a
-        href="https://www.google.com/search?q=This image is a partial screenshot of a blog page titled "OurApp Blog." The design features a soft pink background with the blog title "OurApp Blog" in large, bold, blue text at the top center. Below the title is a subtitle in a smaller, gray font: "Insights, updates, and inspiration from the OurApp team."
-
-Under the subtitle, there are two blog post previews displayed side by side in card layouts:
-
-1. The left card has the post title "Launching OurApp 2.0 🚀" in bold blue, followed by the date "2025-06-01" in gray, and a snippet of the post content starting with "Discover what's new in OurApp 2.0: enhanced..."
-
-2. The right card begins with the post title "The Power of Automation" in bold blue, the date "2025-05-15," and a snippet beginning with "Why automation is the future of business—..."
-
-The overall style is clean, modern, and uses a friendly color palette with emphasis on blue for headings and soft backgrounds for readability.
+  <!-- Blog main content -->
+  <main class="flex-1 max-w-4xl mx-auto mt-10 pb-4">
+    <h1 class="text-4xl font-extrabold text-blue-800 text-center mb-2">OurApp Blog</h1>
+    <p class="text-xl text-gray-600 text-center mb-10">
+      Insights, updates, and inspiration from the OurApp team.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Blog Post 1 -->
+      <div class="bg-white rounded-xl shadow p-6 blog-post-card">
+        <h2 class="text-2xl font-bold text-blue-700 mb-1">Launching OurApp 2.0 <span>🚀</span></h2>
+        <div class="text-gray-500 text-sm mb-2">2025-06-01</div>
+        <p class="mb-2">Discover what's new in OurApp 2.0: enhanced analytics, better security, and more!</p>
+        <div class="flex flex-row gap-2 items-center mt-3 mb-2">
+          <button type="button" class="like-btn px-3 py-1 border rounded bg-blue-100 text-blue-900 font-semibold flex items-center gap-1 transition">
+            👍 <span class="like-count">0</span> Like
+          </button>
+          <button type="button" class="comment-toggle px-3 py-1 border rounded bg-gray-100 text-gray-700 font-semibold flex items-center gap-1 transition">
+            💬 Comment
+          </button>
+        </div>
+        <div class="comment-section hidden mt-2">
+          <ul class="comment-list text-sm mb-2"></ul>
+          <form class="comment-form flex items-center gap-2">
+            <input type="text" class="comment-input border rounded p-1 flex-1" placeholder="Add a comment..." maxlength="120">
+            <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Post</button>
+          </form>
+        </div>
+      </div>
+      <!-- Blog Post 2 -->
+      <div class="bg-white rounded-xl shadow p-6 blog-post-card">
+        <h2 class="text-2xl font-bold text-blue-700 mb-1">The Power of Automation</h2>
+        <div class="text-gray-500 text-sm mb-2">2025-05-15</div>
+        <p class="mb-2">Why automation is the future of business—and how you can get started today.</p>
+        <div class="flex flex-row gap-2 items-center mt-3 mb-2">
+          <button type="button" class="like-btn px-3 py-1 border rounded bg-blue-100 text-blue-900 font-semibold flex items-center gap-1 transition">
+            👍 <span class="like-count">0</span> Like
+          </button>
+          <button type="button" class="comment-toggle px-3 py-1 border rounded bg-gray-100 text-gray-700 font-semibold flex items-center gap-1 transition">
+            💬 Comment
+          </button>
+        </div>
+        <div class="comment-section hidden mt-2">
+          <ul class="comment-list text-sm mb-2"></ul>
+          <form class="comment-form flex items-center gap-2">
+            <input type="text" class="comment-input border rounded p-1 flex-1" placeholder="Add a comment..." maxlength="120">
+            <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Post</button>
+          </form>
+        </div>
+      </div>
+      <!-- Add more blog posts as needed below -->
+    </div>
+    <!-- Board section (General blog comments) -->
+    <div class="comment-board-section mt-12 mx-auto max-w-2xl">
+      <h2 class="text-xl font-bold text-blue-700 mb-2">Blog Board</h2>
+      <ul id="board-list" class="comment-list text-base mb-2"></ul>
+      <form id="board-form" class="flex items-center gap-2 mt-2">
+        <input type="text" class="board-input border rounded p-1 flex-1" placeholder="Say something to all readers..." maxlength="160">
+        <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Post</button>
+      </form>
+    </div>
+    <!-- Social links section -->
+    <div class="mt-16 mb-10 px-2 text-center">
+      <h2 class="text-xl font-bold text-blue-700 mb-3">Find me everywhere:</h2>
+      <div class="flex flex-wrap justify-center gap-y-2">
+        <a class="badge-link" style="background:#f87171;" href="https://www.youtube.com/@thinktanker1969/posts" target="_blank" rel="noopener">YouTube</a>
+        <a class="badge-link" style="background:#10b981;" href="https://tsaconaspiros.blogspot.com/" target="_blank" rel="noopener">Blogspot</a>
+        <a class="badge-link" style="background:#2563eb;" href="https://www.linkedin.com/in/spyros-tsaconas-92b383119/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="badge-link" style="background:#a78bfa;" href="https://artist69.wordpress.com/" target="_blank" rel="noopener">WordPress</a>
+        <a class="badge-link" style="background:#2563eb;" href="https://www.facebook.com/profile.php?id=100078889342001" target="_blank" rel="noopener">Facebook</a>
+        <a class="badge-link" style="background:#6d28d9;" href="https://medium.com/@spirostsaconas1969" target="_blank" rel="noopener">Medium</a>
+        <a class="badge-link" style="background:#f472b6;" href="https://www.instagram.com/tsaconaspiros/" target="_blank" rel="noopener">Instagram</a>
+        <a class="badge-link" style="background:#111827;" href="https://x.com/tsaconas69" target="_blank" rel="noopener">X / Twitter</a>
+        <a class="badge-link" style="background:#f59e42;" href="https://www.reddit.com/user/IllustriousDraw50/" target="_blank" rel="noopener">Reddit</a>
+        <a class="badge-link" style="background:#22d3ee;" href="https://soundcloud.com/spyros-tsaconas" target="_blank" rel="noopener">SoundCloud</a>
+        <a class="badge-link" style="background:#eab308;" href="https://gr.pinterest.com/airbender_69/_profile/" target="_blank" rel="noopener">Pinterest</a>
+      </div>
+    </div>
+  </main>
+  <footer class="bg-white shadow-inner py-6 text-center text-sm text-gray-500 mt-10">
+    &copy; 2025 Spiros Tsaconas. All rights reserved.
+  </footer>
+</body>
+</html>
