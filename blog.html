@@ -33,6 +33,16 @@
       padding: 1.7em 1.3em 1.3em 1.3em;
       box-shadow: 0 2px 12px #818cf815;
     }
+    .blog-title-link, .post-title-link {
+      color: #1e40af;
+      text-decoration: none;
+      transition: color 0.18s;
+    }
+    .blog-title-link:hover, .post-title-link:hover {
+      color: #22c55e;
+      text-decoration: underline;
+      text-shadow: 0 0 6px #bbf7d0;
+    }
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -108,14 +118,26 @@
   </nav>
   <!-- Blog main content -->
   <main class="flex-1 max-w-4xl mx-auto mt-10 pb-4">
-    <h1 class="text-4xl font-extrabold text-blue-800 text-center mb-2">OurApp Blog</h1>
+    <h1 class="text-4xl font-extrabold text-blue-800 text-center mb-2">
+      <a class="blog-title-link"
+        href="https://www.google.com/search?q=ourapp+blog+leads+to+ai&newwindow=1&sxsrf=AE3TifMQr0DVgYcBadvp23G3eZXfKkDsfA%3A1751726552787&sei=5DlpaN-RFZC_i-gPwdjb2A0"
+        target="_blank" rel="noopener"
+        title="OurApp Blog - Google Search"
+      >OurApp Blog</a>
+    </h1>
     <p class="text-xl text-gray-600 text-center mb-10">
       Insights, updates, and inspiration from the OurApp team.
     </p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <!-- Blog Post 1 -->
       <div class="bg-white rounded-xl shadow p-6 blog-post-card">
-        <h2 class="text-2xl font-bold text-blue-700 mb-1">Launching OurApp 2.0 <span>🚀</span></h2>
+        <h2 class="text-2xl font-bold text-blue-700 mb-1">
+          <a class="post-title-link"
+            href="https://www.google.com/search?newwindow=1&sxsrf=AE3TifN_Qu9QDeH1NUkOjZGNHJ5bYaUZmA:1751726688827&q=Launching+OurApp+2.0+considering+development+with+ai&spell=1&dpr=1"
+            target="_blank" rel="noopener"
+            title="Launching OurApp 2.0 - Google Search"
+          >Launching OurApp 2.0 <span>🚀</span></a>
+        </h2>
         <div class="text-gray-500 text-sm mb-2">2025-06-01</div>
         <p class="mb-2">Discover what's new in OurApp 2.0: enhanced analytics, better security, and more!</p>
         <div class="flex flex-row gap-2 items-center mt-3 mb-2">
@@ -136,7 +158,13 @@
       </div>
       <!-- Blog Post 2 -->
       <div class="bg-white rounded-xl shadow p-6 blog-post-card">
-        <h2 class="text-2xl font-bold text-blue-700 mb-1">The Power of Automation</h2>
+        <h2 class="text-2xl font-bold text-blue-700 mb-1">
+          <a class="post-title-link"
+            href="https://www.google.com/search?q=The+Power+of+Automation+developing+evolution&newwindow=1&sxsrf=AE3TifOm6ZqLpSXA6zAPf8C4NWqadMXS3w%3A1751726766545&uact=5"
+            target="_blank" rel="noopener"
+            title="The Power of Automation - Google Search"
+          >The Power of Automation</a>
+        </h2>
         <div class="text-gray-500 text-sm mb-2">2025-05-15</div>
         <p class="mb-2">Why automation is the future of business—and how you can get started today.</p>
         <div class="flex flex-row gap-2 items-center mt-3 mb-2">
