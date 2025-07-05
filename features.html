@@ -5,10 +5,67 @@
   <title>Features | OurApp</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .left-desert-link, .right-dune-link {
+      position: fixed;
+      top: 0;
+      height: 100vh;
+      width: 50vw;
+      z-index: 0;
+      transition: background 0.18s;
+      pointer-events: auto;
+    }
+    .left-desert-link {
+      left: 0;
+      background: #f7e4ca; /* Light brown desert color */
+      opacity: 0.77;
+      border-right: 2px solid #f0d9b5;
+    }
+    .left-desert-link:hover {
+      opacity: 0.95;
+      background: #f5d7a8;
+    }
+    .right-dune-link {
+      right: 0;
+      background: #f3e6d5; /* Lighter sand color, differentiates from left */
+      opacity: 0.77;
+      border-left: 2px solid #e5c187;
+    }
+    .right-dune-link:hover {
+      opacity: 0.95;
+      background: #f7e9b9;
+    }
+    /* Keep main content on top */
+    .main-content-z {
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 900px) {
+      .left-desert-link, .right-dune-link { display: none; }
+    }
+  </style>
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col">
+<body class="bg-gray-50 min-h-screen flex flex-col relative overflow-x-hidden">
+  <!-- Left Clickable Desert Half -->
+  <a 
+    class="left-desert-link"
+    href="https://duneawakening.com/"
+    target="_blank"
+    title="Dune: Awakening - Desert Awaits"
+    aria-label="Visit Dune Awakening"
+    tabindex="-1"
+  ></a>
+  <!-- Right Clickable Dune Movie Half -->
+  <a 
+    class="right-dune-link"
+    href="https://www.legendary.com/film/dune/"
+    target="_blank"
+    title="Dune Movie at Legendary"
+    aria-label="Visit Dune on Legendary"
+    tabindex="-1"
+  ></a>
   <!-- Navigation Bar -->
-  <nav class="bg-white shadow p-4 flex gap-8 items-center">
+  <nav class="bg-white shadow p-4 flex gap-8 items-center main-content-z">
     <a href="index.html" class="font-extrabold text-2xl text-blue-700">OurApp</a>
     <a href="dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
     <a href="features.html" class="text-blue-800 font-extrabold underline underline-offset-4">Features</a>
@@ -19,7 +76,7 @@
     <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
   </nav>
   <!-- Main Content -->
-  <main class="flex-grow flex flex-col items-center justify-center text-center">
+  <main class="main-content-z flex-grow flex flex-col items-center justify-center text-center">
     <!-- Clickable Headline -->
     <h1 class="text-5xl font-extrabold text-blue-800 mt-16 mb-4 drop-shadow">
       <a href="https://en.wikipedia.org/wiki/Software_as_a_service"
@@ -119,7 +176,7 @@
     </div>
   </main>
   <!-- Footer -->
-  <footer class="bg-white shadow-inner py-6 text-center text-sm text-gray-500 mt-12">
+  <footer class="main-content-z bg-white shadow-inner py-6 text-center text-sm text-gray-500 mt-12">
     &copy; 2025 Spiros Tsaconas. All rights reserved.
   </footer>
 </body>
