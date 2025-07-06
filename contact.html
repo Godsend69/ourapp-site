@@ -6,37 +6,56 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body, html {
-      height: 100%;
+      min-height: 100%;
       width: 100%;
+      background: #000 !important;
+      position: relative;
     }
-    .full-bg-link {
+    .bg-link-overlay {
       position: fixed;
       inset: 0;
-      z-index: 1;
       width: 100vw;
       height: 100vh;
+      z-index: 1;
+      background: transparent;
       display: block;
-      background: #000;
-      opacity: 1;
+      pointer-events: auto;
     }
-    .page-content {
+    .content-wrapper {
       position: relative;
-      z-index: 2; /* Above the link overlay */
-      /* pointer-events: none; */ /* Uncomment to make form not interactive */
+      z-index: 2;
     }
-    /* Optional: prevent highlight of link overlay on click */
-    .full-bg-link:focus {
-      outline: none;
+    /* Prevent the overlay from blocking clicks on the content */
+    .content-area, nav, footer {
+      position: relative;
+      z-index: 3;
+      pointer-events: auto;
+    }
+    /* Let background link only be clickable where there is no content */
+    .bg-link-overlay {
+      pointer-events: auto;
+    }
+    .content-area, nav, footer {
+      pointer-events: auto;
     }
   </style>
 </head>
-<body class="bg-black min-h-screen flex flex-col">
-  <!-- Full-page black clickable background -->
-  <a href="https://www.nationalgeographic.com/" target="_blank" class="full-bg-link" aria-label="Go to National Geographic"></a>
-  <div class="page-content flex-grow flex items-center justify-center">
-    <main class="flex-grow flex items-center justify-center">
-      <!-- Main Contact Content -->
-      <section class="bg-white rounded-xl shadow-2xl p-10 max-w-xl w-full my-16 mx-2 text-center flex-grow">
+<body>
+  <!-- Clickable black background overlay -->
+  <a href="https://www.nationalgeographic.com/" target="_blank" class="bg-link-overlay" aria-label="Go to National Geographic"></a>
+  <div class="content-wrapper flex flex-col min-h-screen">
+    <nav class="bg-white shadow p-4 flex gap-6 items-center">
+      <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
+      <a href="dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
+      <a href="features.html" class="text-gray-800 hover:text-blue-600">Features</a>
+      <a href="pricing.html" class="text-gray-800 hover:text-blue-600">Pricing</a>
+      <a href="about-us.html" class="text-gray-800 hover:text-blue-600">About</a>
+      <a href="contact.html" class="text-gray-800 hover:text-blue-600 font-bold underline underline-offset-4">Contact</a>
+      <a href="blog.html" class="text-gray-800 hover:text-blue-600">Blog</a>
+      <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
+    </nav>
+    <main class="flex-grow flex flex-col items-center justify-center">
+      <section class="content-area bg-white rounded-xl shadow-2xl p-10 max-w-xl w-full my-16 mx-2 text-center flex-grow">
         <h1 class="text-4xl font-extrabold text-blue-800 mb-6">Contact Us</h1>
         <p class="mb-8 text-gray-700 text-base md:text-lg">
           We'd love to hear from you! Fill out the form below or reach us by email.
@@ -71,24 +90,27 @@
           </div>
         </div>
       </section>
+      <!-- Like & Comment Section (Unified, Simple, No Backend) -->
+      <div class="content-area" style="max-width:600px;margin:2em auto 3em auto;padding:1.5em 1em 1em 1em;border:1px solid #ddd;border-radius:0.8em;background:#f8f8ff;">
+        <!-- Like Button -->
+        <div style="display:flex;align-items:center;gap:1em;margin-bottom:1em;">
+          <button id="like-btn" style="padding:0.5em 1.2em;font-size:1.1em;border-radius:0.5em;border:1px solid #aaa;background:#f0f0f0;cursor:pointer;">
+            👍 Like <span id="like-count">0</span>
+          </button>
+          <span style="color:#555;font-size:0.98em;">Show some love for this page!</span>
+        </div>
+        <!-- Comments -->
+        <div>
+          <div style="font-weight:bold;font-size:1.07em;margin-bottom:0.4em;">Comments</div>
+          <div id="comments-list" style="min-height:2em;margin-bottom:0.7em;"></div>
+          <textarea id="comment-input" rows="2" style="width:100%;padding:0.5em;border-radius:0.3em;border:1px solid #bbb;" placeholder="Write a comment..."></textarea>
+          <button id="add-comment" style="margin-top:0.5em;padding:0.4em 1em;border-radius:0.4em;border:1px solid #aaa;background:#f0f0f0;cursor:pointer;">Add Comment</button>
+        </div>
+      </div>
     </main>
-  </div>
-  <!-- Like & Comment Section (Unified, Simple, No Backend) -->
-  <div class="page-content" style="max-width:600px;margin:2em auto 3em auto;padding:1.5em 1em 1em 1em;border:1px solid #ddd;border-radius:0.8em;background:#f8f8ff;">
-    <!-- Like Button -->
-    <div style="display:flex;align-items:center;gap:1em;margin-bottom:1em;">
-      <button id="like-btn" style="padding:0.5em 1.2em;font-size:1.1em;border-radius:0.5em;border:1px solid #aaa;background:#f0f0f0;cursor:pointer;">
-        👍 Like <span id="like-count">0</span>
-      </button>
-      <span style="color:#555;font-size:0.98em;">Show some love for this page!</span>
-    </div>
-    <!-- Comments -->
-    <div>
-      <div style="font-weight:bold;font-size:1.07em;margin-bottom:0.4em;">Comments</div>
-      <div id="comments-list" style="min-height:2em;margin-bottom:0.7em;"></div>
-      <textarea id="comment-input" rows="2" style="width:100%;padding:0.5em;border-radius:0.3em;border:1px solid #bbb;" placeholder="Write a comment..."></textarea>
-      <button id="add-comment" style="margin-top:0.5em;padding:0.4em 1em;border-radius:0.4em;border:1px solid #aaa;background:#f0f0f0;cursor:pointer;">Add Comment</button>
-    </div>
+    <footer class="content-area bg-white shadow-inner py-6 text-center text-sm text-gray-500">
+      &copy; 2025 Spiros Tsaconas. All rights reserved.
+    </footer>
   </div>
   <script>
     // Like button
@@ -114,9 +136,5 @@
       }
     });
   </script>
-  <!-- Footer -->
-  <footer class="page-content bg-white shadow-inner py-6 text-center text-sm text-gray-500">
-    &copy; 2025 Spiros Tsaconas. All rights reserved.
-  </footer>
 </body>
 </html>
