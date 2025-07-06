@@ -156,12 +156,14 @@
     aria-label="Lush Green Meadow"
     tabindex="-1"
   ></a>
+  <!-- NAVIGATION BAR: Install as App link added after About -->
   <nav class="bg-white shadow p-4 flex gap-6 items-center main-content-z">
     <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
     <a href="dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
     <a href="features.html" class="text-gray-800 hover:text-blue-600">Features</a>
     <a href="pricing.html" class="text-gray-800 hover:text-blue-600">Pricing</a>
     <a href="about-us.html" class="text-gray-800 hover:text-blue-600 font-bold underline underline-offset-4">About</a>
+    <a href="install-as-app.html" class="text-green-700 hover:underline underline-offset-4 font-semibold">Install as App</a>
     <a href="contact.html" class="text-gray-800 hover:text-blue-600">Contact</a>
     <a href="blog.html" class="text-gray-800 hover:text-blue-600">Blog</a>
     <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
@@ -173,8 +175,27 @@
     </button>
   </nav>
   <main class="main-content-z flex-grow flex flex-col items-center justify-center text-center">
+    <!-- INSTALL AS APP INFO BLOCK (NEW) -->
+    <section class="w-full max-w-2xl bg-green-50 border border-green-300 rounded-xl shadow-lg p-6 mt-8 mb-4 flex flex-col items-center">
+      <h2 class="text-xl md:text-2xl font-bold text-green-700 mb-2 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7"/></svg>
+        Install OurApp as an App
+      </h2>
+      <p class="text-green-800 text-base md:text-lg mb-2">
+        Enjoy the ultimate experience! You can <span class="font-semibold">install OurApp on your phone, tablet, or desktop</span> for fast access and beautiful fullscreen mode—no app store required.
+        <br>
+        Just visit the <a href="install-as-app.html" class="text-green-800 font-bold underline hover:text-green-600">Install as App</a> page for a quick, step-by-step guide.
+      </p>
+      <ul class="list-disc list-inside text-green-700 text-left mb-2 pl-3">
+        <li>Works offline after install</li>
+        <li>No updates to download—always fresh</li>
+        <li>Safe: No Google/Apple account needed</li>
+        <li>Remove anytime, no clutter</li>
+      </ul>
+      <p class="text-green-700 text-sm mt-1">Try it now and see your app fly!</p>
+    </section>
     <!-- ENHANCED: Clickable About OurApp -->
-    <h1 class="text-4xl font-extrabold text-blue-800 mt-12 mb-6">
+    <h1 class="text-4xl font-extrabold text-blue-800 mt-8 mb-6">
       <a
         href="https://www.google.com/search?q=best+apps+in+the+world&ie=UTF-8"
         target="_blank"
