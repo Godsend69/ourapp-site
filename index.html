@@ -6,40 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    details[open] summary .arrow { transform: rotate(90deg);}
-    .arrow { transition: transform 0.2s;}
-    .badge { font-size: 0.75rem; padding: 0.2em 0.7em; border-radius: 999px; font-weight: 700; margin-left: 0.5em;}
-    .like-btn.liked { background-color: #dbeafe; color: #1d4ed8;}
-    .comment-list { max-height: 120px; overflow-y: auto; }
-    /* Green clickable backgrounds */
-    .left-green-link, .right-green-link {
+    body {
+      background: none !important;
+    }
+    .bg-clickable {
       position: fixed;
-      top: 0;
-      height: 100vh;
-      width: 50vw;
+      top: 0; left: 0; width: 100vw; height: 100vh;
       z-index: 0;
-      transition: background 0.18s;
-      pointer-events: auto;
+      background: url('/assets/ai-1454-x-900-wallpaper-9cqsh5rq507uxapg.webp') center center / cover no-repeat;
+      display: block;
     }
-    .left-green-link {
-      left: 0;
-      background: #bbf7d0; /* Green-200 */
-      opacity: 0.79;
-      border-right: 2px solid #4ade80;
-    }
-    .left-green-link:hover {
-      opacity: 1;
-      background: #34d399;
-    }
-    .right-green-link {
-      right: 0;
-      background: #6ee7b7; /* Green-300 */
-      opacity: 0.77;
-      border-left: 2px solid #10b981;
-    }
-    .right-green-link:hover {
-      opacity: 1;
-      background: #22d3ee;
+    .white-nav-border {
+      border: 3px solid #fff;
+      border-radius: 1.2rem;
+      box-shadow: 0 0 0 4px rgba(255,255,255,0.12);
     }
     .main-content-z {
       position: relative;
@@ -47,29 +27,40 @@
     }
     .clickable-headline {
       display: inline-block;
-      color: #1e40af;
-      text-decoration: none;
+      color: #2563eb;
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 3px;
       transition: color 0.18s;
     }
     .clickable-headline:hover {
-      color: #22c55e;
+      color: #1d4ed8;
       text-decoration: underline;
       text-shadow: 0 0 6px #bbf7d0;
     }
     .clickable-section-title {
       color: #2563eb;
-      text-decoration: none;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
       transition: color 0.18s;
       cursor: pointer;
       display: inline-block;
     }
     .clickable-section-title:hover {
-      color: #059669;
+      color: #1d4ed8;
       text-decoration: underline;
       text-shadow: 0 0 6px #6ee7b7;
     }
+    .white-welcome {
+      color: #fff !important;
+      font-size: 1.18rem;
+      font-weight: 500;
+      text-shadow: 0 1px 8px #2226;
+    }
     @media (max-width: 900px) {
-      .left-green-link, .right-green-link { display: none; }
+      .white-nav-border { border-radius: 0.7rem; }
+      nav { flex-wrap: wrap; gap: 0.8rem; font-size: 1rem; }
     }
   </style>
   <script>
@@ -117,25 +108,20 @@
   </script>
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col relative overflow-x-hidden">
-  <!-- Left Green Half Clickable Background -->
-  <a 
-    class="left-green-link"
-    href="https://catoma.com/93-miles-around-mount-rainier-how-to-thru-hike-the-wonderland-trail/"
+
+  <!-- Clickable background image, covers everything -->
+  <a
+    href="https://www.istockphoto.com/search/2/image-film?phrase=nucleic+acid"
     target="_blank"
-    title="93 Miles Around Mount Rainier - Wonderland Trail"
-    aria-label="Wonderland Trail"
+    rel="noopener"
+    aria-label="Nucleic Acid images on iStock"
+    class="bg-clickable"
     tabindex="-1"
+    style="outline:none;"
   ></a>
-  <!-- Right Green Half Clickable Background -->
-  <a 
-    class="right-green-link"
-    href="https://www.vecteezy.com/photo/60601538-hiking-trail-crossing-lush-green-meadow-leading-to-majestic-mountain-landscape"
-    target="_blank"
-    title="Lush Green Meadow Hiking Trail"
-    aria-label="Lush Green Meadow"
-    tabindex="-1"
-  ></a>
-  <nav class="bg-white shadow p-4 flex gap-6 items-center main-content-z">
+
+  <!-- Navigation with white border -->
+  <nav class="bg-white shadow p-4 flex gap-6 items-center main-content-z white-nav-border mt-3 mx-auto max-w-5xl" style="position:relative;">
     <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
     <a href="dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
     <a href="features.html" class="text-gray-800 hover:text-blue-600">Features</a>
@@ -145,6 +131,7 @@
     <a href="blog.html" class="text-gray-800 hover:text-blue-600">Blog</a>
     <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
   </nav>
+
   <main class="main-content-z flex-grow flex flex-col items-center justify-center text-center">
     <!-- ENHANCED: Clickable About OurApp -->
     <h1 class="text-4xl font-extrabold text-blue-800 mt-12 mb-6">
@@ -156,7 +143,7 @@
         title="Search: Best apps in the world"
       >About OurApp</a>
     </h1>
-    <p class="text-lg text-gray-700 mb-8 max-w-2xl">
+    <p class="mb-8 white-welcome max-w-2xl mx-auto">
       Welcome! OurApp helps you choose the best tools for your business or project. Click any solution below for clear answers, recommendations, and links to expert resources—so you always find what you need.
     </p>
     <div class="w-full max-w-3xl bg-white rounded-xl shadow p-6 text-left mb-10">
@@ -176,4 +163,7 @@
       </h2>
       <!-- The rest of your file is unchanged -->
       <!-- ... (all original content follows as you sent it) ... -->
-      <!-- (for brevity in this display, your original file continues unchanged below this section) -->
+    </div>
+  </main>
+</body>
+</html>
