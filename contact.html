@@ -4,6 +4,29 @@
   <meta charset="UTF-8">
   <title>Contact | OurApp</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .sphere-image {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 4px 16px rgba(59,130,246,0.15);
+      border: 4px solid #3b82f6;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      background: #f0f9ff;
+    }
+    .sphere-image:hover {
+      transform: scale(1.08) rotate(-3deg);
+      box-shadow: 0 8px 24px rgba(16,185,129,0.18);
+      border-color: #22d3ee;
+    }
+    @media (max-width: 1024px) {
+      .sphere-column {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body class="bg-blue-50 min-h-screen flex flex-col">
   <nav class="bg-white shadow p-4 flex gap-6 items-center">
@@ -17,21 +40,63 @@
     <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
   </nav>
   <main class="flex-grow flex items-center justify-center">
-    <section class="bg-white rounded-xl shadow-2xl p-10 max-w-xl w-full my-16 mx-2 text-center">
-      <h1 class="text-4xl font-extrabold text-blue-800 mb-6">Contact Us</h1>
-      <p class="mb-8 text-gray-700 text-base md:text-lg">
-        We'd love to hear from you! Fill out the form below or reach us by email.
-      </p>
-      <form class="flex flex-col gap-4 items-center" autocomplete="off">
-        <input type="text" placeholder="Your Name" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300" required>
-        <input type="email" placeholder="Your Email" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300" required>
-        <textarea placeholder="Your Message" rows="4" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300" required></textarea>
-        <button type="submit" class="bg-blue-700 text-white px-6 py-2 rounded font-bold hover:bg-blue-800 transition">Send Message</button>
-      </form>
-      <div class="mt-8 text-gray-600 text-sm">
-        Or email us directly at <a href="mailto:support@ourapp.com" class="text-blue-700 font-semibold hover:underline">support@ourapp.com</a>
+    <!-- 3-column layout: left sphere, main, right sphere -->
+    <div class="w-full flex flex-row justify-center items-stretch">
+      <!-- Left Sphere Column -->
+      <div class="sphere-column flex flex-col justify-center items-center lg:w-1/6 w-0 mr-2">
+        <a href="https://www.instagram.com/tsaconaspiros/" target="_blank" title="Instagram">
+          <img src="image3" alt="Social Sphere 1" class="sphere-image mb-6" />
+        </a>
+        <a href="https://x.com/tsaconas69" target="_blank" title="X / Twitter">
+          <img src="image4" alt="Social Sphere 2" class="sphere-image" />
+        </a>
       </div>
-    </section>
+      <!-- Main Contact Content -->
+      <section class="bg-white rounded-xl shadow-2xl p-10 max-w-xl w-full my-16 mx-2 text-center flex-grow">
+        <h1 class="text-4xl font-extrabold text-blue-800 mb-6">Contact Us</h1>
+        <p class="mb-8 text-gray-700 text-base md:text-lg">
+          We'd love to hear from you! Fill out the form below or reach us by email.
+        </p>
+        <form class="flex flex-col gap-4 items-center" autocomplete="off">
+          <input type="text" placeholder="Your Name" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300" required>
+          <input type="email" placeholder="Your Email" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300" required>
+          <textarea placeholder="Your Message" rows="4" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300" required></textarea>
+          <button type="submit" class="bg-blue-700 text-white px-6 py-2 rounded font-bold hover:bg-blue-800 transition">Send Message</button>
+        </form>
+        <div class="mt-8 text-gray-600 text-sm">
+          Or email us directly at <a href="mailto:support@ourapp.com" class="text-blue-700 font-semibold hover:underline">support@ourapp.com</a>
+        </div>
+        <!-- Social Media Links Grid -->
+        <div class="mt-10">
+          <h2 class="text-lg font-bold text-blue-700 mb-3">Connect with Spiros Tsaconas:</h2>
+          <div class="flex flex-wrap items-center justify-center gap-4">
+            <a href="https://www.instagram.com/tsaconaspiros/" target="_blank" class="hover:underline text-pink-600 font-bold">Instagram</a>
+            <a href="https://x.com/tsaconas69" target="_blank" class="hover:underline text-blue-600 font-bold">X (Twitter)</a>
+            <a href="https://www.linkedin.com/in/spyros-tsaconas-92b383119/" target="_blank" class="hover:underline text-blue-700 font-bold">LinkedIn</a>
+            <a href="https://artist69.wordpress.com/" target="_blank" class="hover:underline text-gray-800 font-bold">WordPress</a>
+            <a href="https://www.facebook.com/profile.php?id=100078889342001" target="_blank" class="hover:underline text-blue-800 font-bold">Facebook</a>
+            <a href="https://www.reddit.com/user/IllustriousDraw50/" target="_blank" class="hover:underline text-orange-600 font-bold">Reddit</a>
+            <a href="https://gr.pinterest.com/airbender_69/" target="_blank" class="hover:underline text-red-500 font-bold">Pinterest</a>
+            <a href="https://www.tumblr.com/dashboard" target="_blank" class="hover:underline text-indigo-700 font-bold">Tumblr (Dashboard)</a>
+            <a href="https://www.tumblr.com/blog/tsaconaspiros69" target="_blank" class="hover:underline text-indigo-700 font-bold">Tumblr (Blog)</a>
+            <a href="https://artist69.wordpress.com/blog/" target="_blank" class="hover:underline text-gray-800 font-bold">WordPress Blog</a>
+            <a href="https://gravatar.com/profile" target="_blank" class="hover:underline text-gray-700 font-bold">Gravatar</a>
+            <a href="https://www.producthunt.com/@spirostsaconas69" target="_blank" class="hover:underline text-red-700 font-bold">ProductHunt</a>
+            <a href="https://lightinthedarksolutions.blogspot.com/" target="_blank" class="hover:underline text-blue-700 font-bold">Light In The Dark Blogspot</a>
+            <a href="https://tsaconaspiros.blogspot.com/" target="_blank" class="hover:underline text-blue-700 font-bold">Main Blogspot</a>
+          </div>
+        </div>
+      </section>
+      <!-- Right Sphere Column -->
+      <div class="sphere-column flex flex-col justify-center items-center lg:w-1/6 w-0 ml-2">
+        <a href="https://www.linkedin.com/in/spyros-tsaconas-92b383119/" target="_blank" title="LinkedIn">
+          <img src="image4" alt="Social Sphere 2" class="sphere-image mb-6" />
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100078889342001" target="_blank" title="Facebook">
+          <img src="image3" alt="Social Sphere 1" class="sphere-image" />
+        </a>
+      </div>
+    </div>
   </main>
   <!-- Like & Comment Section (Unified, Simple, No Backend) -->
   <div id="like-comment-section" style="max-width:600px;margin:2em auto 3em auto;padding:1.5em 1em 1em 1em;border:1px solid #ddd;border-radius:0.8em;background:#f8f8ff;">
