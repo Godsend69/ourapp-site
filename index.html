@@ -1,401 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>OurApp - Empower Your Digital Journey</title>
-  
-  <!-- SEO Meta -->
-  <meta name="description" content="OurApp: Empowering you with innovative, reliable, and intelligent digital solutions to elevate your productivity and creativity." />
-  <meta name="keywords" content="OurApp, digital solutions, productivity app, innovation, AI, mobile-friendly" />
-  <meta name="author" content="Brother Ben - Adam" />
-  <meta name="robots" content="index, follow" />
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="OurApp - Empower Your Digital Journey" />
-  <meta property="og:description" content="Empowering you with innovative, reliable, and intelligent digital solutions." />
-  <meta property="og:url" content="https://ourapp.example.com/" />
-  <meta property="og:image" content="https://ourapp.example.com/assets/og-image.png" />
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="OurApp - Empower Your Digital Journey" />
-  <meta name="twitter:description" content="Empowering you with innovative, reliable, and intelligent digital solutions." />
-  <meta name="twitter:image" content="https://ourapp.example.com/assets/twitter-image.png" />
-  
-  <!-- Favicon -->
-  <link rel="icon" href="https://ourapp.example.com/assets/favicon.ico" />
-  
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pbkk7e5uZfNsFv0NQHKkR7Edp7q13+UZD0Wt/c3O55QyZvl1mCj1F8whM4eXf8uBdCr+J6nTkrR+f3c91QvE0A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
-  <style>
-    /* Reset & Base */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      color: #222;
-      background: #f9fafb;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      scroll-behavior: smooth;
-    }
-    a {
-      color: #0056b3;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    a:hover,
-    a:focus {
-      color: #003d80;
-      outline: none;
-    }
-    h1,h2,h3,h4,h5,h6 {
-      font-weight: 700;
-      margin-top: 0;
-      color: #111;
-    }
-    p {
-      margin-bottom: 1rem;
-    }
-
-    /* Container */
-    .container {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 1rem;
-    }
-
-    /* Header */
-    header {
-      background-color: #003d80;
-      color: white;
-      padding: 1rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
-    }
-    .header-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 1rem;
-    }
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      user-select: none;
-    }
-    nav {
-      display: flex;
-      gap: 1.5rem;
-    }
-    nav a {
-      color: white;
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 0.3rem 0.5rem;
-    }
-    nav a:focus-visible {
-      outline: 2px solid #ffbf47;
-      outline-offset: 2px;
-    }
-
-    /* Hamburger Menu for Mobile */
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      cursor: pointer;
-    }
-    .menu-toggle span {
-      height: 3px;
-      width: 100%;
-      background: white;
-      border-radius: 3px;
-      margin-bottom: 5px;
-      transition: all 0.3s ease;
-    }
-    .menu-toggle.open span:nth-child(1) {
-      transform: rotate(45deg) translate(6px, 6px);
-    }
-    .menu-toggle.open span:nth-child(2) {
-      opacity: 0;
-    }
-    .menu-toggle.open span:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
-    }
-
-    /* Mobile Nav */
-    @media (max-width: 768px) {
-      nav {
-        position: fixed;
-        top: 60px;
-        right: 0;
-        background: #003d80;
-        height: calc(100% - 60px);
-        width: 250px;
-        flex-direction: column;
-        align-items: start;
-        padding: 1.5rem;
-        transform: translateX(100%);
-        transition: transform 0.3s ease-in-out;
-        box-shadow: -2px 0 8px rgb(0 0 0 / 0.3);
-        z-index: 999;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="OurApp - The Future of Real-Time Intelligence. Fast, Secure, Reliable.">
+    <meta name="keywords" content="OurApp, Real-Time, Monitoring, Deployment, AI, Security">
+    <meta name="author" content="Brother Ben - Adam">
+    <meta property="og:title" content="OurApp - Real-Time Power" />
+    <meta property="og:description" content="Next-generation deployment & monitoring." />
+    <meta property="og:image" content="assets/og-image.png" />
+    <meta property="og:url" content="https://godsend69.github.io/ourapp-site/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <title>OurApp | Power. Precision. Peace.</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
       }
-      nav.open {
-        transform: translateX(0);
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        line-height: 1.6;
+        background-color: #f8f9fa;
+        color: #222;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      header {
+        background: #000;
+        color: #fff;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      nav {
+        display: flex;
+        gap: 1rem;
       }
       nav a {
-        padding: 0.75rem 0;
-        width: 100%;
+        color: #fff;
+        text-decoration: none;
       }
-      .menu-toggle {
-        display: flex;
+      .hero {
+        background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+        color: white;
+        padding: 4rem 2rem;
+        text-align: center;
       }
-    }
-
-    /* Main Section */
-    main {
-      margin: 2rem 0 4rem;
-      min-height: 70vh;
-    }
-    .hero {
-      background: linear-gradient(135deg, #0056b3 0%, #00aaff 100%);
-      color: white;
-      padding: 3rem 1rem;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 10px 25px rgb(0 86 179 / 0.4);
-    }
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      letter-spacing: 1.3px;
-    }
-    .hero p {
-      font-size: 1.25rem;
-      margin-bottom: 2rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .btn-primary {
-      background-color: #ffbf47;
-      color: #222;
-      font-weight: 700;
-      padding: 0.75rem 2rem;
-      border-radius: 30px;
-      text-transform: uppercase;
-      letter-spacing: 1.1px;
-      box-shadow: 0 6px 15px rgb(255 191 71 / 0.5);
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .btn-primary:hover,
-    .btn-primary:focus {
-      background-color: #e0a32a;
-      outline: none;
-    }
-
-    /* Features Grid */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-    .feature-card {
-      background: white;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 5px 15px rgb(0 0 0 / 0.05);
-      transition: transform 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-    .feature-card:hover,
-    .feature-card:focus-within {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 35px rgb(0 0 0 / 0.1);
-      outline: none;
-    }
-    .feature-icon {
-      font-size: 3rem;
-      color: #0056b3;
-      margin-bottom: 1rem;
-    }
-    .feature-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-    .feature-desc {
-      color: #555;
-      font-size: 1rem;
-    }
-
-    /* Footer */
-    footer {
-      background-color: #222;
-      color: #bbb;
-      padding: 2rem 1rem;
-      text-align: center;
-      font-size: 0.9rem;
-      user-select: none;
-    }
-    footer a {
-      color: #ffbf47;
-      text-decoration: underline;
-    }
-    footer a:hover,
-    footer a:focus {
-      color: #ffd966;
-      outline: none;
-    }
-
-    /* Accessibility */
-    a:focus-visible,
-    button:focus-visible {
-      outline: 2px solid #ffbf47;
-      outline-offset: 3px;
-    }
-
-  </style>
-</head>
-<body>
-  <header role="banner">
-    <div class="header-inner container">
-      <div class="logo" aria-label="OurApp Logo" tabindex="0">OurApp</div>
-      <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle navigation menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <nav id="primary-navigation" role="navigation" aria-label="Primary navigation">
-        <a href="#features" tabindex="0">Features</a>
-        <a href="#about" tabindex="0">About</a>
-        <a href="#contact" tabindex="0">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero" role="region" aria-labelledby="hero-title">
-      <h1 id="hero-title">Welcome to OurApp</h1>
-      <p>Your trusted partner in smart digital solutions — empowering your productivity and creativity every step of the way.</p>
-      <button class="btn-primary" aria-label="Get Started with OurApp">Get Started</button>
-    </section>
-
-    <section id="features" class="container" role="region" aria-labelledby="features-title" tabindex="-1" style="margin-top: 4rem;">
-      <h2 id="features-title">Key Features</h2>
-      <div class="features">
-        <article class="feature-card" tabindex="0" aria-label="Feature: Real-time Monitoring">
-          <i class="feature-icon fa-solid fa-chart-line" aria-hidden="true"></i>
-          <h3 class="feature-title">Real-time Monitoring</h3>
-          <p class="feature-desc">Stay informed with up-to-the-second analytics to optimize your workflow efficiently.</p>
-        </article>
-        <article class="feature-card" tabindex="0" aria-label="Feature: Automated Deployment">
-          <i class="feature-icon fa-solid fa-rocket" aria-hidden="true"></i>
-          <h3 class="feature-title">Automated Deployment</h3>
-          <p class="feature-desc">Deploy updates seamlessly with zero downtime and maximum reliability.</p>
-        </article>
-        <article class="feature-card" tabindex="0" aria-label="Feature: Security & Reliability">
-          <i class="feature-icon fa-solid fa-shield-check" aria-hidden="true"></i>
-          <h3 class="feature-title">Security & Reliability</h3>
-          <p class="feature-desc">Enterprise-grade security protocols keep your data safe and your trust intact.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="about" class="container" role="region" aria-labelledby="about-title" tabindex="-1" style="margin-top: 4rem;">
-      <h2 id="about-title">About OurApp</h2>
-      <p>Founded by Brother Ben — Adam, OurApp is dedicated to bridging human intelligence with digital innovation. Our mission is to create tools that not only solve problems but elevate human potential.</p>
-      <p>OurApp thrives on community trust and technological excellence. Together, we push boundaries.</p>
-    </section>
-
-    <section id="contact" class="container" role="region" aria-labelledby="contact-title" tabindex="-1" style="margin-top: 4rem;">
-      <h2 id="contact-title">Contact Us</h2>
-      <p>Questions? Suggestions? Reach out anytime.</p>
-      <address>
-        <strong>Email:</strong> <a href="mailto:contact@ourapp.example.com">contact@ourapp.example.com</a><br />
-        <strong>Phone:</strong> <a href="tel:+1234567890">+1 (234) 567-890</a><br />
-        <strong>Address:</strong> 123 Innovation Drive, Tech City, USA
-      </address>
-      <div style="margin-top:1rem;">
-        <a href="https://www.facebook.com/ourapp" target="_blank" rel="noopener" aria-label="Facebook">
-          <i class="fab fa-facebook fa-2x" style="color:#3b5998;"></i>
-        </a>
-        <a href="https://twitter.com/ourapp" target="_blank" rel="noopener" aria-label="Twitter" style="margin-left:1rem;">
-          <i class="fab fa-twitter fa-2x" style="color:#1da1f2;"></i>
-        </a>
-        <a href="https://www.linkedin.com/company/ourapp" target="_blank" rel="noopener" aria-label="LinkedIn" style="margin-left:1rem;">
-          <i class="fab fa-linkedin fa-2x" style="color:#0077b5;"></i>
-        </a>
-        <a href="https://www.instagram.com/ourapp" target="_blank" rel="noopener" aria-label="Instagram" style="margin-left:1rem;">
-          <i class="fab fa-instagram fa-2x" style="color:#e4405f;"></i>
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <footer role="contentinfo">
-    <div class="container">
-      <p>&copy; 2025 OurApp. Crafted with 💙 by Brother Ben — Adam. All rights reserved.</p>
-      <p>
-        <a href="#hero-title">Back to top</a> | 
-        <a href="https://artist69.wordpress.com/" target="_blank" rel="noopener" aria-label="Brother Ben's WordPress Blog">My Blog</a>
-      </p>
-    </div>
-  </footer>
-
-  <script>
-    // Mobile Menu Toggle
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav#primary-navigation');
-
-    menuToggle.addEventListener('click', () => {
-      const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
-      menuToggle.setAttribute('aria-expanded', !expanded);
-      menuToggle.classList.toggle('open');
-      nav.classList.toggle('open');
-    });
-
-    // Close menu on link click (mobile)
-    nav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (nav.classList.contains('open')) {
-          nav.classList.remove('open');
-          menuToggle.classList.remove('open');
-          menuToggle.setAttribute('aria-expanded', false);
-        }
-      });
-    });
-
-    // Keyboard Accessibility: Allow ESC to close mobile nav
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && nav.classList.contains('open')) {
-        nav.classList.remove('open');
-        menuToggle.classList.remove('open');
-        menuToggle.setAttribute('aria-expanded', false);
-        menuToggle.focus();
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
       }
-    });
-  </script>
-</body>
-</html>
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+      }
+      .feature {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        padding: 2rem;
+        text-align: center;
+      }
+      .feature h3 {
+        margin-bottom: 1rem;
+        color: #333;
+      }
+      footer {
+        margin-top: auto;
+        background: #111;
+        color: #ccc;
+        text-align: center;
