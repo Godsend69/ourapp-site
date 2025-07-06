@@ -5,53 +5,36 @@
   <title>Contact | OurApp</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .sphere-image {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 50%;
-      box-shadow: 0 4px 16px rgba(59,130,246,0.15);
-      border: 4px solid #3b82f6;
-      transition: transform 0.2s, box-shadow 0.2s;
-      cursor: pointer;
-      background: #f0f9ff;
-      margin-bottom: 1.5rem;
+    body, html {
+      height: 100%;
+      width: 100%;
     }
-    .sphere-image:hover {
-      transform: scale(1.08) rotate(-3deg);
-      box-shadow: 0 8px 24px rgba(16,185,129,0.18);
-      border-color: #22d3ee;
+    .full-bg-link {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      background: #000;
+      opacity: 1;
     }
-    @media (max-width: 1024px) {
-      .sphere-column {
-        display: none;
-      }
+    .page-content {
+      position: relative;
+      z-index: 2; /* Above the link overlay */
+      /* pointer-events: none; */ /* Uncomment to make form not interactive */
+    }
+    /* Optional: prevent highlight of link overlay on click */
+    .full-bg-link:focus {
+      outline: none;
     }
   </style>
 </head>
-<body class="bg-blue-50 min-h-screen flex flex-col">
-  <nav class="bg-white shadow p-4 flex gap-6 items-center">
-    <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
-    <a href="dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
-    <a href="features.html" class="text-gray-800 hover:text-blue-600">Features</a>
-    <a href="pricing.html" class="text-gray-800 hover:text-blue-600">Pricing</a>
-    <a href="about-us.html" class="text-gray-800 hover:text-blue-600">About</a>
-    <a href="contact.html" class="text-gray-800 hover:text-blue-600 font-bold underline underline-offset-4">Contact</a>
-    <a href="blog.html" class="text-gray-800 hover:text-blue-600">Blog</a>
-    <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
-  </nav>
-  <main class="flex-grow flex items-center justify-center">
-    <!-- 3-column layout: left sphere, main, right sphere -->
-    <div class="w-full flex flex-row justify-center items-stretch">
-      <!-- Left Sphere Column -->
-      <div class="sphere-column flex flex-col justify-center items-center lg:w-1/6 w-0 mr-2">
-        <a href="https://www.instagram.com/tsaconaspiros/" target="_blank" title="Instagram">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo" class="sphere-image" />
-        </a>
-        <a href="https://x.com/tsaconas69" target="_blank" title="X / Twitter">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/X_logo_2023.svg" alt="X Logo" class="sphere-image" style="background:#fff;" />
-        </a>
-      </div>
+<body class="bg-black min-h-screen flex flex-col">
+  <!-- Full-page black clickable background -->
+  <a href="https://www.nationalgeographic.com/" target="_blank" class="full-bg-link" aria-label="Go to National Geographic"></a>
+  <div class="page-content flex-grow flex items-center justify-center">
+    <main class="flex-grow flex items-center justify-center">
       <!-- Main Contact Content -->
       <section class="bg-white rounded-xl shadow-2xl p-10 max-w-xl w-full my-16 mx-2 text-center flex-grow">
         <h1 class="text-4xl font-extrabold text-blue-800 mb-6">Contact Us</h1>
@@ -88,19 +71,10 @@
           </div>
         </div>
       </section>
-      <!-- Right Sphere Column -->
-      <div class="sphere-column flex flex-col justify-center items-center lg:w-1/6 w-0 ml-2">
-        <a href="https://www.linkedin.com/in/spyros-tsaconas-92b383119/" target="_blank" title="LinkedIn">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo" class="sphere-image" />
-        </a>
-        <a href="https://www.facebook.com/profile.php?id=100078889342001" target="_blank" title="Facebook">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="Facebook Logo" class="sphere-image" />
-        </a>
-      </div>
-    </div>
-  </main>
+    </main>
+  </div>
   <!-- Like & Comment Section (Unified, Simple, No Backend) -->
-  <div id="like-comment-section" style="max-width:600px;margin:2em auto 3em auto;padding:1.5em 1em 1em 1em;border:1px solid #ddd;border-radius:0.8em;background:#f8f8ff;">
+  <div class="page-content" style="max-width:600px;margin:2em auto 3em auto;padding:1.5em 1em 1em 1em;border:1px solid #ddd;border-radius:0.8em;background:#f8f8ff;">
     <!-- Like Button -->
     <div style="display:flex;align-items:center;gap:1em;margin-bottom:1em;">
       <button id="like-btn" style="padding:0.5em 1.2em;font-size:1.1em;border-radius:0.5em;border:1px solid #aaa;background:#f0f0f0;cursor:pointer;">
@@ -121,7 +95,7 @@
     let likeCount = 0;
     const likeBtn = document.getElementById('like-btn');
     const likeDisplay = document.getElementById('like-count');
-    likeBtn.addEventListener('click', function() {
+    likeBtn && likeBtn.addEventListener('click', function() {
       likeCount++;
       likeDisplay.textContent = likeCount;
     });
@@ -131,7 +105,7 @@
     const commentInput = document.getElementById('comment-input');
     const addCommentBtn = document.getElementById('add-comment');
     const commentsList = document.getElementById('comments-list');
-    addCommentBtn.addEventListener('click', function() {
+    addCommentBtn && addCommentBtn.addEventListener('click', function() {
       const value = commentInput.value.trim();
       if (value) {
         comments.push(value);
@@ -141,7 +115,7 @@
     });
   </script>
   <!-- Footer -->
-  <footer class="bg-white shadow-inner py-6 text-center text-sm text-gray-500">
+  <footer class="page-content bg-white shadow-inner py-6 text-center text-sm text-gray-500">
     &copy; 2025 Spiros Tsaconas. All rights reserved.
   </footer>
 </body>
