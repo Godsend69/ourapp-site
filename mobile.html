@@ -112,6 +112,28 @@
       margin-bottom: 0.7rem;
       font-size: 1.03em;
     }
+    .install-link-block {
+      background: #f0fdf4;
+      border: 1px solid #4ade80;
+      color: #166534;
+      border-radius: 10px;
+      margin: 2.5em auto 2em auto;
+      max-width: 400px;
+      padding: 1.2em 1em 1em 1em;
+      font-size: 1.09em;
+      box-shadow: 0 2px 16px #4ade8033;
+      text-align: center;
+    }
+    .install-link-block a {
+      color: #0891b2;
+      text-decoration: underline;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    .install-link-block a:hover {
+      color: #0ea5e9;
+      text-decoration: none;
+    }
     footer {
       background: #334155;
       color: #e0e7ef;
@@ -158,7 +180,7 @@
         font-size: 1.185rem;
         padding: 1.2rem 1rem;
       }
-      .pwa-block {
+      .pwa-block, .install-link-block {
         padding: 1.2em 0.5em 0.9em 0.5em;
         font-size: 1.08em;
       }
@@ -192,6 +214,7 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="mobile.html" class="active">Mobile</a></li>
+      <li><a href="install-as-app.html">Install as App</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
   </nav>
@@ -205,6 +228,10 @@
         <li>Choose <b>Add to Home Screen</b>.</li>
         <li>OurApp icon will appear on your phone like a regular app!</li>
       </ul>
+    </div>
+    <div class="install-link-block">
+      <span>Want detailed step-by-step instructions?</span><br>
+      <a href="install-as-app.html">Click here to learn how to install OurApp as an app!</a>
     </div>
     <h2 style="margin-top:2.5em;">Why OurApp for Mobile?</h2>
     <ul>
