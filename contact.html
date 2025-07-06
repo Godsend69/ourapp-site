@@ -11,7 +11,8 @@
       background: #000 !important;
       position: relative;
     }
-    .bg-clickable {
+    /* The overlay covers everything but pointer-events are only on the overlay itself */
+    .bg-overlay {
       position: fixed;
       inset: 0;
       width: 100vw;
@@ -21,13 +22,16 @@
     .page-content {
       position: relative;
       z-index: 20;
+      /* make content allow interactions */
       pointer-events: auto;
     }
+    /* Here's the trick: the overlay is on top, but content is set to pointer-events: auto,
+       so only clicks on the black area (not covered by .page-content) trigger the overlay click */
   </style>
 </head>
 <body>
-  <!-- Clickable black background overlay (above background, below everything else) -->
-  <div id="bg-clickable" class="bg-clickable"></div>
+  <!-- Overlay for catching background clicks -->
+  <div class="bg-overlay" onclick="if(event.target === this){window.open('https://www.nationalgeographic.com/','_blank');}"></div>
   <div class="page-content flex flex-col min-h-screen">
     <nav class="bg-white shadow p-4 flex gap-6 items-center">
       <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
@@ -98,16 +102,6 @@
     </footer>
   </div>
   <script>
-    // Make the black background clickable ONLY outside the content
-    const bg = document.getElementById('bg-clickable');
-    document.addEventListener('click', function(e) {
-      // If the click is on the background (not inside content)
-      const content = document.querySelector('.page-content');
-      if (!content.contains(e.target) && bg.contains(e.target)) {
-        window.open('https://www.nationalgeographic.com/', '_blank');
-      }
-    });
-
     // Like button
     let likeCount = 0;
     const likeBtn = document.getElementById('like-btn');
