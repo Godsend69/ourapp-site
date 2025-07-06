@@ -7,9 +7,21 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background: url('/assets/ai-1454-x-900-wallpaper-9cqsh5rq507uxapg.webp') no-repeat center center fixed;
-      background-size: cover;
-      background-color: #111924;
+      background: none !important;
+    }
+    /* Clickable background image, clickable everywhere! */
+    .bg-clickable {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      background: url('/assets/ai-1454-x-900-wallpaper-9cqsh5rq507uxapg.webp') center center / cover no-repeat;
+      display: block;
+    }
+    /* White border for nav */
+    .white-nav-border {
+      border: 3px solid #fff;
+      border-radius: 1.2rem;
+      box-shadow: 0 0 0 4px rgba(255,255,255,0.12);
     }
     main, section.bg-white {
       background: rgba(255,255,255,0.93);
@@ -21,46 +33,74 @@
       border: 1px solid #e0e0e0 !important;
       color: #1c4532 !important;
     }
-    .text-green-700, .text-green-500, .border-green-200, .bg-green-50, .text-green-800 {
-      color: #2563eb !important;
-      border-color: #bfdbfe !important;
-      background: transparent !important;
-    }
-    #like-comment-section {
-      background: rgba(248,248,255,0.96) !important;
-    }
-    /* White border for main content */
     .main-white-border {
       border: 3px solid #fff;
       border-radius: 1.2rem;
       box-shadow: 0 0 0 4px rgba(255,255,255,0.12);
     }
-    /* For better readability on the background */
-    .about-link {
+    .about-link, .headline-link, .section-link {
       color: #2563eb;
-      font-weight: 600;
+      font-weight: 700;
       text-decoration: underline;
       text-underline-offset: 3px;
       transition: color 0.18s;
+      cursor: pointer;
     }
-    .about-link:hover {
+    .about-link:hover, .headline-link:hover, .section-link:hover {
       color: #1d4ed8;
+    }
+    #like-comment-section {
+      background: rgba(248,248,255,0.96) !important;
+    }
+    /* Make welcome text white for contrast */
+    .white-welcome {
+      color: #fff !important;
+      font-size: 1.18rem;
+      font-weight: 500;
+      text-shadow: 0 1px 8px #2226;
+    }
+    /* Remove old greens styling */
+    .text-green-700, .text-green-500, .border-green-200, .bg-green-50, .text-green-800 {
+      color: #2563eb !important;
+      border-color: #bfdbfe !important;
+      background: transparent !important;
+    }
+    nav, main, #like-comment-section, .install-block {
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 700px) {
+      .main-white-border, .white-nav-border { border-radius: 0.7rem; }
+      .main-white-border { padding: 0.6rem !important; }
+      nav { flex-wrap: wrap; gap: 0.8rem; font-size: 1rem; }
     }
   </style>
 </head>
 <body class="flex flex-col min-h-screen">
-  <!-- Navigation -->
-  <nav class="bg-white shadow p-4 flex gap-6 items-center">
+
+  <!-- Clickable background image, covers everything -->
+  <a
+    href="https://www.istockphoto.com/search/2/image-film?phrase=nucleic+acid"
+    target="_blank"
+    rel="noopener"
+    aria-label="Nucleic Acid images on iStock"
+    class="bg-clickable"
+    tabindex="-1"
+    style="outline:none;"
+  ></a>
+
+  <!-- Navigation with white border -->
+  <nav class="bg-white shadow p-4 flex flex-wrap gap-6 items-center mx-auto mt-4 max-w-5xl white-nav-border">
     <a href="/" class="font-bold text-2xl text-blue-700">OurApp</a>
-    <a href="/dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
-    <a href="/features.html" class="text-gray-800 hover:text-blue-600">Features</a>
-    <a href="/pricing.html" class="text-gray-800 hover:text-blue-600">Pricing</a>
+    <a href="/dashboard.html" class="text-gray-800 hover:text-blue-600 font-semibold">Dashboard</a>
+    <a href="/features.html" class="text-gray-800 hover:text-blue-600 font-semibold">Features</a>
+    <a href="/pricing.html" class="text-gray-800 hover:text-blue-600 font-semibold">Pricing</a>
     <a href="/about.html" class="text-gray-800 hover:text-blue-600 font-bold underline underline-offset-4">About</a>
-    <a href="/install-as-app.html" class="text-gray-800 hover:text-blue-600 font-semibold">Install as App</a>
-    <a href="/contact.html" class="text-gray-800 hover:text-blue-600">Contact</a>
-    <a href="https://tsaconaspiros.blogspot.com/" target="_blank" rel="noopener" class="text-gray-800 hover:text-blue-600">Blogspot Blog</a>
-    <a href="https://artist69.wordpress.com/" target="_blank" rel="noopener" class="text-gray-800 hover:text-blue-600">WordPress Blog</a>
+    <a href="/contact.html" class="text-gray-800 hover:text-blue-600 font-semibold">Contact</a>
+    <a href="/blog.html" class="text-gray-800 hover:text-blue-600 font-semibold">Blog</a>
+    <a href="/best-practices.html" class="text-gray-800 hover:text-blue-600 font-semibold">Best Practices</a>
   </nav>
+
   <!-- Install as App Info Block (NEW) -->
   <section class="install-block border rounded-lg shadow-md mt-8 mx-auto max-w-2xl p-6 mb-6 flex flex-col gap-2 items-center">
     <h2 class="text-xl md:text-2xl font-bold text-blue-700 mb-1 flex items-center gap-2">
@@ -74,10 +114,13 @@
       <em>Empower your workflow—no app store needed, just the magic of the open web!</em>
     </p>
   </section>
+
   <!-- About Content -->
   <main class="flex-grow flex items-center justify-center">
     <section class="bg-white main-white-border rounded-xl shadow-2xl p-10 max-w-3xl w-full my-16 mx-2 text-center">
-      <h1 class="text-4xl md:text-5xl font-extrabold text-blue-800 mb-6">About</h1>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-blue-800 mb-6">
+        <a href="https://www.google.com/search?q=best+apps+in+the+world&ie=UTF-8" target="_blank" class="headline-link">About OurApp</a>
+      </h1>
       <div class="flex flex-col gap-2 items-center mb-6 text-lg">
         <span>
           <a href="https://tsaconaspiros.blogspot.com/p/the-founder.html" target="_blank" class="about-link">Founder</a>
@@ -87,13 +130,18 @@
           <a href="https://artist69.wordpress.com/think-tank-artist/" target="_blank" class="about-link">Think Tank Artist</a>
         </span>
       </div>
-      <p class="mb-6 text-gray-700 text-base md:text-lg">
-        As the <span class="about-link">founder</span> and <span class="about-link">owner</span>, I have passionately designed and built this app with a vision to empower businesses, entrepreneurs, and innovators. My journey from concept to creation has been guided by the desire to deliver a solution that is not only functional but transformative.
+      <p class="mb-6 white-welcome">
+        Welcome! OurApp helps you choose the best tools for your business or project. Click any solution below for clear answers, recommendations, and links to expert resources—so you always find what you need.
       </p>
-      <p class="mb-10 text-gray-700 text-base md:text-lg">
-        As a <span class="about-link">Think Tank Artist</span>, I approach every challenge with creativity and strategic thinking, ensuring that our app evolves with the needs of its users. The blend of innovation, reliability, and cutting-edge technology makes this platform a game-changer in its industry.
-      </p>
-      <!-- ADDED SECTION FROM USER -->
+      <h2 class="text-2xl font-bold mb-5 mt-2">
+        <a
+          href="https://www.google.com/search?q=world%27s+best+Real-Time+Monitoring+Solutions&ie=UTF-8"
+          target="_blank"
+          class="section-link"
+          title="Search: World's best Real-Time Monitoring Solutions"
+        >Real-Time Monitoring Solutions</a>
+      </h2>
+      <!-- ALL YOUR REMAINING CONTENT BELOW STAYS UNCHANGED -->
       <div class="border-t border-gray-300 pt-8 mt-8 mb-10 text-left">
         <h2 class="text-2xl font-bold text-blue-700 mb-3">Founder • Owner • Think Tank Artist</h2>
         <p class="mb-4 text-gray-700">
@@ -186,7 +234,6 @@
           </li>
         </ul>
       </div>
-      <!-- END OF ADDED SECTION FROM USER -->
       <div class="border-t border-gray-200 pt-8 mt-10">
         <h2 class="text-2xl font-bold text-blue-700 mb-2">Want to Go Deeper?</h2>
         <p class="mb-4 text-gray-700">
@@ -201,6 +248,7 @@
       </div>
     </section>
   </main>
+
   <!-- Like & Comment Section (Unified, Simple, No Backend) -->
   <div id="like-comment-section" style="max-width:600px;margin:2em auto 3em auto;padding:1.5em 1em 1em 1em;border:1px solid #ddd;border-radius:0.8em;background:rgba(248,248,255,0.96);">
     <!-- Like Button -->
