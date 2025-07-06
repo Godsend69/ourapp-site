@@ -9,29 +9,36 @@
       min-height: 100%;
       width: 100%;
       background: #000 !important;
-      position: relative;
+      margin: 0;
+      padding: 0;
     }
-    /* The overlay covers everything but pointer-events are only on the overlay itself */
-    .bg-overlay {
+    .bg-clickable {
       position: fixed;
       inset: 0;
       width: 100vw;
       height: 100vh;
       z-index: 10;
+      /* pointer-events on by default, but content will be above */
     }
-    .page-content {
+    .page-content,
+    nav,
+    main,
+    footer {
       position: relative;
       z-index: 20;
-      /* make content allow interactions */
       pointer-events: auto;
     }
-    /* Here's the trick: the overlay is on top, but content is set to pointer-events: auto,
-       so only clicks on the black area (not covered by .page-content) trigger the overlay click */
+    /* Like/comment box also above */
+    .like-comment-section {
+      position: relative;
+      z-index: 20;
+      pointer-events: auto;
+    }
   </style>
 </head>
 <body>
-  <!-- Overlay for catching background clicks -->
-  <div class="bg-overlay" onclick="if(event.target === this){window.open('https://www.nationalgeographic.com/','_blank');}"></div>
+  <!-- Clickable black background overlay (below content, above body bg) -->
+  <div class="bg-clickable" id="bg-clickable"></div>
   <div class="page-content flex flex-col min-h-screen">
     <nav class="bg-white shadow p-4 flex gap-6 items-center">
       <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
@@ -80,7 +87,7 @@
         </div>
       </section>
       <!-- Like & Comment Section (Unified, Simple, No Backend) -->
-      <div style="max-width:600px;margin:2em auto 3em auto;padding:1.5em 1em 1em 1em;border:1px solid #ddd;border-radius:0.8em;background:#f8f8ff;">
+      <div class="like-comment-section" style="max-width:600px;margin:2em auto 3em auto;padding:1.5em 1em 1em 1em;border:1px solid #ddd;border-radius:0.8em;background:#f8f8ff;">
         <!-- Like Button -->
         <div style="display:flex;align-items:center;gap:1em;margin-bottom:1em;">
           <button id="like-btn" style="padding:0.5em 1.2em;font-size:1.1em;border-radius:0.5em;border:1px solid #aaa;background:#f0f0f0;cursor:pointer;">
@@ -102,6 +109,12 @@
     </footer>
   </div>
   <script>
+    // Make the black background clickable ONLY outside the content
+    document.getElementById('bg-clickable').addEventListener('click', function(e) {
+      // If the click is not on a child (content is above anyway), open the link
+      window.open('https://www.nationalgeographic.com/', '_blank');
+    });
+
     // Like button
     let likeCount = 0;
     const likeBtn = document.getElementById('like-btn');
