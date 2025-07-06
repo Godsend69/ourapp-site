@@ -5,45 +5,30 @@
   <title>Contact | OurApp</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body, html {
+    html, body {
       min-height: 100%;
       width: 100%;
       background: #000 !important;
       position: relative;
     }
-    .bg-link-overlay {
+    .bg-clickable {
       position: fixed;
       inset: 0;
       width: 100vw;
       height: 100vh;
-      z-index: 1;
-      background: transparent;
-      display: block;
-      pointer-events: auto;
+      z-index: 10;
     }
-    .content-wrapper {
+    .page-content {
       position: relative;
-      z-index: 2;
-    }
-    /* Prevent the overlay from blocking clicks on the content */
-    .content-area, nav, footer {
-      position: relative;
-      z-index: 3;
-      pointer-events: auto;
-    }
-    /* Let background link only be clickable where there is no content */
-    .bg-link-overlay {
-      pointer-events: auto;
-    }
-    .content-area, nav, footer {
+      z-index: 20;
       pointer-events: auto;
     }
   </style>
 </head>
 <body>
-  <!-- Clickable black background overlay -->
-  <a href="https://www.nationalgeographic.com/" target="_blank" class="bg-link-overlay" aria-label="Go to National Geographic"></a>
-  <div class="content-wrapper flex flex-col min-h-screen">
+  <!-- Clickable black background overlay (above background, below everything else) -->
+  <div id="bg-clickable" class="bg-clickable"></div>
+  <div class="page-content flex flex-col min-h-screen">
     <nav class="bg-white shadow p-4 flex gap-6 items-center">
       <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
       <a href="dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
@@ -55,7 +40,7 @@
       <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
     </nav>
     <main class="flex-grow flex flex-col items-center justify-center">
-      <section class="content-area bg-white rounded-xl shadow-2xl p-10 max-w-xl w-full my-16 mx-2 text-center flex-grow">
+      <section class="bg-white rounded-xl shadow-2xl p-10 max-w-xl w-full my-16 mx-2 text-center flex-grow">
         <h1 class="text-4xl font-extrabold text-blue-800 mb-6">Contact Us</h1>
         <p class="mb-8 text-gray-700 text-base md:text-lg">
           We'd love to hear from you! Fill out the form below or reach us by email.
@@ -91,7 +76,7 @@
         </div>
       </section>
       <!-- Like & Comment Section (Unified, Simple, No Backend) -->
-      <div class="content-area" style="max-width:600px;margin:2em auto 3em auto;padding:1.5em 1em 1em 1em;border:1px solid #ddd;border-radius:0.8em;background:#f8f8ff;">
+      <div style="max-width:600px;margin:2em auto 3em auto;padding:1.5em 1em 1em 1em;border:1px solid #ddd;border-radius:0.8em;background:#f8f8ff;">
         <!-- Like Button -->
         <div style="display:flex;align-items:center;gap:1em;margin-bottom:1em;">
           <button id="like-btn" style="padding:0.5em 1.2em;font-size:1.1em;border-radius:0.5em;border:1px solid #aaa;background:#f0f0f0;cursor:pointer;">
@@ -108,11 +93,21 @@
         </div>
       </div>
     </main>
-    <footer class="content-area bg-white shadow-inner py-6 text-center text-sm text-gray-500">
+    <footer class="bg-white shadow-inner py-6 text-center text-sm text-gray-500">
       &copy; 2025 Spiros Tsaconas. All rights reserved.
     </footer>
   </div>
   <script>
+    // Make the black background clickable ONLY outside the content
+    const bg = document.getElementById('bg-clickable');
+    document.addEventListener('click', function(e) {
+      // If the click is on the background (not inside content)
+      const content = document.querySelector('.page-content');
+      if (!content.contains(e.target) && bg.contains(e.target)) {
+        window.open('https://www.nationalgeographic.com/', '_blank');
+      }
+    });
+
     // Like button
     let likeCount = 0;
     const likeBtn = document.getElementById('like-btn');
