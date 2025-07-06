@@ -51,16 +51,34 @@
     </div>
   </main>
 
-  <!-- Like & Comment Section (Unified, Simple, No Backend) -->
+  <!-- Social Media Section -->
+  <section class="bg-gradient-to-tr from-white via-blue-50 to-pink-50 py-10 mt-16 text-center">
+    <h2 class="text-3xl font-bold text-blue-800 mb-6">🌐 Follow the Vision</h2>
+    <p class="text-gray-700 mb-8 max-w-xl mx-auto">Connect with me across the platforms where inspiration, strategy, and creation meet.</p>
+    <div class="flex flex-wrap justify-center gap-6 text-2xl">
+      <a href="https://www.instagram.com/tsaconaspiros/" target="_blank" class="hover:text-pink-500">📷 Instagram</a>
+      <a href="https://x.com/tsaconas69" target="_blank" class="hover:text-blue-500">🐦 X (Twitter)</a>
+      <a href="https://www.linkedin.com/in/spyros-tsaconas-92b383119/" target="_blank" class="hover:text-blue-700">💼 LinkedIn</a>
+      <a href="https://artist69.wordpress.com/" target="_blank" class="hover:text-gray-800">📝 WordPress</a>
+      <a href="https://www.facebook.com/profile.php?id=100078889342001" target="_blank" class="hover:text-blue-600">📘 Facebook</a>
+      <a href="https://www.reddit.com/user/IllustriousDraw50/" target="_blank" class="hover:text-orange-600">👽 Reddit</a>
+      <a href="https://gr.pinterest.com/airbender_69/" target="_blank" class="hover:text-red-500">📌 Pinterest</a>
+      <a href="https://www.tumblr.com/blog/tsaconaspiros69" target="_blank" class="hover:text-purple-700">🌌 Tumblr</a>
+      <a href="https://gravatar.com/profile" target="_blank" class="hover:text-gray-500">🧑‍💻 Gravatar</a>
+      <a href="https://www.producthunt.com/@spirostsaconas69" target="_blank" class="hover:text-orange-500">🚀 Product Hunt</a>
+      <a href="https://lightinthedarksolutions.blogspot.com/" target="_blank" class="hover:text-green-700">🕯️ Blogspot 1</a>
+      <a href="https://tsaconaspiros.blogspot.com/" target="_blank" class="hover:text-green-700">🌿 Blogspot 2</a>
+    </div>
+  </section>
+
+  <!-- Like & Comment Section -->
   <div id="like-comment-section" style="max-width:600px;margin:2em auto 3em auto;padding:1.5em 1em 1em 1em;border:1px solid #ddd;border-radius:0.8em;background:#f8f8ff;">
-    <!-- Like Button -->
     <div style="display:flex;align-items:center;gap:1em;margin-bottom:1em;">
       <button id="like-btn" style="padding:0.5em 1.2em;font-size:1.1em;border-radius:0.5em;border:1px solid #aaa;background:#f0f0f0;cursor:pointer;">
         👍 Like <span id="like-count">0</span>
       </button>
       <span style="color:#555;font-size:0.98em;">Show some love for this page!</span>
     </div>
-    <!-- Comments -->
     <div>
       <div style="font-weight:bold;font-size:1.07em;margin-bottom:0.4em;">Comments</div>
       <div id="comments-list" style="min-height:2em;margin-bottom:0.7em;"></div>
@@ -70,7 +88,6 @@
   </div>
 
   <script>
-    // Like button
     let likeCount = 0;
     const likeBtn = document.getElementById('like-btn');
     const likeDisplay = document.getElementById('like-count');
@@ -79,7 +96,6 @@
       likeDisplay.textContent = likeCount;
     });
 
-    // Comments section
     const comments = [];
     const commentInput = document.getElementById('comment-input');
     const addCommentBtn = document.getElementById('add-comment');
