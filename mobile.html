@@ -1,130 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>OurApp Mobile Optimized</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>OurApp - Mobile</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    * {
       margin: 0;
       padding: 0;
-      background: #f4f4f4;
+      box-sizing: border-box;
     }
-
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+      padding: 1rem;
+    }
     header {
-      background: #333;
+      background: #1e1e2f;
       color: #fff;
       padding: 1rem;
       text-align: center;
     }
-
     nav {
-      background: #444;
-    }
-
-    .nav-links {
       display: flex;
-      justify-content: space-around;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .nav-links li a {
-      color: white;
-      text-decoration: none;
+      justify-content: space-between;
+      align-items: center;
+      background: #333;
       padding: 1rem;
+    }
+    nav .logo {
+      font-size: 1.2rem;
+      color: #fff;
+      font-weight: bold;
+    }
+    nav .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    nav .menu-toggle span {
+      background: #fff;
+      height: 3px;
+      width: 25px;
+      margin: 3px 0;
+    }
+    ul.nav-links {
+      list-style: none;
+      display: flex;
+    }
+    ul.nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
       display: block;
     }
-
-    .burger {
-      display: none;
-      cursor: pointer;
-      padding: 1rem;
-    }
-
-    .burger div {
-      width: 25px;
-      height: 3px;
-      background-color: white;
-      margin: 5px;
-      transition: all 0.3s ease;
-    }
-
-    .container {
-      padding: 1rem;
-    }
-
-    h1 {
-      font-size: 2rem;
-      text-align: center;
-      margin-top: 1rem;
-    }
-
-    p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      max-width: 700px;
-      margin: auto;
-      text-align: center;
-    }
-
     @media screen and (max-width: 768px) {
-      .nav-links {
+      nav .menu-toggle {
+        display: flex;
+      }
+      ul.nav-links {
         flex-direction: column;
+        width: 100%;
         display: none;
         background: #444;
       }
-
-      .nav-links.active {
+      ul.nav-links.showing {
         display: flex;
       }
-
-      .burger {
-        display: block;
-        background: #444;
-        text-align: right;
-      }
+    }
+    main {
+      padding: 1rem;
+    }
+    h2 {
+      margin-bottom: 1rem;
+    }
+    p {
+      margin-bottom: 1.5rem;
     }
   </style>
 </head>
-
 <body>
   <header>
-    <h1>Welcome to OurApp</h1>
+    <h1>Mobile-Optimized Experience</h1>
   </header>
 
   <nav>
-    <div class="burger" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
+    <div class="logo">OurApp</div>
+    <div class="menu-toggle" id="mobile-menu">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
-    <ul class="nav-links" id="navLinks">
+    <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="features.html">Features</a></li>
+      <li><a href="mobile.html">Mobile</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
   </nav>
 
-  <div class="container">
-    <h1>This Page is Mobile Optimized</h1>
+  <main>
+    <h2>Optimized for Phones & Tablets</h2>
     <p>
-      This page demonstrates responsive design, easy readability, and a burger menu for small screens.
+      This version of our app site is carefully crafted to provide a clean,
+      responsive, and intuitive user experience on all screen sizes.
     </p>
-  </div>
+    <ul>
+      <li>✅ Responsive layout using flex/grid</li>
+      <li>✅ Optimized text for small screens</li>
+      <li>✅ Touch-friendly buttons and navigation</li>
+      <li>✅ Fast loading and mobile performance</li>
+    </ul>
+  </main>
 
   <script>
-    function toggleMenu() {
-      const nav = document.getElementById('navLinks');
-      nav.classList.toggle('active');
-    }
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinks = document.querySelector('.nav-links');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('showing');
+    });
   </script>
 </body>
-
 </html>
