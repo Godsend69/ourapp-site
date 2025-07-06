@@ -26,11 +26,11 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      pointer-events: none; /* default: don't allow clicks */
+      pointer-events: none;
     }
     nav, .main-card, .like-comment-section, footer {
-      pointer-events: auto; /* allow interactions */
-      width: 100%; /* nav/footer full width, cards auto width */
+      pointer-events: auto;
+      width: 100%;
     }
     .main-card, .like-comment-section {
       width: 100%;
@@ -41,6 +41,17 @@
     .like-comment-section {
       margin-top: 2em;
       margin-bottom: 2em;
+    }
+    .clickable-title {
+      display: inline-block;
+      cursor: pointer;
+      color: #1e40af;
+      text-decoration: underline;
+      text-underline-offset: 6px;
+      transition: color 0.2s;
+    }
+    .clickable-title:hover {
+      color: #2563eb;
     }
   </style>
 </head>
@@ -59,7 +70,9 @@
       <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
     </nav>
     <section class="main-card bg-white rounded-xl shadow-2xl p-10 my-16 mx-2 text-center">
-      <h1 class="text-4xl font-extrabold text-blue-800 mb-6">Contact Us</h1>
+      <a href="https://science.nasa.gov/exoplanets/search-for-life/" target="_blank" rel="noopener" class="clickable-title">
+        <h1 class="text-4xl font-extrabold mb-6">Contact Us</h1>
+      </a>
       <p class="mb-8 text-gray-700 text-base md:text-lg">
         We'd love to hear from you! Fill out the form below or reach us by email.
       </p>
