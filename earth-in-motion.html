@@ -21,16 +21,54 @@
             padding: 0;
             position: relative;
         }
+        /* Make the whole background (except content) clickable, but avoid resource links */
+        .background-link {
+            position: fixed;
+            z-index: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            background: transparent;
+            cursor: pointer;
+        }
+        .background-link.no-pointer {
+            pointer-events: none;
+        }
         h1 {
             margin: 32px 0 16px 0;
             letter-spacing: 2px;
             font-size: 2.2em;
+            position: relative;
+            z-index: 2;
+        }
+        .headline-link {
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Orbitron', Arial, sans-serif;
+            font-size: 1.1em;
+            font-weight: 900;
+            background: linear-gradient(90deg, #1e3a8a 0%, #60a5fa 100%);
+            padding: 0.18em 1.3em;
+            border-radius: 1.4em;
+            box-shadow: 0 2px 22px #0007;
+            letter-spacing: .09em;
+            margin: 0 auto;
+            display: inline-block;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        }
+        .headline-link:hover {
+            background: #fbbf24;
+            color: #1e293b;
+            box-shadow: 0 2px 40px #fbbf2433;
+            text-shadow: 0 0 16px #fff;
         }
         .video-container {
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 32px 0;
+            position: relative;
+            z-index: 2;
         }
         .video-link {
             display: inline-block;
@@ -38,6 +76,7 @@
             box-shadow: 0 4px 32px #000a;
             overflow: hidden;
             transition: box-shadow 0.2s;
+            background: rgba(0,0,0,0.4);
         }
         .video-link:hover {
             box-shadow: 0 8px 48px #00f3;
@@ -48,10 +87,15 @@
             display: block;
             background: #000;
         }
+        .main-content,
+        p {
+            position: relative;
+            z-index: 2;
+        }
         /* BACKGROUND LINKS */
         .bg-link {
             position: fixed;
-            z-index: 1;
+            z-index: 10;
             color: #fbbf24;
             background: rgba(10, 21, 39, 0.68);
             border: 1.5px solid #fff2;
@@ -74,7 +118,7 @@
             text-shadow: 0 0 18px #fff, 0 0 10px #fbbf24;
             box-shadow: 0 4px 24px #fbbf2499;
         }
-        /* Random placements, avoiding perfect vertical/horizontal alignment */
+        /* Random placements */
         .bg-link.l1 { top: 8%; left: 12%; transform: rotate(-8deg);}
         .bg-link.l2 { top: 23%; right: 14%; transform: rotate(10deg);}
         .bg-link.l3 { top: 41%; left: 7%; transform: rotate(-13deg);}
@@ -98,8 +142,43 @@
             .bg-link.l5, .bg-link.l6, .bg-link.l7, .bg-link.l8 { display: none; }
         }
     </style>
+    <script>
+        // Ensure background link does not overlay resource links
+        window.addEventListener('DOMContentLoaded', function () {
+            const bgLink = document.getElementById('background-link');
+            const resourceLinks = Array.from(document.querySelectorAll('.bg-link'));
+            function updatePointerEvents(e) {
+                // On mouse move, check if we're over a resource link
+                const overResource = resourceLinks.some(el => {
+                    const rect = el.getBoundingClientRect();
+                    return (
+                        e.clientX >= rect.left &&
+                        e.clientX <= rect.right &&
+                        e.clientY >= rect.top &&
+                        e.clientY <= rect.bottom &&
+                        getComputedStyle(el).display !== 'none'
+                    );
+                });
+                bgLink.classList.toggle('no-pointer', overResource);
+            }
+            document.addEventListener('mousemove', updatePointerEvents);
+            document.addEventListener('touchstart', function(e) {
+                if (e.touches && e.touches.length > 0) {
+                    const touch = e.touches[0];
+                    updatePointerEvents({clientX: touch.clientX, clientY: touch.clientY});
+                }
+            });
+        });
+    </script>
 </head>
 <body>
+    <!-- The whole background is a clickable link (but not over resource links) -->
+    <a href="https://spacetelescopelive.org/webb?obsId=01JZ5WDQ89KSW9C9AGB1WT7KE4"
+       class="background-link"
+       id="background-link"
+       title="James Webb Live"
+       tabindex="-1"></a>
+
     <!-- BACKGROUND LINKS (clickable, randomly placed) -->
     <a href="https://earthobservatory.nasa.gov/" target="_blank" class="bg-link l1" title="NASA Earth Observatory">NASA Earth Observatory</a>
     <a href="https://eospso.nasa.gov/content/resource-links" target="_blank" class="bg-link l2" title="NASA EOSPSO Resource Links">NASA EOSPSO Resources</a>
@@ -114,14 +193,18 @@
     <a href="https://defence-industry-space.ec.europa.eu/eu-space/copernicus-earth-observation_en" target="_blank" class="bg-link l11" title="EU Copernicus Earth Observation">EU Copernicus EO</a>
     <a href="https://www.spacex.com/" target="_blank" class="bg-link l12" title="SpaceX">SpaceX</a>
 
-    <h1>EARTH IN MOTION</h1>
-    <div class="video-container">
-        <a class="video-link" href="https://www.google.com/search?q=EARTH+IN+MOTION&ie=UTF-8" target="_blank" title="Learn more about Earth in Motion">
-            <video src="istockphoto-1044859270-640_adpp_is.mp4" controls autoplay loop muted></video>
-        </a>
+    <div class="main-content">
+        <h1>
+            <a href="https://spacetelescopelive.org/hubble" target="_blank" class="headline-link" title="Hubble Space Telescope Live">EARTH IN MOTION</a>
+        </h1>
+        <div class="video-container">
+            <a class="video-link" href="https://www.google.com/search?q=EARTH+IN+MOTION&ie=UTF-8" target="_blank" title="Learn more about Earth in Motion">
+                <video src="istockphoto-1044859270-640_adpp_is.mp4" controls autoplay loop muted></video>
+            </a>
+        </div>
+        <p>
+            Click the video to learn more about <b>Earth in Motion</b>.
+        </p>
     </div>
-    <p>
-        Click the video to learn more about <b>Earth in Motion</b>.
-    </p>
 </body>
 </html>
