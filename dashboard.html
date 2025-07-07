@@ -31,16 +31,24 @@
     .dashboard-background-link:hover {
       background: #bee4fe;
     }
+    /* REDDISH CENTRAL CONTAINER */
     .dashboard-container {
       max-width: 1000px;
       margin: 2.5em auto;
       padding: 2em 1em;
-      background: #fff;
+      background: linear-gradient(135deg, #ffdde1 0%, #ff6a6a 100%);
       border-radius: 16px;
       box-shadow: 0 2px 12px #e7e7e7;
       text-align: center;
       position: relative;
       z-index: 1;
+      cursor: pointer;
+      transition: box-shadow 0.2s, background 0.2s;
+      border: 2.5px solid #fff3;
+    }
+    .dashboard-container:hover {
+      box-shadow: 0 6px 26px #ff6a6a44, 0 2px 12px #e7e7e7;
+      background: linear-gradient(135deg, #ffeaea 0%, #ff4c6a 100%);
     }
     .dashboard-title {
       color: #2d6cdf;
@@ -203,14 +211,18 @@
     aria-label="ScienceDirect Article"
     tabindex="-1"
   ></a>
-  <div class="dashboard-container">
-    <a 
-      class="dashboard-title"
-      href="https://www.google.com/search?q=Dashboard&ie=UTF-8"
-      target="_blank"
-      rel="noopener"
-      title="Google Search: Dashboard"
-    >Dashboard</a>
+  <a
+    class="dashboard-container"
+    href="https://www.google.com/search?newwindow=1&sxsrf=AE3TifPJN5ay0qzCMTyE5polaUr191jVPg:1751885582399&q=Top+10+cooking+blogs&dpr=1"
+    target="_blank"
+    rel="noopener"
+    title="Top 10 Cooking Blogs"
+    tabindex="0"
+    style="display:block;text-decoration:none;"
+  >
+    <span class="dashboard-title"
+      onclick="event.stopPropagation();"
+      >Dashboard</span>
     <div class="dashboard-subtitle">
       Welcome to your Dashboard. Here you can monitor your app's metrics, control deployments, and see real-time insights.
     </div>
@@ -256,24 +268,48 @@
       <textarea class="comment-box" placeholder="Write a comment..."></textarea>
       <button class="add-comment-btn">Add Comment</button>
     </div>
-  </div>
+  </a>
   <script>
     // Like button logic
     const likeBtn = document.querySelector('.like-button');
     const likeCount = document.getElementById('like-count');
 
     if (likeBtn && likeCount) {
-      likeBtn.addEventListener('click', function() {
+      likeBtn.addEventListener('click', function(event) {
+        event.stopPropagation();
         let count = parseInt(likeCount.textContent, 10);
         likeCount.textContent = count + 1;
       });
     }
-    // Prevent click events on dashboard-container from bubbling to background link
-    document.querySelector('.dashboard-container').addEventListener('click', function(e) {
+    // Prevent click events on dashboard-title from bubbling to dashboard-container
+    document.querySelector('.dashboard-title').addEventListener('click', function(e) {
       e.stopPropagation();
     });
-    // Make sure tabbing into dashboard-container works and dashboard background is not focusable
-    document.querySelector('.dashboard-container').setAttribute('tabindex', '0');
+    // Prevent click events on feature-card links and buttons from bubbling to dashboard-container
+    document.querySelectorAll('.feature-card a, .add-comment-btn').forEach(el => {
+      el.addEventListener('click', function(e) { e.stopPropagation(); });
+    });
+    // Prevent click events for textarea/comments from bubbling to dashboard-container
+    document.querySelector('.comment-box').addEventListener('click', function(e) { e.stopPropagation(); });
+
+    // Comments logic
+    const commentBox = document.querySelector('.comment-box');
+    const addCommentBtn = document.querySelector('.add-comment-btn');
+    const commentsLabel = document.querySelector('.comments-label');
+    let commentsListDiv = document.createElement('div');
+    commentsLabel.parentNode.insertBefore(commentsListDiv, commentsLabel.nextSibling);
+
+    addCommentBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const value = commentBox.value.trim();
+      if (value) {
+        const div = document.createElement('div');
+        div.style.cssText = "border-bottom:1px dashed #eee;padding:0.4em 0;";
+        div.textContent = value;
+        commentsListDiv.appendChild(div);
+        commentBox.value = '';
+      }
+    });
   </script>
 </body>
 </html>
