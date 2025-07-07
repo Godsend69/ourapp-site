@@ -19,6 +19,7 @@
             text-align: center;
             margin: 0;
             padding: 0;
+            position: relative;
         }
         h1 {
             margin: 32px 0 16px 0;
@@ -47,14 +48,72 @@
             display: block;
             background: #000;
         }
+        /* BACKGROUND LINKS */
+        .bg-link {
+            position: fixed;
+            z-index: 1;
+            color: #fbbf24;
+            background: rgba(10, 21, 39, 0.68);
+            border: 1.5px solid #fff2;
+            border-radius: 1em 2em 2em 1em;
+            padding: 0.4em 1.2em;
+            font-size: 1.07em;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 700;
+            text-shadow: 0 2px 16px #000b, 0 3px 12px #3338;
+            box-shadow: 0 2px 12px #0005;
+            text-decoration: none;
+            opacity: 0.85;
+            pointer-events: auto;
+            transition: background 0.22s, color 0.19s, box-shadow 0.22s, opacity 0.18s;
+        }
+        .bg-link:hover {
+            background: #fbbf24;
+            color: #1d2538;
+            opacity: 1;
+            text-shadow: 0 0 18px #fff, 0 0 10px #fbbf24;
+            box-shadow: 0 4px 24px #fbbf2499;
+        }
+        /* Random placements, avoiding perfect vertical/horizontal alignment */
+        .bg-link.l1 { top: 8%; left: 12%; transform: rotate(-8deg);}
+        .bg-link.l2 { top: 23%; right: 14%; transform: rotate(10deg);}
+        .bg-link.l3 { top: 41%; left: 7%; transform: rotate(-13deg);}
+        .bg-link.l4 { bottom: 19%; right: 13%; transform: rotate(6deg);}
+        .bg-link.l5 { bottom: 13%; left: 21%; transform: rotate(-18deg);}
+        .bg-link.l6 { top: 55%; right: 8%; transform: rotate(16deg);}
+        .bg-link.l7 { top: 60%; left: 16%; transform: rotate(-12deg);}
+        .bg-link.l8 { bottom: 7%; right: 24%; transform: rotate(17deg);}
+        .bg-link.l9 { top: 17%; left: 29%; transform: rotate(-14deg);}
+        .bg-link.l10 { bottom: 25%; right: 31%; transform: rotate(21deg);}
+        .bg-link.l11 { top: 34%; right: 28%; transform: rotate(-21deg);}
+        .bg-link.l12 { bottom: 31%; left: 34%; transform: rotate(7deg);}
+        /* Responsive: hide some links on mobile */
+        @media (max-width: 900px) {
+            .bg-link { font-size: 0.92em; padding: 0.3em 0.5em;}
+            .bg-link.l9, .bg-link.l10, .bg-link.l11, .bg-link.l12 { display: none; }
+        }
         @media (max-width: 600px) {
-            h1 {
-                font-size: 1.3em;
-            }
+            h1 { font-size: 1.3em;}
+            .bg-link { font-size: 0.78em; }
+            .bg-link.l5, .bg-link.l6, .bg-link.l7, .bg-link.l8 { display: none; }
         }
     </style>
 </head>
 <body>
+    <!-- BACKGROUND LINKS (clickable, randomly placed) -->
+    <a href="https://earthobservatory.nasa.gov/" target="_blank" class="bg-link l1" title="NASA Earth Observatory">NASA Earth Observatory</a>
+    <a href="https://eospso.nasa.gov/content/resource-links" target="_blank" class="bg-link l2" title="NASA EOSPSO Resource Links">NASA EOSPSO Resources</a>
+    <a href="https://earthobservations.org/" target="_blank" class="bg-link l3" title="Group on Earth Observations">GEO</a>
+    <a href="https://earth.esa.int/eogateway" target="_blank" class="bg-link l4" title="ESA EO Gateway">ESA EO Gateway</a>
+    <a href="https://eodashboard.org/" target="_blank" class="bg-link l5" title="Earth Observing Dashboard">EO Dashboard</a>
+    <a href="https://www.copernicus.eu/en" target="_blank" class="bg-link l6" title="Copernicus">Copernicus</a>
+    <a href="https://old.earthobservations.org/geoss.php" target="_blank" class="bg-link l7" title="GEOSS">GEOSS</a>
+    <a href="https://africanspaceagency.org/portfolio_page/earth-observation/" target="_blank" class="bg-link l8" title="African Space Agency EO">African Space Agency EO</a>
+    <a href="https://earthexplorer.usgs.gov/" target="_blank" class="bg-link l9" title="USGS Earth Explorer">USGS Earth Explorer</a>
+    <a href="https://old.earthobservations.org/index.php" target="_blank" class="bg-link l10" title="Group on Earth Observations (old)">GEO (Old)</a>
+    <a href="https://defence-industry-space.ec.europa.eu/eu-space/copernicus-earth-observation_en" target="_blank" class="bg-link l11" title="EU Copernicus Earth Observation">EU Copernicus EO</a>
+    <a href="https://www.spacex.com/" target="_blank" class="bg-link l12" title="SpaceX">SpaceX</a>
+
     <h1>EARTH IN MOTION</h1>
     <div class="video-container">
         <a class="video-link" href="https://www.google.com/search?q=EARTH+IN+MOTION&ie=UTF-8" target="_blank" title="Learn more about Earth in Motion">
