@@ -24,7 +24,6 @@
             margin: 32px 0 16px 0;
             letter-spacing: 2px;
             font-size: 2.2em;
-            font-family: 'Orbitron', Arial, sans-serif;
         }
         .video-container {
             display: flex;
@@ -38,7 +37,6 @@
             box-shadow: 0 4px 32px #000a;
             overflow: hidden;
             transition: box-shadow 0.2s;
-            background: rgba(0,0,0,0.4);
         }
         .video-link:hover {
             box-shadow: 0 8px 48px #00f3;
@@ -49,58 +47,14 @@
             display: block;
             background: #000;
         }
-        /* Decorative planets */
-        .planet {
-            position: fixed;
-            z-index: 0;
-            opacity: 0.96;
-            pointer-events: none;
-            animation: float-planet 14s ease-in-out infinite alternate;
-        }
-        .planet.planet1 {
-            left: 2vw;
-            top: 12vh;
-            width: 120px;
-            height: 120px;
-            animation-delay: 0s;
-        }
-        .planet.planet2 {
-            right: 4vw;
-            top: 18vh;
-            width: 90px;
-            height: 90px;
-            animation-delay: 2s;
-        }
-        .planet.planet3 {
-            left: 8vw;
-            bottom: 6vh;
-            width: 100px;
-            height: 100px;
-            animation-delay: 4s;
-        }
-        @keyframes float-planet {
-            0% { transform: translateY(0px) scale(1); }
-            100% { transform: translateY(26px) scale(1.07);}
-        }
         @media (max-width: 600px) {
             h1 {
                 font-size: 1.3em;
-            }
-            .planet.planet1,
-            .planet.planet2,
-            .planet.planet3 {
-                width: 54px !important;
-                height: 54px !important;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Decorative planets -->
-    <img src="assets/ChatGPT Image Jul 5, 2025, 03_57_47 AM.png" alt="planet" class="planet planet1">
-    <img src="assets/ChatGPT Image Jul 5, 2025, 04_12_22 AM.png" alt="planet" class="planet planet2">
-    <img src="assets/ChatGPT Image Jul 5, 2025, 04_39_35 AM.png" alt="planet" class="planet planet3">
-
     <h1>EARTH IN MOTION</h1>
     <div class="video-container">
         <a class="video-link" href="https://www.google.com/search?q=EARTH+IN+MOTION&ie=UTF-8" target="_blank" title="Learn more about Earth in Motion">
