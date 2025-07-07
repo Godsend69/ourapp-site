@@ -62,6 +62,72 @@
       .white-nav-border { border-radius: 0.7rem; }
       nav { flex-wrap: wrap; gap: 0.8rem; font-size: 1rem; }
     }
+    /* Highlight for Spheres of Destiny link */
+    .spheres-highlight {
+      color: #fbbf24 !important;
+      font-weight: 900 !important;
+      letter-spacing: .06em;
+      text-shadow: 0 0 10px #fde68a99, 0 0 4px #fff;
+      background: rgba(255,255,255,0.08);
+      border-radius: 0.7rem;
+      padding: 0.2em 0.9em;
+      margin-left: auto;
+      font-size: 1.13rem;
+      transition: background 0.18s, color 0.16s, box-shadow 0.18s;
+      border: 2px solid #fef3c7;
+      box-shadow: 0 2px 18px #fbbf2433;
+    }
+    .spheres-highlight:hover {
+      background: #fbbf24;
+      color: #1d2538 !important;
+      text-shadow: 0 0 18px #fff, 0 0 10px #fde68a;
+      box-shadow: 0 4px 24px #fbbf2499;
+      border-color: #f59e42;
+    }
+    .headline-link-main {
+      display: inline-block;
+      background: linear-gradient(90deg, #60a5fa 60%, #fbbf24 100%);
+      color: #1e293b;
+      font-family: 'Orbitron', 'Montserrat', Arial, sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      text-decoration: none;
+      padding: 0.55em 1.28em;
+      border-radius: 32px;
+      box-shadow: 0 2px 30px #2563eb66;
+      letter-spacing: .07em;
+      margin: 2.5rem auto 1.7rem auto;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      text-shadow: 0 0 6px #f8fafc77;
+    }
+    .headline-link-main:hover {
+      background: linear-gradient(90deg, #fbbf24 30%, #60a5fa 100%);
+      color: #fff;
+      box-shadow: 0 2px 44px #fbbf2433;
+      text-shadow: 0 0 19px #fff;
+    }
+    .main-headline {
+      font-family: 'Orbitron', 'Montserrat', Arial, sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.7rem);
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: .07em;
+      margin-bottom: 0.7rem;
+      text-shadow: 0 4px 60px #60a5fa88, 0 2px 0 #1e293b, 0 10px 40px #0e1a3699;
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+    .main-subtitle {
+      color: #e2e8f0;
+      font-size: clamp(1.05rem, 2vw, 1.22rem);
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 2.2rem;
+      text-shadow: 0 2px 16px #2563eb55;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -129,9 +195,24 @@
     <a href="contact.html" class="text-gray-800 hover:text-blue-600">Contact</a>
     <a href="blog.html" class="text-gray-800 hover:text-blue-600">Blog</a>
     <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
+    <!-- SPHERES OF DESTINY headline link, highlighted and right-aligned -->
+    <a href="spheres-of-destiny.html" class="spheres-highlight ml-auto" title="SPHERES OF DESTINY">SPHERES OF DESTINY</a>
   </nav>
 
   <main class="main-content-z flex-grow flex flex-col items-center justify-center text-center">
+    <!-- ENHANCED: Main headline and subtitle -->
+    <div class="main-headline">
+      Welcome to OurApp
+    </div>
+    <div class="main-subtitle">
+      Discover next-generation features, best practices, and philosophical journeys into knowledge, destiny, and the power of AI.
+    </div>
+    <!-- Main call-to-action headline link -->
+    <a class="headline-link-main"
+      href="spheres-of-destiny.html"
+      title="Go to SPHERES OF DESTINY"
+    >Explore SPHERES OF DESTINY &rarr;</a>
+
     <!-- ENHANCED: Clickable About OurApp -->
     <h1 class="text-4xl font-extrabold text-blue-800 mt-12 mb-6">
       <a
@@ -146,7 +227,6 @@
       Welcome! OurApp helps you choose the best tools for your business or project. Click any solution below for clear answers, recommendations, and links to expert resources—so you always find what you need.
     </p>
     <div class="w-full max-w-3xl bg-white rounded-xl shadow p-6 text-left mb-10">
-
       <!-- =======================
            MONITORING
       ======================== -->
