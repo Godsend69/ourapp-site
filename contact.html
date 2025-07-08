@@ -19,6 +19,15 @@
       height: 100vh;
       z-index: 10;
     }
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      width: 100%;
+    }
+    .nav-spacer {
+      height: 72px; /* should match nav height so content doesn't hide behind it */
+    }
     .centered-content {
       position: relative;
       z-index: 20;
@@ -26,13 +35,6 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      /* pointer-events REMOVED */
-    }
-    nav {
-      /* pointer-events: auto; REMOVED */
-      width: 100%;
-      z-index: 30; /* make sure nav is above the overlay */
-      position: relative;
     }
     .main-card, .like-comment-section, footer {
       width: 100%;
@@ -104,6 +106,19 @@
   <!-- Clickable background overlay -->
   <div class="bg-overlay" onclick="window.open('https://www.nationalgeographic.com/', '_blank');"></div>
 
+  <!-- Navigation: NOW OUTSIDE centered-content, always on top -->
+  <nav class="bg-white shadow p-4 flex gap-6 items-center w-full max-w-none">
+    <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
+    <a href="dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
+    <a href="features.html" class="text-gray-800 hover:text-blue-600">Features</a>
+    <a href="pricing.html" class="text-gray-800 hover:text-blue-600">Pricing</a>
+    <a href="about-us.html" class="text-gray-800 hover:text-blue-600">About</a>
+    <a href="contact.html" class="text-gray-800 hover:text-blue-600 font-bold underline underline-offset-4">Contact</a>
+    <a href="blog.html" class="text-gray-800 hover:text-blue-600">Blog</a>
+    <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
+  </nav>
+  <div class="nav-spacer"></div>
+
   <!-- Left side image -->
   <div class="side-images-container side-images-left">
     <a 
@@ -131,16 +146,6 @@
   </div>
 
   <div class="centered-content">
-    <nav class="bg-white shadow p-4 flex gap-6 items-center w-full max-w-none">
-      <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
-      <a href="dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
-      <a href="features.html" class="text-gray-800 hover:text-blue-600">Features</a>
-      <a href="pricing.html" class="text-gray-800 hover:text-blue-600">Pricing</a>
-      <a href="about-us.html" class="text-gray-800 hover:text-blue-600">About</a>
-      <a href="contact.html" class="text-gray-800 hover:text-blue-600 font-bold underline underline-offset-4">Contact</a>
-      <a href="blog.html" class="text-gray-800 hover:text-blue-600">Blog</a>
-      <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
-    </nav>
     <section class="main-card bg-white rounded-xl shadow-2xl p-10 my-16 mx-2 text-center">
       <a href="https://science.nasa.gov/exoplanets/search-for-life/" target="_blank" rel="noopener" class="clickable-title">
         <h1 class="text-4xl font-extrabold mb-6">Contact Us</h1>
