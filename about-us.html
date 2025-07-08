@@ -15,21 +15,36 @@
       padding: 0;
       position: relative;
     }
-    /* The overlay for background clicks */
-    .bg-clickable-link {
+    /* Helmet Mask Hotspot */
+    .helmet-hotspot {
       position: fixed;
-      inset: 0;
-      z-index: 1;
-      width: 100vw;
-      height: 100vh;
-      background: transparent;
-      cursor: pointer;
+      /* Adjust left/top to match the mask's position on your background! */
+      left: 10vw;   /* <<<< ADJUST for your design */
+      top: 11vh;    /* <<<< ADJUST for your design */
+      width: 85px;  /* <<<< ADJUST for your design */
+      height: 120px;/* <<<< ADJUST for your design */
+      z-index: 12;
+      pointer-events: none;
+      /* Optional: set border:1px solid red; to debug position */
+    }
+    .helmet-hotspot a {
+      display: block;
+      width: 100%;
+      height: 100%;
       pointer-events: auto;
+    }
+    .helmet-mask-shape {
+      fill: rgba(255, 215, 0, 0.07); /* Gold, faint for debug; set to 0 for invisible */
+      cursor: pointer;
+      transition: fill 0.2s;
+    }
+    .helmet-mask-shape:hover {
+      fill: rgba(255, 215, 0, 0.28); /* highlight on hover */
     }
     /* Content is above the overlay and fully interactive */
     .main-content-z {
       position: relative;
-      z-index: 2;
+      z-index: 20;
       pointer-events: auto;
     }
     details[open] summary .arrow { transform: rotate(90deg);}
@@ -122,18 +137,22 @@
           input.value = '';
         });
       });
-      // Make the background clickable, but not content
-      var bgClickable = document.querySelector('.bg-clickable-link');
-      bgClickable.addEventListener('click', function(e){
-        // Only trigger if it's not covered by content (content is above by z-index)
-        window.open('https://tainio-mania.online/xfsearch/director/Steven%20Kane/', '_blank');
-      });
+      // No background clickable overlay for mask -- handled by clickable SVG only
     });
   </script>
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col relative overflow-x-hidden">
-  <!-- The invisible clickable overlay, under all content -->
-  <div class="bg-clickable-link" title="See Steven Kane's movies"></div>
+  <!-- CLICKABLE HELMET MASK HOTSPOT SVG -->
+  <div class="helmet-hotspot" aria-label="Watch Steven Kane series">
+    <a href="https://tainio-mania.online/xfsearch/director/Steven%20Kane/" target="_blank" title="Watch Steven Kane series">
+      <!-- Adjust <polygon> points for an even more precise fit -->
+      <svg viewBox="0 0 85 120" width="85" height="120">
+        <polygon class="helmet-mask-shape"
+          points="10,10 75,15 80,70 70,110 15,105 5,60"
+        />
+      </svg>
+    </a>
+  </div>
   <!-- CONTENT -->
   <nav class="bg-white shadow p-4 flex gap-6 items-center main-content-z">
     <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
