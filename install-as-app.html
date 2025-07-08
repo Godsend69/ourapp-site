@@ -5,42 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Install OurApp on Your Device</title>
   <style>
-    html, body {
-      height: 100%;
-      min-height: 100vh;
-      margin: 0;
-      padding: 0;
-    }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f4;
       color: #222;
       margin: 0;
+      padding: 0;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-      height: 100%;
-      position: relative;
-      background: #f4f4f4;
     }
-    .bg-clickable-link {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      display: block;
-      pointer-events: auto;
-      background: url('assets/9d726d2c-1a4b-4c28-a86f-86eb3d853b20.webp') center center/cover no-repeat;
-    }
-    header, footer {
+    header {
+      background: #1e293b;
+      color: #fff;
+      padding: 1.5rem 0.8rem 1.2rem 0.8rem;
+      text-align: center;
+      box-shadow: 0 2px 12px #0f172a22;
+      font-size: 1.2em;
+      z-index: 100;
       position: relative;
-      z-index: 3;
     }
     main {
       flex-grow: 1;
       position: relative;
-      z-index: 2;
+      z-index: 1;
       width: 100vw;
+      min-height: 0;
       margin: 0;
       padding: 0;
       display: flex;
@@ -48,15 +38,30 @@
       justify-content: flex-start;
       align-items: center;
     }
+    /* Use a div not <a> for correct click/capture */
+    .clickable-bg-area {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url('assets/9d726d2c-1a4b-4c28-a86f-86eb3d853b20.webp') center center/cover no-repeat;
+      z-index: 1;
+      cursor: pointer;
+      border: none;
+    }
+    header, footer {
+      position: relative;
+      z-index: 3;
+    }
     .center-contents {
+      position: relative;
+      z-index: 2;
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-top: 0;
-      position: relative;
-      z-index: 4;
-      pointer-events: auto;
     }
     .instructions {
       background: rgba(255,255,255,0.96);
@@ -70,11 +75,27 @@
       text-align: left;
       backdrop-filter: blur(1.5px);
     }
-    .instructions strong { color: #0891b2; }
-    ul { margin: 1em 0 0 1.4em; padding: 0; color: #0369a1; font-size: 1.07em; }
-    li { margin-bottom: 0.9em; }
-    .browser-section { margin-top: 1.5em; margin-bottom: 1.5em; }
-    .browser-section h3 { color: #0891b2; margin-bottom: 0.4em; font-size: 1.1em; }
+    .instructions strong {
+      color: #0891b2;
+    }
+    ul {
+      margin: 1em 0 0 1.4em;
+      padding: 0;
+      color: #0369a1;
+      font-size: 1.07em;
+    }
+    li {
+      margin-bottom: 0.9em;
+    }
+    .browser-section {
+      margin-top: 1.5em;
+      margin-bottom: 1.5em;
+    }
+    .browser-section h3 {
+      color: #0891b2;
+      margin-bottom: 0.4em;
+      font-size: 1.1em;
+    }
     .tip {
       background: #fbbf24;
       color: #422006;
@@ -101,23 +122,35 @@
       border: none;
       cursor: pointer;
       position: relative;
-      z-index: 5;
-      pointer-events: auto;
+      z-index: 2;
     }
     a.home-link:hover {
       background: linear-gradient(90deg,#16a34a 70%,#0891b2 100%);
       color: #fff;
       box-shadow: 0 4px 18px #16a34a44;
     }
+    footer {
+      background: #334155;
+      color: #e0e7ef;
+      text-align: center;
+      font-size: 1.04em;
+      padding: 1.25em 0 0.9em 0;
+      letter-spacing: 0.03em;
+      margin-top: 2em;
+      border-top: 1px solid #0891b222;
+    }
     @media (max-width: 600px) {
-      .instructions, .tip { max-width: 98vw; font-size: 1em; }
-      .center-contents { width: 100vw; }
+      .instructions, .tip {
+        max-width: 98vw;
+        font-size: 1em;
+      }
+      .center-contents {
+        width: 100vw;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- The background link is visually under everything, but pointer-events handled in JS -->
-  <a href="https://oukitel.com/" target="_blank" class="bg-clickable-link" id="bg-link" tabindex="-1" aria-label="Visit Oukitel.com"></a>
   <header>
     <h1>Install OurApp on Your Device</h1>
     <p style="font-size:1.04em; color:#bae6fd; margin-top:0.5em;">
@@ -125,7 +158,15 @@
     </p>
   </header>
   <main>
-    <div class="center-contents" id="content">
+    <!-- Use a DIV instead of <a> for reliable click, and open link on click -->
+    <div
+      class="clickable-bg-area"
+      title="Visit Oukitel.com"
+      tabindex="-1"
+      onclick="window.open('https://oukitel.com/','_blank')"
+      aria-label="Visit Oukitel.com"
+    ></div>
+    <div class="center-contents">
       <div class="instructions">
         <strong>How to add OurApp to your Home Screen:</strong>
         <div class="browser-section">
@@ -156,33 +197,6 @@
   <footer>
     &copy; 2025 Spiros Tsaconas. All rights reserved. | Enjoy freedom with OurApp
   </footer>
-  <script>
-    // Prevent the background link from being clicked if clicking on content
-    const content = document.getElementById('content');
-    const bgLink = document.getElementById('bg-link');
-    // This disables pointer events on the background link when hovering content
-    function setBgPointerEvents(disabled) {
-      if (disabled) {
-        bgLink.style.pointerEvents = 'none';
-      } else {
-        bgLink.style.pointerEvents = 'auto';
-      }
-    }
-    // Disable pointer events on bg when mouse is over content
-    content.addEventListener('mouseenter', () => setBgPointerEvents(true));
-    content.addEventListener('mouseleave', () => setBgPointerEvents(false));
-    // Disable on header/footer too
-    document.querySelector('header').addEventListener('mouseenter', () => setBgPointerEvents(true));
-    document.querySelector('header').addEventListener('mouseleave', () => setBgPointerEvents(false));
-    document.querySelector('footer').addEventListener('mouseenter', () => setBgPointerEvents(true));
-    document.querySelector('footer').addEventListener('mouseleave', () => setBgPointerEvents(false));
-    // Touch devices: when tapping content, temporarily disable bg link
-    content.addEventListener('touchstart', () => setBgPointerEvents(true));
-    content.addEventListener('touchend', () => setBgPointerEvents(false));
-    document.querySelector('header').addEventListener('touchstart', () => setBgPointerEvents(true));
-    document.querySelector('header').addEventListener('touchend', () => setBgPointerEvents(false));
-    document.querySelector('footer').addEventListener('touchstart', () => setBgPointerEvents(true));
-    document.querySelector('footer').addEventListener('touchend', () => setBgPointerEvents(false));
-  </script>
 </body>
 </html>
+
