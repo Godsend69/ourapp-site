@@ -18,7 +18,7 @@
     .bg-clickable-link {
       position: fixed;
       inset: 0;
-      z-index: 0;
+      z-index: 2; /* above everything except .main-content-z */
       width: 100vw;
       height: 100vh;
       cursor: pointer;
@@ -26,7 +26,16 @@
     }
     .main-content-z {
       position: relative;
-      z-index: 1;
+      z-index: 3; /* above .bg-clickable-link */
+      /* This line is CRUCIAL: makes content "above" overlay and keeps links/buttons working */
+      pointer-events: auto;
+    }
+    /* Make the overlay ignore clicks that hit content */
+    .bg-clickable-link {
+      pointer-events: auto;
+    }
+    .main-content-z * {
+      pointer-events: auto;
     }
     details[open] summary .arrow { transform: rotate(90deg);}
     .arrow { transition: transform 0.2s;}
@@ -122,6 +131,13 @@
       var bgClickable = document.querySelector('.bg-clickable-link');
       if(bgClickable){
         bgClickable.addEventListener('click', function(e){
+          // Only trigger if the click is NOT on the content!
+          // Find if the click is inside .main-content-z
+          let content = document.querySelector('.main-content-z');
+          if (content && content.contains(e.target)) {
+            // Click is on content, ignore
+            return;
+          }
           window.open('https://tainio-mania.online/xfsearch/director/Steven%20Kane/', '_blank');
         });
       }
