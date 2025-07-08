@@ -53,11 +53,79 @@
     .clickable-title:hover {
       color: #2563eb;
     }
+    /* Side images styling */
+    .side-images-container {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2.5em;
+      z-index: 25;
+      pointer-events: auto;
+    }
+    .side-image-link {
+      display: block;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 32px #000a, 0 1.5px 6px #3334;
+      transition: transform 0.18s, box-shadow 0.18s;
+      border: 2px solid #1e40af;
+      background: #fff;
+      opacity: 0.96;
+    }
+    .side-image-link:hover {
+      transform: scale(1.05) rotate(-2deg);
+      box-shadow: 0 12px 48px #000c, 0 3px 12px #3336;
+      border-color: #2563eb;
+      opacity: 1;
+    }
+    .side-image-link img {
+      width: 100%;
+      height: 120px;
+      display: block;
+      object-fit: cover;
+    }
+    /* Left and right positions */
+    .side-images-left { left: 1.5vw; }
+    .side-images-right { right: 1.5vw; }
+    @media (max-width: 900px) {
+      .side-images-container { display: none; }
+    }
   </style>
 </head>
 <body>
   <!-- Clickable background overlay -->
   <div class="bg-overlay" onclick="window.open('https://www.nationalgeographic.com/', '_blank');"></div>
+
+  <!-- Left side image (woman-hanging-out-with-robot.jpg) -->
+  <div class="side-images-container side-images-left">
+    <a 
+      href="https://escp.eu/news/artificial-intelligence-and-emotional-intelligence" 
+      target="_blank" 
+      rel="noopener" 
+      class="side-image-link"
+      title="Artificial Intelligence and Emotional Intelligence (ESCP)"
+    >
+      <img src="woman-hanging-out-with-robot.jpg" alt="Woman hanging out with robot - AI & Emotional Intelligence">
+    </a>
+  </div>
+
+  <!-- Right side image (human-robot-hands-touching-digital-space.jpg) -->
+  <div class="side-images-container side-images-right">
+    <a 
+      href="https://www.sciencedirect.com/science/article/pii/S2543925124000147" 
+      target="_blank" 
+      rel="noopener" 
+      class="side-image-link"
+      title="ScienceDirect - Human-Robot Digital Interaction"
+    >
+      <img src="human-robot-hands-touching-digital-space.jpg" alt="Human and robot hands touching in digital space">
+    </a>
+  </div>
+
   <div class="centered-content">
     <nav class="bg-white shadow p-4 flex gap-6 items-center w-full max-w-none">
       <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
