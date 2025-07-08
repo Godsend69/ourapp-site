@@ -5,15 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Install OurApp on Your Device</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f4f4f4;
-      color: #222;
+    html, body {
+      height: 100%;
+      min-height: 100vh;
       margin: 0;
       padding: 0;
-      min-height: 100vh;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #222;
+      margin: 0;
       display: flex;
       flex-direction: column;
+      min-height: 100vh;
+      height: 100%;
+      position: relative;
+      background: #f4f4f4;
+    }
+    .bg-clickable {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0;
+      background: url('assets/9d726d2c-1a4b-4c28-a86f-86eb3d853b20.webp') center center/cover no-repeat;
     }
     header {
       background: #1e293b;
@@ -22,15 +36,14 @@
       text-align: center;
       box-shadow: 0 2px 12px #0f172a22;
       font-size: 1.2em;
-      z-index: 100;
+      z-index: 2;
       position: relative;
     }
     main {
       flex-grow: 1;
       position: relative;
-      z-index: 1;
+      z-index: 2;
       width: 100vw;
-      min-height: 0;
       margin: 0;
       padding: 0;
       display: flex;
@@ -38,22 +51,14 @@
       justify-content: flex-start;
       align-items: center;
     }
-    .bg-clickable {
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background: url('assets/9d726d2c-1a4b-4c28-a86f-86eb3d853b20.webp') center center/cover no-repeat;
-      z-index: 0;
-      cursor: pointer;
-      user-select: none;
-    }
     .center-contents {
-      position: relative;
-      z-index: 2;
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-top: 0;
+      position: relative;
+      z-index: 3;
     }
     .instructions {
       background: rgba(255,255,255,0.96);
@@ -67,25 +72,11 @@
       text-align: left;
       backdrop-filter: blur(1.5px);
     }
-    .instructions strong {
-      color: #0891b2;
-    }
-    ul {
-      margin: 1em 0 0 1.4em;
-      padding: 0;
-      color: #0369a1;
-      font-size: 1.07em;
-    }
+    .instructions strong { color: #0891b2; }
+    ul { margin: 1em 0 0 1.4em; padding: 0; color: #0369a1; font-size: 1.07em; }
     li { margin-bottom: 0.9em; }
-    .browser-section {
-      margin-top: 1.5em;
-      margin-bottom: 1.5em;
-    }
-    .browser-section h3 {
-      color: #0891b2;
-      margin-bottom: 0.4em;
-      font-size: 1.1em;
-    }
+    .browser-section { margin-top: 1.5em; margin-bottom: 1.5em; }
+    .browser-section h3 { color: #0891b2; margin-bottom: 0.4em; font-size: 1.1em; }
     .tip {
       background: #fbbf24;
       color: #422006;
@@ -112,7 +103,7 @@
       border: none;
       cursor: pointer;
       position: relative;
-      z-index: 2;
+      z-index: 4;
     }
     a.home-link:hover {
       background: linear-gradient(90deg,#16a34a 70%,#0891b2 100%);
@@ -129,29 +120,24 @@
       margin-top: 2em;
       border-top: 1px solid #0891b222;
       position: relative;
-      z-index: 3;
+      z-index: 2;
     }
     @media (max-width: 600px) {
-      .instructions, .tip {
-        max-width: 98vw;
-        font-size: 1em;
-      }
-      .center-contents {
-        width: 100vw;
-      }
+      .instructions, .tip { max-width: 98vw; font-size: 1em; }
+      .center-contents { width: 100vw; }
     }
   </style>
 </head>
 <body>
+  <div class="bg-clickable" id="bg-clickable"></div>
   <header>
     <h1>Install OurApp on Your Device</h1>
     <p style="font-size:1.04em; color:#bae6fd; margin-top:0.5em;">
       Get an app-like experience—right from your browser!
     </p>
   </header>
-  <div class="bg-clickable" id="bgClickArea"></div>
   <main>
-    <div class="center-contents">
+    <div class="center-contents" id="content">
       <div class="instructions">
         <strong>How to add OurApp to your Home Screen:</strong>
         <div class="browser-section">
@@ -183,12 +169,25 @@
     &copy; 2025 Spiros Tsaconas. All rights reserved. | Enjoy freedom with OurApp
   </footer>
   <script>
-    // Make bg only clickable if you click the bg (not content)!
-    document.getElementById('bgClickArea').addEventListener('click', function(e) {
-      // Only trigger if you didn't click on anything above it
-      // (z-index ensures this, but we check for safety)
+    // Only trigger link when clicking on the background, not on content!
+    document.getElementById('bg-clickable').addEventListener('click', function(e) {
+      // Find the element at the click position (topmost)
+      // If it's the background, and not content, open the link
+      // (z-index ensures content is above)
       window.open('https://oukitel.com/', '_blank');
     });
+
+    // Prevent pointer events from falling through the content!
+    document.getElementById('content').addEventListener('click', function(e) {
+      e.stopPropagation();
+    }, true);
+    // Also prevent propagation through header/footer
+    document.querySelector("header").addEventListener('click', function(e) {
+      e.stopPropagation();
+    }, true);
+    document.querySelector("footer").addEventListener('click', function(e) {
+      e.stopPropagation();
+    }, true);
   </script>
 </body>
 </html>
