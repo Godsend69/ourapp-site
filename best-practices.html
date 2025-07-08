@@ -4,6 +4,22 @@
   <meta charset="UTF-8">
   <title>Best Practices | OurApp</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      /* Vertically-tiled background image, full height, covers scrolling */
+      background: #111 url('assets/HD-wallpaper-night-nature-mountain-sky-stars-thumbnail.jpg') repeat-y center top;
+      background-size: cover;
+      min-height: 100vh;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    /* Optional: make the main content easier to read over a bright image */
+    main {
+      /* You can uncomment the next line for a subtle overlay if needed: */
+      /* background: rgba(255,255,255,0.85); border-radius: 18px; */
+    }
+  </style>
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
   <nav class="bg-white shadow p-4 flex gap-6 items-center">
