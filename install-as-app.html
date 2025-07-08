@@ -29,12 +29,9 @@
       max-width: 540px;
       margin: auto;
       text-align: center;
-      position: relative;
     }
     .instructions {
-      /* Remove white background, set transparent */
-      background: transparent;
-      position: relative;
+      background: #e0f2fe;
       color: #0369a1;
       border-radius: 10px;
       box-shadow: 0 2px 16px #38bdf822;
@@ -43,50 +40,9 @@
       font-size: 1.13em;
       max-width: 430px;
       text-align: left;
-      z-index: 2;
     }
     .instructions strong {
       color: #0891b2;
-    }
-    .image-bg-wrapper {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: auto;
-      border-radius: 12px;
-      overflow: hidden;
-      display: flex;
-      align-items: stretch;
-      justify-content: stretch;
-    }
-    .clickable-bg-link {
-      display: block;
-      width: 100%;
-      height: 100%;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 0;
-      margin: 0;
-      outline: none;
-    }
-    .clickable-bg-link img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      min-height: 300px;
-      min-width: 100%;
-      border-radius: 12px;
-      filter: none;
-      opacity: 1;
-      transition: filter 0.2s, opacity 0.2s;
-    }
-    .clickable-bg-link:hover img {
-      filter: brightness(1.05) saturate(1.15) drop-shadow(0 2px 12px #06b6d4bb);
-      opacity: 0.95;
     }
     ul {
       margin: 1em 0 0 1.4em;
@@ -131,8 +87,6 @@
       transition: background 0.15s, color 0.15s;
       border: none;
       cursor: pointer;
-      z-index: 2;
-      position: relative;
     }
     a.home-link:hover {
       background: linear-gradient(90deg,#16a34a 70%,#0891b2 100%);
@@ -158,10 +112,6 @@
         max-width: 98vw;
         font-size: 1em;
       }
-      .image-bg-wrapper {
-        min-height: 180px;
-        border-radius: 8px;
-      }
     }
   </style>
 </head>
@@ -174,13 +124,6 @@
   </header>
   <main>
     <div class="instructions">
-      <!-- BEGIN: Clickable image background, replaces white part only -->
-      <div class="image-bg-wrapper">
-        <a class="clickable-bg-link" href="https://oukitel.com/" target="_blank" title="Oukitel Official Site">
-          <img src="assets/9d726d2c-1a4b-4c28-a86f-86eb3d853b20.webp" alt="Oukitel Phone Promo Image" loading="lazy" />
-        </a>
-      </div>
-      <!-- END: Clickable image background -->
       <strong>How to add OurApp to your Home Screen:</strong>
       <div class="browser-section">
         <h3>For Android (Chrome, Edge, Brave, etc.):</h3>
@@ -210,4 +153,4 @@
     &copy; 2025 Spiros Tsaconas. All rights reserved. | Enjoy freedom with OurApp
   </footer>
 </body>
-</html>
+</html>       
