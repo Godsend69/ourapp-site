@@ -7,25 +7,24 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background: #111 url('assets/2560x1440-gaming-halo-master-chief-o4aaowb01kxfit42.jpg') repeat-y center top;
+      background: #111 url('assets/2560x1440-gaming-halo-master-chief-o4aaowb01kxfit42.jpg') no-repeat center center;
       background-size: cover;
       min-height: 100vh;
-      width: 100%;
+      width: 100vw;
       margin: 0;
       padding: 0;
       position: relative;
+      overflow-x: hidden;
     }
-    /* Helmet Mask Hotspot */
     .helmet-hotspot {
       position: fixed;
-      /* Adjust left/top to match the mask's position on your background! */
-      left: 10vw;   /* <<<< ADJUST for your design */
-      top: 11vh;    /* <<<< ADJUST for your design */
-      width: 85px;  /* <<<< ADJUST for your design */
-      height: 120px;/* <<<< ADJUST for your design */
-      z-index: 12;
+      /* These values are carefully chosen for your actual image and desktop screens */
+      left: 68vw;   /* moves hotspot horizontally: higher = right */
+      top: 22.5vh;  /* moves hotspot vertically: higher = down */
+      width: 220px;  /* width of clickable area */
+      height: 170px; /* height of clickable area */
+      z-index: 100;
       pointer-events: none;
-      /* Optional: set border:1px solid red; to debug position */
     }
     .helmet-hotspot a {
       display: block;
@@ -34,17 +33,16 @@
       pointer-events: auto;
     }
     .helmet-mask-shape {
-      fill: rgba(255, 215, 0, 0.07); /* Gold, faint for debug; set to 0 for invisible */
+      fill: rgba(255, 215, 0, 0.22); /* Gold, visible for debug! Set to 0.01 for invisible when ready */
       cursor: pointer;
       transition: fill 0.2s;
     }
     .helmet-mask-shape:hover {
-      fill: rgba(255, 215, 0, 0.28); /* highlight on hover */
+      fill: rgba(255, 215, 0, 0.5);
     }
-    /* Content is above the overlay and fully interactive */
     .main-content-z {
       position: relative;
-      z-index: 20;
+      z-index: 200;
       pointer-events: auto;
     }
     details[open] summary .arrow { transform: rotate(90deg);}
@@ -98,7 +96,6 @@
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Like Button Logic
       document.querySelectorAll('.like-btn').forEach(function(btn) {
         btn.addEventListener('click', function() {
           let countSpan = btn.querySelector('.like-count');
@@ -113,7 +110,6 @@
           countSpan.textContent = count;
         });
       });
-      // Comment Toggle Logic
       document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
         toggle.addEventListener('click', function() {
           let detailsBlock = toggle.closest('details');
@@ -122,7 +118,6 @@
           if (box) box.classList.toggle('hidden');
         });
       });
-      // Comment Submit Logic
       document.querySelectorAll('.comment-form').forEach(function(form) {
         form.addEventListener('submit', function(e) {
           e.preventDefault();
@@ -137,18 +132,18 @@
           input.value = '';
         });
       });
-      // No background clickable overlay for mask -- handled by clickable SVG only
     });
   </script>
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col relative overflow-x-hidden">
+<body class="min-h-screen flex flex-col relative overflow-x-hidden">
   <!-- CLICKABLE HELMET MASK HOTSPOT SVG -->
   <div class="helmet-hotspot" aria-label="Watch Steven Kane series">
     <a href="https://tainio-mania.online/xfsearch/director/Steven%20Kane/" target="_blank" title="Watch Steven Kane series">
-      <!-- Adjust <polygon> points for an even more precise fit -->
-      <svg viewBox="0 0 85 120" width="85" height="120">
+      <svg viewBox="0 0 220 170" width="220" height="170">
+        <!-- This polygon overlays the golden visor on your provided image.
+             You can tweak the coordinates for a pixel-perfect fit. -->
         <polygon class="helmet-mask-shape"
-          points="10,10 75,15 80,70 70,110 15,105 5,60"
+          points="55,38 180,44 205,70 170,158 77,150 45,88"
         />
       </svg>
     </a>
