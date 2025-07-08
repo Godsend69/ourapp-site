@@ -19,7 +19,6 @@
       flex-direction: column;
       min-height: 100vh;
       height: 100%;
-      position: relative;
       background: #f4f4f4;
     }
     .clickable-bg-area {
@@ -30,9 +29,7 @@
       height: 100vh;
       background: url('assets/9d726d2c-1a4b-4c28-a86f-86eb3d853b20.webp') center center/cover no-repeat;
       z-index: 1;
-      cursor: pointer;
-      border: none;
-      pointer-events: auto;
+      pointer-events: none;
     }
     .header-frame {
       background: rgba(255,255,255,0.97);
@@ -91,7 +88,6 @@
       flex-direction: column;
       align-items: center;
       margin-top: 0;
-      /* Add padding to guarantee instructions box never goes under footer */
       padding-bottom: 3.5em;
     }
     .instructions {
@@ -105,6 +101,8 @@
       max-width: 430px;
       text-align: left;
       backdrop-filter: blur(1.5px);
+      position: relative;
+      z-index: 4;
     }
     .instructions strong {
       color: #0891b2;
@@ -127,6 +125,63 @@
       margin-bottom: 0.4em;
       font-size: 1.1em;
     }
+    .promo-block {
+      margin: 2em 0 0 0;
+      position: relative;
+      z-index: 4;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100vw;
+    }
+    .promo-content {
+      color: #fff;
+      font-size: 1.25em;
+      text-align: left;
+      background: none;
+      margin-left: 0;
+      margin-right: 2.5em;
+      margin-bottom: 0;
+      font-weight: 400;
+      line-height: 1.2;
+      max-width: 400px;
+      min-width: 270px;
+      position: relative;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .promo-content .oukitel-link {
+      display: inline-block;
+      font-weight: bold;
+      color: #fff;
+      background: #222e;
+      padding: 0.08em 0.45em;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 1.18em;
+      box-shadow: 0 1px 6px #0004;
+      border: 2px solid #fff;
+      transition: background 0.15s, color 0.15s;
+      letter-spacing: 0.03em;
+    }
+    .promo-content .oukitel-link:hover {
+      color: #06b6d4;
+      background: #fff;
+      border-color: #06b6d4;
+    }
+    .promo-content .promo-desc {
+      margin-left: 0.12em;
+    }
+    .promo-image {
+      max-width: 250px;
+      width: auto;
+      height: auto;
+      margin-left: 1.7em;
+      margin-right: 0.5em;
+      z-index: 4;
+    }
     .tip {
       background: #fbbf24;
       color: #422006;
@@ -137,6 +192,8 @@
       box-shadow: 0 1px 10px #fbbf2433;
       max-width: 420px;
       text-align: center;
+      z-index: 4;
+      position: relative;
     }
     a.home-link {
       display: inline-block;
@@ -167,11 +224,35 @@
       font-size: 1.04em;
       padding: 1.25em 0 0.9em 0;
       letter-spacing: 0.03em;
-      margin-top: 2em;
       border-top: 1px solid #0891b222;
-      position: relative;
-      z-index: 3;
+      position: fixed;
+      left: 0;
+      bottom: 0;
       width: 100vw;
+      z-index: 50;
+    }
+    main {
+      padding-bottom: 70px; /* space for fixed footer */
+    }
+    @media (max-width: 900px) {
+      .promo-block {
+        flex-direction: column;
+        align-items: center;
+        margin: 1em 0 0 0;
+      }
+      .promo-content {
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 1em;
+        text-align: center;
+        align-items: center;
+        max-width: 94vw;
+      }
+      .promo-image {
+        margin-left: 0;
+        margin-right: 0;
+        max-width: 60vw;
+      }
     }
     @media (max-width: 600px) {
       .instructions, .tip {
@@ -181,11 +262,14 @@
       .header-frame, .center-contents {
         width: 98vw;
       }
+      .promo-image {
+        max-width: 90vw;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="clickable-bg-area" id="bg"></div>
+  <div class="clickable-bg-area"></div>
   <header>
     <div class="header-frame">
       <h1>Install OurApp on Your Device</h1>
@@ -195,7 +279,17 @@
     </div>
   </header>
   <main>
-    <div class="center-contents" id="content">
+    <div class="promo-block">
+      <div class="promo-content">
+        <a href="https://oukitel.com/" class="oukitel-link" target="_blank" rel="noopener">OUKITEL</a>
+        <span class="promo-desc">WP38<br>
+        The Ultimate in Power and Tech<br>
+        10600mAh Battery | 24GB RAM (6+18) | Triple Camera Setup | IP68 &amp; IP69K
+        </span>
+      </div>
+      <img src="assets/wp38-promo.webp" alt="Oukitel WP38" class="promo-image"/>
+    </div>
+    <div class="center-contents">
       <div class="instructions">
         <strong>How to add OurApp to your Home Screen:</strong>
         <div class="browser-section">
@@ -226,32 +320,5 @@
   <footer>
     &copy; 2025 Spiros Tsaconas. All rights reserved. | Enjoy freedom with OurApp
   </footer>
-  <script>
-    // Only open the link if the user clicks the background (not content/header/footer/header-frame)
-    document.getElementById('bg').addEventListener('click', function(e) {
-      // Get all elements above the bg
-      const content = document.getElementById('content');
-      const headerFrame = document.querySelector('.header-frame');
-      const header = document.querySelector('header');
-      const footer = document.querySelector('footer');
-      const x = e.clientX;
-      const y = e.clientY;
-      function isInside(el) {
-        if (!el) return false;
-        const rect = el.getBoundingClientRect();
-        return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
-      }
-      if (
-        isInside(content) ||
-        isInside(headerFrame) ||
-        isInside(header) ||
-        isInside(footer)
-      ) {
-        return;
-      }
-      // Otherwise, open the link
-      window.open('https://oukitel.com/', '_blank');
-    });
-  </script>
 </body>
 </html>
