@@ -34,7 +34,6 @@
       border: none;
       pointer-events: auto;
     }
-    /* Header frame for headline/subtitle */
     .header-frame {
       background: rgba(255,255,255,0.97);
       color: #222;
@@ -69,7 +68,6 @@
       z-index: 3;
       position: relative;
       width: 100vw;
-      /* Remove background to show white frame */
       padding: 0;
     }
     main {
@@ -93,6 +91,8 @@
       flex-direction: column;
       align-items: center;
       margin-top: 0;
+      /* Add padding to guarantee instructions box never goes under footer */
+      padding-bottom: 3.5em;
     }
     .instructions {
       background: rgba(255,255,255,0.96);
@@ -185,7 +185,6 @@
   </style>
 </head>
 <body>
-  <!-- Place clickable background on top of everything else -->
   <div class="clickable-bg-area" id="bg"></div>
   <header>
     <div class="header-frame">
