@@ -22,22 +22,19 @@
       position: relative;
       background: #f4f4f4;
     }
-    .bg-clickable {
+    .bg-clickable-link {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      width: 100vw; height: 100vh;
+      width: 100vw;
+      height: 100vh;
       z-index: 0;
+      display: block;
+      pointer-events: auto;
       background: url('assets/9d726d2c-1a4b-4c28-a86f-86eb3d853b20.webp') center center/cover no-repeat;
     }
-    header {
-      background: #1e293b;
-      color: #fff;
-      padding: 1.5rem 0.8rem 1.2rem 0.8rem;
-      text-align: center;
-      box-shadow: 0 2px 12px #0f172a22;
-      font-size: 1.2em;
-      z-index: 2;
+    header, footer {
       position: relative;
+      z-index: 3;
     }
     main {
       flex-grow: 1;
@@ -58,7 +55,8 @@
       align-items: center;
       margin-top: 0;
       position: relative;
-      z-index: 3;
+      z-index: 4;
+      pointer-events: auto;
     }
     .instructions {
       background: rgba(255,255,255,0.96);
@@ -103,24 +101,13 @@
       border: none;
       cursor: pointer;
       position: relative;
-      z-index: 4;
+      z-index: 5;
+      pointer-events: auto;
     }
     a.home-link:hover {
       background: linear-gradient(90deg,#16a34a 70%,#0891b2 100%);
       color: #fff;
       box-shadow: 0 4px 18px #16a34a44;
-    }
-    footer {
-      background: #334155;
-      color: #e0e7ef;
-      text-align: center;
-      font-size: 1.04em;
-      padding: 1.25em 0 0.9em 0;
-      letter-spacing: 0.03em;
-      margin-top: 2em;
-      border-top: 1px solid #0891b222;
-      position: relative;
-      z-index: 2;
     }
     @media (max-width: 600px) {
       .instructions, .tip { max-width: 98vw; font-size: 1em; }
@@ -129,7 +116,8 @@
   </style>
 </head>
 <body>
-  <div class="bg-clickable" id="bg-clickable"></div>
+  <!-- The background link is visually under everything, but pointer-events handled in JS -->
+  <a href="https://oukitel.com/" target="_blank" class="bg-clickable-link" id="bg-link" tabindex="-1" aria-label="Visit Oukitel.com"></a>
   <header>
     <h1>Install OurApp on Your Device</h1>
     <p style="font-size:1.04em; color:#bae6fd; margin-top:0.5em;">
@@ -169,25 +157,32 @@
     &copy; 2025 Spiros Tsaconas. All rights reserved. | Enjoy freedom with OurApp
   </footer>
   <script>
-    // Only trigger link when clicking on the background, not on content!
-    document.getElementById('bg-clickable').addEventListener('click', function(e) {
-      // Find the element at the click position (topmost)
-      // If it's the background, and not content, open the link
-      // (z-index ensures content is above)
-      window.open('https://oukitel.com/', '_blank');
-    });
-
-    // Prevent pointer events from falling through the content!
-    document.getElementById('content').addEventListener('click', function(e) {
-      e.stopPropagation();
-    }, true);
-    // Also prevent propagation through header/footer
-    document.querySelector("header").addEventListener('click', function(e) {
-      e.stopPropagation();
-    }, true);
-    document.querySelector("footer").addEventListener('click', function(e) {
-      e.stopPropagation();
-    }, true);
+    // Prevent the background link from being clicked if clicking on content
+    const content = document.getElementById('content');
+    const bgLink = document.getElementById('bg-link');
+    // This disables pointer events on the background link when hovering content
+    function setBgPointerEvents(disabled) {
+      if (disabled) {
+        bgLink.style.pointerEvents = 'none';
+      } else {
+        bgLink.style.pointerEvents = 'auto';
+      }
+    }
+    // Disable pointer events on bg when mouse is over content
+    content.addEventListener('mouseenter', () => setBgPointerEvents(true));
+    content.addEventListener('mouseleave', () => setBgPointerEvents(false));
+    // Disable on header/footer too
+    document.querySelector('header').addEventListener('mouseenter', () => setBgPointerEvents(true));
+    document.querySelector('header').addEventListener('mouseleave', () => setBgPointerEvents(false));
+    document.querySelector('footer').addEventListener('mouseenter', () => setBgPointerEvents(true));
+    document.querySelector('footer').addEventListener('mouseleave', () => setBgPointerEvents(false));
+    // Touch devices: when tapping content, temporarily disable bg link
+    content.addEventListener('touchstart', () => setBgPointerEvents(true));
+    content.addEventListener('touchend', () => setBgPointerEvents(false));
+    document.querySelector('header').addEventListener('touchstart', () => setBgPointerEvents(true));
+    document.querySelector('header').addEventListener('touchend', () => setBgPointerEvents(false));
+    document.querySelector('footer').addEventListener('touchstart', () => setBgPointerEvents(true));
+    document.querySelector('footer').addEventListener('touchend', () => setBgPointerEvents(false));
   </script>
 </body>
 </html>
