@@ -6,6 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    body {
+      background: #111 url('assets/2560x1440-gaming-halo-master-chief-o4aaowb01kxfit42.jpg') repeat-y center top;
+      background-size: cover;
+      min-height: 100vh;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      /* make sure content is above clickable bg */
+      position: relative;
+    }
+    .bg-clickable-link {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      width: 100vw;
+      height: 100vh;
+      cursor: pointer;
+      background: transparent;
+      /* No pointer-events for children, so links/btns above still work */
+    }
+    .main-content-z {
+      position: relative;
+      z-index: 1;
+    }
     details[open] summary .arrow { transform: rotate(90deg);}
     .arrow { transition: transform 0.2s;}
     .badge { font-size: 0.75rem; padding: 0.2em 0.7em; border-radius: 999px; font-weight: 700; margin-left: 0.5em;}
@@ -23,7 +47,7 @@
     }
     .left-green-link {
       left: 0;
-      background: #bbf7d0; /* Green-200 */
+      background: #bbf7d0;
       opacity: 0.79;
       border-right: 2px solid #4ade80;
     }
@@ -33,17 +57,13 @@
     }
     .right-green-link {
       right: 0;
-      background: #6ee7b7; /* Green-300 */
+      background: #6ee7b7;
       opacity: 0.77;
       border-left: 2px solid #10b981;
     }
     .right-green-link:hover {
       opacity: 1;
       background: #22d3ee;
-    }
-    .main-content-z {
-      position: relative;
-      z-index: 1;
     }
     .clickable-headline {
       display: inline-block;
@@ -68,7 +88,6 @@
       text-decoration: underline;
       text-shadow: 0 0 6px #6ee7b7;
     }
-    /* SPHERES OF DESTINY button styling */
     .spheres-nav-btn {
       background: #244478;
       color: #fff;
@@ -134,10 +153,19 @@
           input.value = '';
         });
       });
+      // Clickable background
+      var bgClickable = document.querySelector('.bg-clickable-link');
+      if(bgClickable){
+        bgClickable.addEventListener('click', function(e){
+          window.open('https://tainio-mania.online/xfsearch/director/Steven%20Kane/', '_blank');
+        });
+      }
     });
   </script>
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col relative overflow-x-hidden">
+  <!-- Clickable fullscreen background overlay -->
+  <div class="bg-clickable-link" title="See Steven Kane's movies"></div>
   <!-- Left Green Half Clickable Background -->
   <a 
     class="left-green-link"
