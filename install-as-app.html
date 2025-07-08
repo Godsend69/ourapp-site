@@ -41,15 +41,21 @@
     }
     /* The area under the header gets the image as background and is clickable */
     .clickable-bg-area {
-      position: absolute;
+      position: fixed; /* <-- CHANGED TO FIXED */
       top: 0;
       left: 0;
       width: 100vw;
-      height: 100%;
-      min-height: 100vh;
+      height: 100vh;
       background: url('assets/9d726d2c-1a4b-4c28-a86f-86eb3d853b20.webp') center center/cover no-repeat;
       z-index: 1;
       cursor: pointer;
+      /* Make sure the area is always on top, but below content */
+      border: none;
+    }
+    /* Make sure header/footer are above the clickable area */
+    header, footer {
+      position: relative;
+      z-index: 3;
     }
     /* Centered content should be above the clickable area */
     .center-contents {
@@ -136,8 +142,6 @@
       letter-spacing: 0.03em;
       margin-top: 2em;
       border-top: 1px solid #0891b222;
-      position: relative;
-      z-index: 100;
     }
     @media (max-width: 600px) {
       .instructions, .tip {
@@ -166,7 +170,6 @@
       title="Visit Oukitel.com"
       aria-label="Visit Oukitel.com"
       tabindex="-1"
-      style="top:0;"
     ></a>
     <div class="center-contents">
       <div class="instructions">
@@ -199,5 +202,12 @@
   <footer>
     &copy; 2025 Spiros Tsaconas. All rights reserved. | Enjoy freedom with OurApp
   </footer>
+  <script>
+    // Always keep the clickable-bg-area behind real links/buttons (z-index 1)
+    // but on top of the image space
+    // Prevent tab/keyboard focus: tabindex -1 is already set
+    // Optional: On mobile, make sure no accidental scroll disables the click
+    // If you want the image clickable only under the header (not header or footer), you can adjust height with JS if needed.
+  </script>
 </body>
 </html>
