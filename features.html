@@ -6,64 +6,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .left-desert-link, .right-dune-link {
-      position: fixed;
-      top: 0;
-      height: 100vh;
-      width: 50vw;
-      z-index: 0;
-      transition: background 0.18s;
-      pointer-events: auto;
+    body {
+      background: #111 url('assets/4547094-digital-art-gates-angel-sky.jpg') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      width: 100vw;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      overflow-x: hidden;
     }
-    .left-desert-link {
-      left: 0;
-      background: #e8c48c; /* Darker brown desert color */
-      opacity: 0.84;
-      border-right: 2px solid #d0a96d;
-    }
-    .left-desert-link:hover {
-      opacity: 1;
-      background: #d9ab5c;
-    }
-    .right-dune-link {
-      right: 0;
-      background: #f3e6d5; /* Lighter sand color */
-      opacity: 0.77;
-      border-left: 2px solid #e5c187;
-    }
-    .right-dune-link:hover {
-      opacity: 1;
-      background: #f7e9b9;
-    }
-    /* Keep main content on top */
     .main-content-z {
       position: relative;
       z-index: 1;
     }
-    @media (max-width: 900px) {
-      .left-desert-link, .right-dune-link { display: none; }
+    /* Bottom clickable links styling */
+    .bottom-links-bar {
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      padding: 2.5rem 0 2.8rem 0;
+      background: rgba(255,255,255,0.93);
+      box-shadow: 0 -2px 18px #b0cdfd44;
+      position: relative;
+      z-index: 3;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    .bottom-links-bar a {
+      display: inline-block;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #1e40af;
+      background: #f1f5fd;
+      border-radius: 0.7em;
+      padding: 0.7em 2.1em;
+      text-decoration: none;
+      box-shadow: 0 1px 8px #b0cdfd44;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      margin: 0 0.7em;
+      letter-spacing: .04em;
+    }
+    .bottom-links-bar a:hover {
+      background: #fbbf24;
+      color: #244478;
+      box-shadow: 0 2px 18px #fbbf24bb;
+      text-decoration: underline;
     }
   </style>
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col relative overflow-x-hidden">
-  <!-- Left Clickable Dark Brown Desert Half -->
-  <a 
-    class="left-desert-link"
-    href="https://duneawakening.com/"
-    target="_blank"
-    title="Dune: Awakening - Desert Awaits"
-    aria-label="Visit Dune Awakening"
-    tabindex="-1"
-  ></a>
-  <!-- Right Clickable Light Brown Dune Movie Half -->
-  <a 
-    class="right-dune-link"
-    href="https://www.legendary.com/film/dune/"
-    target="_blank"
-    title="Dune Movie at Legendary"
-    aria-label="Visit Dune on Legendary"
-    tabindex="-1"
-  ></a>
+<body class="min-h-screen flex flex-col relative overflow-x-hidden">
   <!-- Navigation Bar -->
   <nav class="bg-white shadow p-4 flex gap-8 items-center main-content-z">
     <a href="index.html" class="font-extrabold text-2xl text-blue-700">OurApp</a>
@@ -175,6 +168,11 @@
       </div>
     </div>
   </main>
+  <!-- Bottom Clickable Links Bar -->
+  <div class="bottom-links-bar">
+    <a href="https://duneawakening.com/" target="_blank" title="Dune: Awakening - Desert Awaits">Dune Awakening</a>
+    <a href="https://www.legendary.com/film/dune/" target="_blank" title="Dune Movie at Legendary">Dune Movie</a>
+  </div>
   <!-- Footer -->
   <footer class="main-content-z bg-white shadow-inner py-6 text-center text-sm text-gray-500 mt-12">
     &copy; 2025 Spiros Tsaconas. All rights reserved.
