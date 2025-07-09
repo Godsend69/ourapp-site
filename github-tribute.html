@@ -16,12 +16,23 @@
       min-width: 100vw;
       overflow: hidden;
     }
+    .background-link {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      cursor: pointer;
+      width: 100vw;
+      height: 100vh;
+      background: transparent;
+    }
     .grid4 {
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
       height: 100vh;
       width: 100vw;
+      position: relative;
+      z-index: 1;
     }
     .corner {
       display: flex;
@@ -137,6 +148,9 @@
   </style>
 </head>
 <body>
+  <!-- Full clickable background layer -->
+  <a href="https://tainio-mania.online/?story=THE+MATRIX&amp;titleonly=3&amp;do=search&amp;subaction=search" 
+     class="background-link" target="_blank" rel="noopener" aria-label="Go to THE MATRIX"></a>
   <div class="grid4">
     <!-- Top Left: Human Message -->
     <div class="corner top-left">
