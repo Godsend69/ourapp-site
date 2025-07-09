@@ -16,15 +16,6 @@
       min-width: 100vw;
       overflow: hidden;
     }
-    .background-link {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      cursor: pointer;
-      width: 100vw;
-      height: 100vh;
-      background: transparent;
-    }
     .grid4 {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -131,26 +122,61 @@
       transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
       background: #18181b;
     }
-    .circle-link.github:hover, .circle-link.user:hover {
+    .circle-link.github:hover, .circle-link.user:hover, .circle-link.matrix:hover {
       box-shadow: 0 2px 50px #fbbf24cc, 0 2px 40px #38bdf888;
       transform: scale(1.07);
+    }
+    /* Matrix Round Button */
+    .circle-link.matrix {
+      width: 64px;
+      height: 64px;
+      min-width: 64px;
+      min-height: 64px;
+      border-radius: 50%;
+      border: 3.5px solid #000;
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 18px;
+      margin-bottom: 22px;
+      box-shadow: 0 2px 18px #0009;
+      z-index: 2;
+      cursor: pointer;
+      transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
+    }
+    .circle-link.matrix svg {
+      width: 34px;
+      height: 34px;
+      display: block;
+      fill: #27ff2a;
+    }
+    .matrix-btn-container {
+      display: flex;
+      align-items: flex-end;
+      gap: 0;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      margin-left: 0px;
     }
     @media (max-width: 1100px) {
       .msg-human, .msg-code { max-width: 95vw; min-width: 0; font-size: 1.04rem;}
       .circle-link { width:150px; height:150px; min-width:150px; min-height:150px;}
+      .circle-link.matrix { width: 48px; height: 48px; min-width: 48px; min-height: 48px; }
+      .circle-link.matrix svg { width: 26px; height: 26px;}
     }
     @media (max-width: 700px) {
       .grid4 { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr 1fr 1fr; }
       .corner { align-items: center; justify-content: center; padding: 5vw 2vw;}
       .msg-human, .msg-code { min-width: 0; max-width: 98vw; padding: 1.3rem;}
       .circle-link { width:110px; height:110px; min-width:110px; min-height:110px;}
+      .matrix-btn-container { margin-left: 0; margin-bottom: 0; }
+      .circle-link.matrix { width: 38px; height: 38px; min-width: 38px; min-height: 38px; }
+      .circle-link.matrix svg { width: 18px; height: 18px;}
     }
   </style>
 </head>
 <body>
-  <!-- Full clickable background layer -->
-  <a href="https://tainio-mania.online/?story=THE+MATRIX&amp;titleonly=3&amp;do=search&amp;subaction=search" 
-     class="background-link" target="_blank" rel="noopener" aria-label="Go to THE MATRIX"></a>
   <div class="grid4">
     <!-- Top Left: Human Message -->
     <div class="corner top-left">
@@ -173,11 +199,18 @@
         <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo">
       </a>
     </div>
-    <!-- Bottom Left: User Photo -->
+    <!-- Bottom Left: User Photo + Matrix Button -->
     <div class="corner bottom-left">
-      <a href="https://tsaconaspiros.blogspot.com/" target="_blank" rel="noopener" class="circle-link user" title="Visit my Blog">
-        <img src="assets/my-photo.jpg" alt="Spiros Tsaconas">
-      </a>
+      <div class="matrix-btn-container">
+        <a href="https://tsaconaspiros.blogspot.com/" target="_blank" rel="noopener" class="circle-link user" title="Visit my Blog">
+          <img src="assets/my-photo.jpg" alt="Spiros Tsaconas">
+        </a>
+        <a href="https://tainio-mania.online/?story=THE+MATRIX&amp;titleonly=3&amp;do=search&amp;subaction=search"
+           target="_blank" rel="noopener" class="circle-link matrix" title="Go to THE MATRIX">
+          <!-- Matrix SVG icon -->
+          <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" stroke="#27ff2a" stroke-width="2" fill="none"/><text x="50%" y="54%" text-anchor="middle" fill="#27ff2a" font-size="19" font-family="monospace" dy=".3em">M</text></svg>
+        </a>
+      </div>
     </div>
     <!-- Bottom Right: Code Message -->
     <div class="corner bottom-right">
