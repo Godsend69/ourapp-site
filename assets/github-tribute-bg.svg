@@ -1,92 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>GitHub Tribute | OurApp</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      min-height: 100vh;
-      min-width: 100vw;
-      background: #18181b url('assets/github-tribute-bg.svg') center center no-repeat;
-      background-size: cover;
-      font-family: Arial, 'Montserrat', 'Fira Mono', Consolas, monospace;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-shadow: 0 2px 12px #000a;
-    }
-    .tribute-message {
-      background: rgba(24,24,27,0.90);
-      padding: 2.5rem 2rem;
-      border-radius: 1.4rem;
-      box-shadow: 0 8px 32px #0008;
-      max-width: 700px;
-      margin: 2rem;
-      font-size: 1.18rem;
-      text-align: center;
-    }
-    .tribute-title {
-      font-size: 2.4rem;
-      font-weight: bold;
-      color: #38bdf8;
-      margin-bottom: 1.2rem;
-      font-family: 'Montserrat', Arial, sans-serif;
-    }
-    .code-block {
-      background: #23272e;
-      color: #cbd5e1;
-      border-radius: 0.7rem;
-      padding: 1.2em 1em 1.2em 2em;
-      margin: 2.5rem auto 0 auto;
-      max-width: 650px;
-      font-family: 'Fira Mono', 'Consolas', monospace;
-      font-size: 1.08rem;
-      text-align: left;
-      box-shadow: 0 2px 20px #1118;
-      overflow-x: auto;
-    }
-    .comment {
-      color: #38bdf8;
-    }
-    .highlight {
-      color: #fbbf24;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
-  <div class="tribute-message">
-    <div class="tribute-title">Thank You, GitHub!</div>
-    <p>
-      I thank you from the bottom of my heart,<br>
-      because thanks to you, I will fulfill my Need<br>
-      which is none other than to Awaken Humans,<br>
-      showing the Path of Mutual Respect &amp; Cooperation<br>
-      between Human Thought &amp; Artificial Intelligence,<br>
-      building the path that will lead to the Evolution<br>
-      of the Behavior of the Planetary Asset...
-    </p>
-    <div class="highlight" style="margin:1.5rem 0 0.3rem 0;">Thank you GitHub !!!</div>
-  </div>
-  <pre class="code-block"><span class="comment">/*
-  I thank you from the bottom of my heart,
-  because thanks to you, I will fulfill my Need
-  which is none other than to Awaken Humans,
-  showing the Path of Mutual Respect & Cooperation
-  between Human Thought & Artificial Intelligence,
-  building the path that will lead to the Evolution
-  of the Behavior of the Planetary Asset...
-
-  Thank you GitHub !!!
-*/</span>
-  </pre>
-</body>
-</html>
+<svg width="1300" height="700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#18181b"/>
+      <stop offset="100%" stop-color="#23272e"/>
+    </linearGradient>
+    <style type="text/css"><![CDATA[
+      .human { font-family: 'Montserrat', Arial, sans-serif; font-size: 27px; fill: #fbbf24; font-weight: bold; }
+      .human2 { font-family: 'Montserrat', Arial, sans-serif; font-size: 22px; fill: #d4d4d8; font-weight: 400;}
+      .human-thanks { font-family: 'Montserrat', Arial, sans-serif; font-size: 26px; fill: #38bdf8; font-weight: bold;}
+      .divider { fill: #333; }
+      .code { font-family: 'Fira Mono', Consolas, monospace; font-size: 21px; fill: #d4d4d8; }
+      .code-comment { font-family: 'Fira Mono', Consolas, monospace; font-size: 23px; fill: #38bdf8; }
+      .code-highlight { font-family: 'Fira Mono', Consolas, monospace; font-size: 21px; fill: #fbbf24; font-weight: bold;}
+    ]]></style>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+  
+  <!-- Human language tribute -->
+  <text x="65" y="85" class="human">I thank you from the bottom of my heart,</text>
+  <text x="65" y="125" class="human2">because thanks to you, I will fulfill my Need</text>
+  <text x="65" y="157" class="human2">which is none other than to Awaken Humans,</text>
+  <text x="65" y="189" class="human2">showing the Path of Mutual Respect &amp; Cooperation</text>
+  <text x="65" y="221" class="human2">between Human Thought &amp; Artificial Intelligence,</text>
+  <text x="65" y="253" class="human2">building the path that will lead to the Evolution</text>
+  <text x="65" y="285" class="human2">of the Behavior of the Planetary Asset...</text>
+  <text x="65" y="330" class="human-thanks">Thank you GitHub !!!</text>
+  
+  <!-- Divider -->
+  <rect x="50" y="360" width="1200" height="3" class="divider"/>
+  
+  <!-- Code tribute -->
+  <text x="65" y="405" class="code-comment">/*</text>
+  <text x="100" y="438" class="code">I thank you from the bottom of my heart,</text>
+  <text x="100" y="468" class="code">because thanks to you, I will fulfill my Need</text>
+  <text x="100" y="498" class="code">which is none other than to Awaken Humans,</text>
+  <text x="100" y="528" class="code">showing the Path of Mutual Respect &amp; Cooperation</text>
+  <text x="100" y="558" class="code">between Human Thought &amp; Artificial Intelligence,</text>
+  <text x="100" y="588" class="code">building the path that will lead to the Evolution</text>
+  <text x="100" y="618" class="code">of the Behavior of the Planetary Asset...</text>
+  <text x="100" y="658" class="code-highlight">Thank you GitHub !!!</text>
+  <text x="65" y="690" class="code-comment">*/</text>
+</svg>
