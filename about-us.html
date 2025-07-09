@@ -18,11 +18,10 @@
     }
     .helmet-hotspot {
       position: fixed;
-      /* These values are carefully chosen for your actual image and desktop screens */
-      left: 68vw;   /* moves hotspot horizontally: higher = right */
-      top: 22.5vh;  /* moves hotspot vertically: higher = down */
-      width: 220px;  /* width of clickable area */
-      height: 170px; /* height of clickable area */
+      left: 68vw;
+      top: 22.5vh;
+      width: 220px;
+      height: 170px;
       z-index: 100;
       pointer-events: none;
     }
@@ -33,7 +32,7 @@
       pointer-events: auto;
     }
     .helmet-mask-shape {
-      fill: rgba(255, 215, 0, 0.22); /* Gold, visible for debug! Set to 0.01 for invisible when ready */
+      fill: rgba(255, 215, 0, 0.22);
       cursor: pointer;
       transition: fill 0.2s;
     }
@@ -140,8 +139,6 @@
   <div class="helmet-hotspot" aria-label="Watch Steven Kane series">
     <a href="https://tainio-mania.online/xfsearch/director/Steven%20Kane/" target="_blank" title="Watch Steven Kane series">
       <svg viewBox="0 0 220 170" width="220" height="170">
-        <!-- This polygon overlays the golden visor on your provided image.
-             You can tweak the coordinates for a pixel-perfect fit. -->
         <polygon class="helmet-mask-shape"
           points="55,38 180,44 205,70 170,158 77,150 45,88"
         />
@@ -194,6 +191,16 @@
         title="Search: Best apps in the world"
       >About OurApp</a>
     </h1>
+    <!-- SPECIAL GITHUB TRIBUTE HEADLINE -->
+    <div class="w-full flex justify-center mb-6">
+      <a href="github-tribute.html"
+         class="block px-6 py-4 rounded-2xl bg-gradient-to-r from-blue-700 via-blue-400 to-yellow-400 shadow-xl border-4 border-yellow-300
+                text-2xl md:text-3xl font-extrabold text-white hover:text-yellow-900 hover:from-yellow-200 hover:to-blue-700 transition-all
+                tracking-wide outline-none focus:ring-4 focus:ring-blue-200"
+         title="See our Special Tribute to GitHub!">
+        🚀 Special Tribute to <span class="text-yellow-200">GitHub</span> – Click to See →
+      </a>
+    </div>
     <p class="text-lg text-gray-700 mb-8 max-w-2xl">
       Welcome! OurApp helps you choose the best tools for your business or project. Click any solution below for clear answers, recommendations, and links to expert resources—so you always find what you need.
     </p>
