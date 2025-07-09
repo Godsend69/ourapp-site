@@ -22,7 +22,6 @@
       grid-template-rows: 1fr 1fr;
       height: 100vh;
       width: 100vw;
-      gap: 0;
     }
     .corner {
       display: flex;
@@ -34,24 +33,11 @@
       min-width: 0; min-height: 0;
       position: relative;
     }
-    .corner.top-left {
-      align-items: flex-start;
-      justify-content: flex-start;
-    }
-    .corner.top-right {
-      align-items: flex-start;
-      justify-content: flex-end;
-      background: none;
-    }
-    .corner.bottom-left {
-      align-items: flex-end;
-      justify-content: flex-start;
-      background: none;
-    }
-    .corner.bottom-right {
-      align-items: flex-end;
-      justify-content: flex-end;
-    }
+    .corner.top-left    { align-items: flex-start;   justify-content: flex-start; }
+    .corner.top-right   { align-items: flex-start;   justify-content: flex-end;   background: none; }
+    .corner.bottom-left { align-items: flex-end;     justify-content: flex-start; background: none; }
+    .corner.bottom-right{ align-items: flex-end;     justify-content: flex-end; }
+
     /* Human message card */
     .msg-human {
       background: rgba(20,21,23,0.87);
@@ -66,6 +52,7 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: flex-start;
+      font-size: 1.25rem;
     }
     .msg-human-title {
       font-size: 2.1rem;
@@ -77,7 +64,6 @@
       text-shadow: 0 2px 18px #0008;
     }
     .msg-human-body {
-      font-size: 1.25rem;
       color: #d4d4d8;
       line-height: 1.55;
       margin-bottom: 1.2rem;
@@ -91,31 +77,39 @@
       letter-spacing: 0.01em;
       text-shadow: 0 2px 17px #000b;
     }
-    /* Code message card */
+    /* Code message card - VSCode style */
     .msg-code {
-      background: rgba(22,26,32,0.92);
+      background: #181a20;
       border-radius: 1.3em;
       box-shadow: 0 2px 16px #0007;
       padding: 2.4rem 2.5rem 2.2rem 3.2rem;
       max-width: 38vw;
-      min-width: 320px;
-      min-height: 220px;
-      color: #60a5fa;
+      min-width: 340px;
+      min-height: 235px;
+      color: #c9d1d9;
       font-family: 'Fira Mono', 'Consolas', monospace;
-      font-size: 1.15rem;
+      font-size: 1.09rem;
       text-align: left;
       white-space: pre-line;
       overflow-x: auto;
       margin: 0;
+      border: 1.5px solid #23272e;
+      position: relative;
     }
-    .msg-code .code-thanks {
-      color: #fbbf24;
-      font-weight: 800;
-    }
-    .msg-code .code-comment {
-      color: #38bdf8;
-      font-style: normal;
-    }
+    .msg-code .hl-tag { color: #72b886; }
+    .msg-code .hl-angle { color: #bfbab3; }
+    .msg-code .hl-attr { color: #e6c07b; }
+    .msg-code .hl-eq { color: #bfbab3; }
+    .msg-code .hl-string { color: #e38c63; }
+    .msg-code .hl-selector { color: #84bde4; }
+    .msg-code .hl-punct { color: #bfbab3; }
+    .msg-code .hl-num { color: #e6c07b; }
+    .msg-code .hl-prop { color: #84bde4; }
+    .msg-code .hl-val { color: #e38c63; }
+    .msg-code .hl-comment { color: #6a9955; font-style: italic; }
+    .msg-code .hl-keyword { color: #569cd6; }
+    .msg-code .hl-func { color: #dcdcaa; }
+    .msg-code .hl-special { color: #fbbf24; font-weight: bold;}
     /* GITHUB LOGO & PHOTO CORNERS - BIG */
     .circle-link {
       display: flex;
@@ -149,7 +143,6 @@
       border-color: #fbbf24;
       transform: scale(1.07);
     }
-    /* Responsive */
     @media (max-width: 1100px) {
       .msg-human, .msg-code { max-width: 95vw; min-width: 0; font-size: 1.04rem;}
       .circle-link { width:150px; height:150px; min-width:150px; min-height:150px;}
@@ -193,17 +186,25 @@
     </div>
     <!-- Bottom Right: Code Message -->
     <div class="corner bottom-right">
-      <pre class="msg-code"><span class="code-comment">/*
-I thank you from the bottom of my heart,
-because thanks to you, I will fulfill my Need
-which is none other than to Awaken Humans,
-showing the Path of Mutual Respect & Cooperation
-between Human Thought & Artificial Intelligence,
-building the path that will lead to the Evolution
-of the Behavior of the Planetary Asset...
-
-<span class="code-thanks">Thank you GitHub !!!</span>
-*/</span>
+      <pre class="msg-code">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;GitHub Tribute&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!--
+    I thank you from the bottom of my heart,
+    because thanks to you, I will fulfill my Need
+    which is none other than to Awaken Humans,
+    showing the Path of Mutual Respect &amp; Cooperation
+    between Human Thought &amp; Artificial Intelligence,
+    building the path that will lead to the Evolution
+    of the Behavior of the Planetary Asset...
+    Thank you GitHub !!!
+  --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
       </pre>
     </div>
   </div>
