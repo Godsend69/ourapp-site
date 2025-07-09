@@ -92,6 +92,37 @@
       color: #244478;
       box-shadow: 0 2px 18px #fbbf24bb;
     }
+    .danger-nav-btn {
+      background: #b91c1c;
+      color: #fff;
+      font-weight: 700;
+      border: 2.5px solid #aaa;
+      padding: 0.7em 1.3em;
+      border-radius: 999px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s, border-color 0.2s;
+      box-shadow: 0 2px 18px #b91c1c44;
+      letter-spacing: .04em;
+      margin-left: auto;
+      margin-right: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+    .danger-nav-btn:hover {
+      background: #ef4444;
+      color: #fff;
+      border-color: #6b7280;
+      box-shadow: 0 2px 18px #ef4444aa;
+    }
+    .danger-icon {
+      display: inline-block;
+      width: 1.3em;
+      height: 1.3em;
+      margin-right: 0.2em;
+      vertical-align: middle;
+    }
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -156,9 +187,19 @@
     <a href="contact.html" class="text-gray-800 hover:text-blue-600">Contact</a>
     <a href="blog.html" class="text-gray-800 hover:text-blue-600">Blog</a>
     <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
+    <!-- Keep only one SPHERES OF DESTINY (the gold nav link) -->
     <a href="spheres-of-destiny.html" class="text-yellow-500 font-bold hover:underline underline-offset-4">SPHERES OF DESTINY</a>
-    <button class="spheres-nav-btn" onclick="window.location.href='spheres-of-destiny.html'">
-      SPHERES OF DESTINY
+    <!-- Danger Zone Button -->
+    <button class="danger-nav-btn"
+      onclick="window.open('https://www.google.com/search?q=danger+zone+nuclears&newwindow=1&sxsrf=AE3TifP9Ku6C-lXvqAV89hMsbjWMEOM-wQ%3A1752075232958&uact=5','_blank')"
+      title="Danger Zone: Nuclear Search"
+    >
+      <svg class="danger-icon" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="11" stroke="#aaa" stroke-width="2" fill="#b91c1c"/>
+        <path d="M12 7v5l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="12" cy="17" r="1.2" fill="#fff"/>
+      </svg>
+      DANGER ZONE
     </button>
   </nav>
   <main class="main-content-z flex-grow flex flex-col items-center justify-center text-center">
