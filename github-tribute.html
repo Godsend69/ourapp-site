@@ -5,103 +5,207 @@
   <title>GitHub Tribute | OurApp</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body {
-      min-height: 100vh;
-      min-width: 100vw;
+    html, body {
+      height: 100%;
       margin: 0;
       padding: 0;
-      background: #18181b url('assets/github-tribute-bg.svg') center center no-repeat;
-      background-size: cover;
+      background: radial-gradient(ellipse at center, #23272e 80%, #18181b 100%);
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      min-width: 100vw;
+      overflow: hidden;
+    }
+    .grid4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      height: 100vh;
+      width: 100vw;
+      gap: 0;
+    }
+    .corner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 4vw 3vw;
+      box-sizing: border-box;
+      background: rgba(0,0,0,0.33);
+      min-width: 0; min-height: 0;
+      position: relative;
+    }
+    .corner.top-left {
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+    .corner.top-right {
+      align-items: flex-start;
+      justify-content: flex-end;
+      background: none;
+    }
+    .corner.bottom-left {
+      align-items: flex-end;
+      justify-content: flex-start;
+      background: none;
+    }
+    .corner.bottom-right {
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+    /* Human message card */
+    .msg-human {
+      background: rgba(20,21,23,0.87);
+      padding: 2.8rem 2.4rem 2.3rem 2.4rem;
+      border-radius: 1.4em;
+      box-shadow: 0 2px 16px #000a;
+      max-width: 38vw;
+      min-width: 320px;
+      min-height: 230px;
+      margin: 0;
       display: flex;
       flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+    .msg-human-title {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.01em;
+      line-height: 1.18;
+      text-shadow: 0 2px 18px #0008;
+    }
+    .msg-human-body {
+      font-size: 1.25rem;
+      color: #d4d4d8;
+      line-height: 1.55;
+      margin-bottom: 1.2rem;
+      font-weight: 400;
+    }
+    .msg-human-thanks {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #38bdf8;
+      margin-top: 0.4rem;
+      letter-spacing: 0.01em;
+      text-shadow: 0 2px 17px #000b;
+    }
+    /* Code message card */
+    .msg-code {
+      background: rgba(22,26,32,0.92);
+      border-radius: 1.3em;
+      box-shadow: 0 2px 16px #0007;
+      padding: 2.4rem 2.5rem 2.2rem 3.2rem;
+      max-width: 38vw;
+      min-width: 320px;
+      min-height: 220px;
+      color: #60a5fa;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      font-size: 1.15rem;
+      text-align: left;
+      white-space: pre-line;
+      overflow-x: auto;
+      margin: 0;
+    }
+    .msg-code .code-thanks {
+      color: #fbbf24;
+      font-weight: 800;
+    }
+    .msg-code .code-comment {
+      color: #38bdf8;
+      font-style: normal;
+    }
+    /* GITHUB LOGO & PHOTO CORNERS - BIG */
+    .circle-link {
+      display: flex;
       align-items: center;
       justify-content: center;
-      font-family: Arial, 'Montserrat', 'Fira Mono', Consolas, monospace;
+      width: 200px;
+      height: 200px;
+      min-width: 200px;
+      min-height: 200px;
+      border-radius: 50%;
+      box-shadow: 0 4px 32px #000b;
+      transition: box-shadow 0.2s, transform 0.2s;
+      cursor: pointer;
+      background: #18181b;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      border: 6px solid #38bdf8;
     }
-    .tribute-message {
-      background: rgba(24,24,27,0.93);
-      padding: 2.5rem 2rem;
-      border-radius: 1.4rem;
-      box-shadow: 0 8px 32px #0008;
-      max-width: 700px;
-      margin: 2rem;
-      font-size: 1.18rem;
-      text-align: center;
-      color: #fff;
-      text-shadow: 0 2px 12px #000a;
+    .circle-link img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+      background: #18181b;
     }
-    .tribute-title {
-      font-size: 2.4rem;
-      font-weight: bold;
-      color: #38bdf8;
-      margin-bottom: 1.2rem;
-      font-family: 'Montserrat', Arial, sans-serif;
-      text-shadow: 0 2px 24px #222a;
+    .circle-link.github:hover, .circle-link.user:hover {
+      box-shadow: 0 2px 50px #fbbf24cc, 0 2px 40px #38bdf888;
+      border-color: #fbbf24;
+      transform: scale(1.07);
     }
-    .code-block {
-      background: #23272e;
-      color: #cbd5e1;
-      border-radius: 0.7rem;
-      padding: 1.2em 1em 1.2em 2em;
-      margin: 2.5rem auto 0 auto;
-      max-width: 650px;
-      font-family: 'Fira Mono', 'Consolas', monospace;
-      font-size: 1.08rem;
-      text-align: left;
-      box-shadow: 0 2px 20px #1118;
-      overflow-x: auto;
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .msg-human, .msg-code { max-width: 95vw; min-width: 0; font-size: 1.04rem;}
+      .circle-link { width:150px; height:150px; min-width:150px; min-height:150px;}
     }
-    .comment {
-      color: #38bdf8;
-    }
-    .highlight {
-      color: #fbbf24;
-      font-weight: bold;
-    }
-    .back-link {
-      margin-top: 2rem;
-      color: #fff;
-      font-size: 1.2rem;
-      text-decoration: underline;
-      text-underline-offset: .2em;
-      background: #244478cc;
-      padding: 0.6em 1.6em;
-      border-radius: 1em;
-      transition: background .2s, color .2s;
-      display: inline-block;
-    }
-    .back-link:hover {
-      background: #fbbf24cc;
-      color: #244478;
+    @media (max-width: 700px) {
+      .grid4 { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr 1fr 1fr; }
+      .corner { align-items: center; justify-content: center; padding: 5vw 2vw;}
+      .msg-human, .msg-code { min-width: 0; max-width: 98vw; padding: 1.3rem;}
+      .circle-link { width:110px; height:110px; min-width:110px; min-height:110px;}
     }
   </style>
 </head>
 <body>
-  <div class="tribute-message">
-    <div class="tribute-title">Thank You, GitHub!</div>
-    <p>
-      I thank you from the bottom of my heart,<br>
-      because thanks to you, I will fulfill my Need<br>
-      which is none other than to Awaken Humans,<br>
-      showing the Path of Mutual Respect &amp; Cooperation<br>
-      between Human Thought &amp; Artificial Intelligence,<br>
-      building the path that will lead to the Evolution<br>
-      of the Behavior of the Planetary Asset...
-    </p>
-    <div class="highlight" style="margin:1.5rem 0 0.3rem 0;">Thank you GitHub !!!</div>
-  </div>
-  <pre class="code-block"><span class="comment">/*
-  I thank you from the bottom of my heart,
-  because thanks to you, I will fulfill my Need
-  which is none other than to Awaken Humans,
-  showing the Path of Mutual Respect & Cooperation
-  between Human Thought & Artificial Intelligence,
-  building the path that will lead to the Evolution
-  of the Behavior of the Planetary Asset...
+  <div class="grid4">
+    <!-- Top Left: Human Message -->
+    <div class="corner top-left">
+      <div class="msg-human">
+        <div class="msg-human-title">I thank you from the bottom of my heart,</div>
+        <div class="msg-human-body">
+          because thanks to you, I will fulfill my Need<br>
+          which is none other than to Awaken Humans,<br>
+          showing the Path of Mutual Respect &amp; Cooperation<br>
+          between Human Thought &amp; Artificial Intelligence,<br>
+          building the path that will lead to the Evolution<br>
+          of the Behavior of the Planetary Asset...
+        </div>
+        <div class="msg-human-thanks">Thank you GitHub !!!</div>
+      </div>
+    </div>
+    <!-- Top Right: GitHub Logo -->
+    <div class="corner top-right">
+      <a href="https://github.com" target="_blank" rel="noopener" class="circle-link github" title="Visit GitHub">
+        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo">
+      </a>
+    </div>
+    <!-- Bottom Left: User Photo -->
+    <div class="corner bottom-left">
+      <a href="https://tsaconaspiros.blogspot.com/" target="_blank" rel="noopener" class="circle-link user" title="Visit my Blog">
+        <img src="assets/my-photo.jpg" alt="Spiros Tsaconas">
+      </a>
+    </div>
+    <!-- Bottom Right: Code Message -->
+    <div class="corner bottom-right">
+      <pre class="msg-code"><span class="code-comment">/*
+I thank you from the bottom of my heart,
+because thanks to you, I will fulfill my Need
+which is none other than to Awaken Humans,
+showing the Path of Mutual Respect & Cooperation
+between Human Thought & Artificial Intelligence,
+building the path that will lead to the Evolution
+of the Behavior of the Planetary Asset...
 
-  Thank you GitHub !!!
+<span class="code-thanks">Thank you GitHub !!!</span>
 */</span>
-  </pre>
-  <a href="about-us.html" class="back-link">&larr; Back to About Us</a>
+      </pre>
+    </div>
+  </div>
 </body>
 </html>
