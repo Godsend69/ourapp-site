@@ -9,7 +9,7 @@
       height: 100%;
       margin: 0;
       padding: 0;
-      background: radial-gradient(ellipse at center, #23272e 80%, #18181b 100%);
+      background: url('assets/digital-binary-code-matrix-banner-with-falling-numbers-design_1017-54560%20(1).png') center center / cover no-repeat fixed;
       font-family: 'Montserrat', Arial, sans-serif;
       color: #fff;
       min-height: 100vh;
@@ -29,16 +29,15 @@
       justify-content: flex-start;
       padding: 4vw 3vw;
       box-sizing: border-box;
-      background: rgba(0,0,0,0.33);
       min-width: 0; min-height: 0;
       position: relative;
+      background: none !important;
     }
     .corner.top-left    { align-items: flex-start;   justify-content: flex-start; }
-    .corner.top-right   { align-items: flex-start;   justify-content: flex-end;   background: none; }
-    .corner.bottom-left { align-items: flex-end;     justify-content: flex-start; background: none; }
+    .corner.top-right   { align-items: flex-start;   justify-content: flex-end;   }
+    .corner.bottom-left { align-items: flex-end;     justify-content: flex-start; }
     .corner.bottom-right{ align-items: flex-end;     justify-content: flex-end; }
 
-    /* Human message card */
     .msg-human {
       background: rgba(20,21,23,0.87);
       padding: 2.8rem 2.4rem 2.3rem 2.4rem;
@@ -67,6 +66,7 @@
       color: #d4d4d8;
       line-height: 1.55;
       margin-bottom: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 400;
     }
     .msg-human-thanks {
@@ -77,9 +77,8 @@
       letter-spacing: 0.01em;
       text-shadow: 0 2px 17px #000b;
     }
-    /* Code message card - VSCode style */
     .msg-code {
-      background: #181a20;
+      background: rgba(24,26,32,0.93);
       border-radius: 1.3em;
       box-shadow: 0 2px 16px #0007;
       padding: 2.4rem 2.5rem 2.2rem 3.2rem;
@@ -93,24 +92,7 @@
       white-space: pre-line;
       overflow-x: auto;
       margin: 0;
-      border: 1.5px solid #23272e;
-      position: relative;
     }
-    .msg-code .hl-tag { color: #72b886; }
-    .msg-code .hl-angle { color: #bfbab3; }
-    .msg-code .hl-attr { color: #e6c07b; }
-    .msg-code .hl-eq { color: #bfbab3; }
-    .msg-code .hl-string { color: #e38c63; }
-    .msg-code .hl-selector { color: #84bde4; }
-    .msg-code .hl-punct { color: #bfbab3; }
-    .msg-code .hl-num { color: #e6c07b; }
-    .msg-code .hl-prop { color: #84bde4; }
-    .msg-code .hl-val { color: #e38c63; }
-    .msg-code .hl-comment { color: #6a9955; font-style: italic; }
-    .msg-code .hl-keyword { color: #569cd6; }
-    .msg-code .hl-func { color: #dcdcaa; }
-    .msg-code .hl-special { color: #fbbf24; font-weight: bold;}
-    /* GITHUB LOGO & PHOTO CORNERS - BIG */
     .circle-link {
       display: flex;
       align-items: center;
@@ -127,7 +109,7 @@
       overflow: hidden;
       padding: 0;
       margin: 0;
-      border: 6px solid #38bdf8;
+      border: none;
     }
     .circle-link img {
       width: 100%;
@@ -140,7 +122,6 @@
     }
     .circle-link.github:hover, .circle-link.user:hover {
       box-shadow: 0 2px 50px #fbbf24cc, 0 2px 40px #38bdf888;
-      border-color: #fbbf24;
       transform: scale(1.07);
     }
     @media (max-width: 1100px) {
@@ -167,7 +148,7 @@
           showing the Path of Mutual Respect &amp; Cooperation<br>
           between Human Thought &amp; Artificial Intelligence,<br>
           building the path that will lead to the Evolution<br>
-          of the Behavior of the Planetary Asset...
+          of the Behavior of the Planetary Asset…
         </div>
         <div class="msg-human-thanks">Thank you GitHub !!!</div>
       </div>
@@ -200,7 +181,7 @@
     showing the Path of Mutual Respect &amp; Cooperation
     between Human Thought &amp; Artificial Intelligence,
     building the path that will lead to the Evolution
-    of the Behavior of the Planetary Asset...
+    of the Behavior of the Planetary Asset…
     Thank you GitHub !!!
   --&gt;
 &lt;/body&gt;
