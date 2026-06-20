@@ -205,7 +205,7 @@
     <div class="main-headline">
       Welcome to OurApp
     </div>
-    <div class="main-subtitle">
+    <div class="main-subtitle tilt3d" data-tilt>
       Discover next-generation features, best practices, and philosophical journeys into knowledge, destiny, the Earth, and the power of AI.
     </div>
     <!-- Main call-to-action headline links -->
@@ -228,7 +228,7 @@
         title="Search: Best apps in the world"
       >About OurApp</a>
     </h1>
-    <p class="mb-8 white-welcome max-w-2xl mx-auto">
+    <p class="mb-8 white-welcome max-w-2xl mx-auto tilt3d" data-tilt>
       Welcome! OurApp helps you choose the best tools for your business or project. Click any solution below for clear answers, recommendations, and links to expert resources—so you always find what you need.
     </p>
     <div class="w-full max-w-3xl bg-white rounded-xl shadow p-6 text-left mb-10">
@@ -249,5 +249,8 @@
       <!-- ... (all original content follows as you sent it) ... -->
     </div>
   </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="assets/ourapp-motion.js"></script>
+<script>OURAPP.mount("network",{dot:0x2563eb,line:0x60a5fa,count:100});</script>
 </body>
 </html>
