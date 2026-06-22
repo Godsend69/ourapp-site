@@ -6,15 +6,106 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background: #111 url('assets/925792-wallpapers-2560x1440-2560x1440-cell-phone.jpg') no-repeat center center fixed;
+      background: #05060f url('assets/nebula_soft.jpg') no-repeat center center fixed;
       background-size: cover;
       min-height: 100vh;
       margin: 0;
       padding: 0;
     }
+    body.orrery-big nav, body.orrery-big main, body.orrery-big footer { opacity: 0.12; transition: opacity .6s; pointer-events: none; }
+    body.orrery-big { transition: opacity .6s; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
+  <!-- ===== FLANKING 3D LINKS: Gumroad (left) + Stripe/all-services (right) ===== -->
+  <style>
+    .flank-link{
+      position:fixed; top:42%; transform:translateY(-50%);
+      z-index:50; display:flex; flex-direction:column; align-items:center;
+      text-decoration:none; cursor:pointer;
+      -webkit-user-select:none; user-select:none;
+      perspective:600px;
+    }
+    .flank-left{ left:3.2vw; }
+    .flank-right{ right:3.2vw; }
+    .flank-badge{
+      width:96px; height:96px; border-radius:24px;
+      display:flex; align-items:center; justify-content:center;
+      position:relative;
+      transform-style:preserve-3d;
+      animation:flankBob 3.6s ease-in-out infinite;
+      transition:transform .35s cubic-bezier(.2,.8,.25,1), box-shadow .35s;
+      will-change:transform;
+    }
+    .flank-right .flank-badge{ animation-delay:-1.8s; }
+    .flank-gumroad{
+      background:linear-gradient(145deg,#ff90e8 0%,#ff5fd1 55%,#e23fb8 100%);
+      box-shadow:0 14px 34px rgba(255,95,209,.45), inset 0 2px 6px rgba(255,255,255,.55), inset 0 -6px 14px rgba(160,20,120,.4);
+    }
+    .flank-stripe{
+      background:linear-gradient(145deg,#8b6cff 0%,#635bff 55%,#4b40d4 100%);
+      box-shadow:0 14px 34px rgba(99,91,255,.45), inset 0 2px 6px rgba(255,255,255,.5), inset 0 -6px 14px rgba(40,30,160,.45);
+    }
+    .flank-badge svg{ width:54px; height:54px; filter:drop-shadow(0 3px 5px rgba(0,0,0,.35)); transform:translateZ(28px); }
+    .flank-link:hover .flank-badge{
+      transform:translateZ(40px) rotateX(12deg) rotateY(-14deg) scale(1.12);
+      animation-play-state:paused;
+    }
+    .flank-right:hover .flank-badge{ transform:translateZ(40px) rotateX(12deg) rotateY(14deg) scale(1.12); }
+    .flank-gumroad:hover{ box-shadow:0 22px 48px rgba(255,95,209,.65), inset 0 2px 8px rgba(255,255,255,.7), inset 0 -7px 16px rgba(160,20,120,.5); }
+    .flank-stripe:hover{ box-shadow:0 22px 48px rgba(99,91,255,.65), inset 0 2px 8px rgba(255,255,255,.65), inset 0 -7px 16px rgba(40,30,160,.5); }
+    .flank-badge::after{
+      content:''; position:absolute; inset:-6px; border-radius:28px;
+      border:2px solid rgba(255,255,255,.0);
+      transition:border-color .35s;
+    }
+    .flank-link:hover .flank-badge::after{ animation:flankPulse 1.4s ease-out infinite; }
+    .flank-label{
+      margin-top:14px; font-family:'Segoe UI',Arial,sans-serif; font-weight:700;
+      font-size:.82rem; letter-spacing:.06em; color:#eaf0ff;
+      text-shadow:0 2px 8px rgba(0,0,0,.6); opacity:.92;
+      transition:opacity .3s, transform .3s;
+    }
+    .flank-sub{ font-weight:400; font-size:.66rem; color:#aab6d4; letter-spacing:.04em; margin-top:2px; }
+    .flank-link:hover .flank-label{ opacity:1; transform:translateY(2px); }
+    @keyframes flankBob{
+      0%,100%{ transform:translateZ(0) translateY(0) rotateY(-6deg); }
+      50%{ transform:translateZ(0) translateY(-12px) rotateY(6deg); }
+    }
+    @keyframes flankPulse{
+      0%{ inset:-6px; border-color:rgba(255,255,255,.55); opacity:1; }
+      100%{ inset:-22px; border-color:rgba(255,255,255,0); opacity:0; }
+    }
+    @media (max-width:760px){
+      .flank-badge{ width:62px; height:62px; border-radius:18px; }
+      .flank-badge svg{ width:34px; height:34px; }
+      .flank-left{ left:2vw; } .flank-right{ right:2vw; }
+      .flank-label{ font-size:.66rem; } .flank-sub{ display:none; }
+    }
+  </style>
+
+  <a class="flank-link flank-left" href="https://gumroad.com/products" target="_blank" rel="noopener" title="Gumroad &mdash; digital products">
+    <div class="flank-badge flank-gumroad">
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path fill="#ffffff" d="M32 8C18.7 8 9 18.2 9 32s9.4 24 23.4 24c11.9 0 19.9-7.3 21.3-17.9H38.9c-.8 3.4-3.2 5.4-6.8 5.4-5 0-8.4-4.3-8.4-11.5 0-7 3.5-11.4 8.6-11.4 3.6 0 6 2.1 6.7 5.6h14.6C52.1 15.3 44.3 8 32 8z"/>
+        <rect x="40" y="30" width="15" height="12" rx="2" fill="#ffffff"/>
+      </svg>
+    </div>
+    <div class="flank-label">GUMROAD</div>
+    <div class="flank-sub">Digital products</div>
+  </a>
+
+  <a class="flank-link flank-right" href="https://godsend69.github.io/lightinthedark-solutions/pricing.html" target="_blank" rel="noopener" title="All services &mdash; secure Stripe checkout">
+    <div class="flank-badge flank-stripe">
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path fill="#ffffff" d="M33.6 25.3c0-1.9 1.6-2.7 4.1-2.7 3.7 0 8.4 1.1 12.1 3.1V14.5c-4-1.6-8-2.2-12.1-2.2C27.8 12.3 21 17.5 21 26c0 13.4 18.3 11.2 18.3 17 0 2.2-1.9 2.9-4.6 2.9-4 0-9.2-1.7-13.3-3.9v11.3c4.5 1.9 9.1 2.8 13.3 2.8 10.2 0 17.2-5 17.2-13.6 0-14.4-18.3-11.8-18.3-17.2z"/>
+      </svg>
+    </div>
+    <div class="flank-label">ALL SERVICES</div>
+    <div class="flank-sub">Secure Stripe checkout</div>
+  </a>
+  <!-- ===== END FLANKING LINKS ===== -->
+
   <nav class="bg-white shadow p-4 flex gap-6 items-center">
     <a href="index.html" class="font-bold text-2xl text-blue-700">OurApp</a>
     <a href="dashboard.html" class="text-gray-800 hover:text-blue-600">Dashboard</a>
@@ -26,6 +117,7 @@
     <a href="best-practices.html" class="text-gray-800 hover:text-blue-600">Best Practices</a>
     <a href="spheres-of-destiny.html" class="text-yellow-500 font-bold hover:underline underline-offset-4" title="SPHERES OF DESTINY">SPHERES OF DESTINY</a>
     <a href="earth-in-motion.html" class="text-yellow-500 font-bold hover:underline underline-offset-4" title="EARTH IN MOTION">EARTH IN MOTION</a>
+    <a href="https://godsend69.github.io/lightinthedark-solutions/index.html" target="_blank" rel="noopener" class="ml-auto text-purple-600 font-bold hover:underline underline-offset-4" title="Light in the Dark Solutions — The Solution">Light in the Dark Solutions &mdash; The Solution</a>
   </nav>
   <main class="flex-grow flex flex-col items-center justify-center text-center">
     <h1 class="text-4xl font-extrabold text-blue-800 mt-12 mb-6">Pricing</h1>

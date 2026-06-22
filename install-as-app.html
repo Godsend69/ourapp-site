@@ -5,294 +5,163 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Install OurApp on Your Device</title>
   <style>
-    html, body {
-      height: 100%;
-      min-height: 100vh;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; padding: 0; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #222;
-      margin: 0;
+      color: #e8f0ff;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      background: #f4f4f4;
+      /* C: calm sovereign nebula background (kills the stale spec-baked photo) */
+      background: #05060f url('assets/nebula_soft.jpg') center center / cover fixed no-repeat;
     }
-    .bg-img {
+    /* A: OUKITEL as a TIMELESS values badge - no specs, never goes stale */
+    .oukitel-badge {
       position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      background: url('assets/9d726d2c-1a4b-4c28-a86f-86eb3d853b20.webp') center center/cover no-repeat;
-      pointer-events: none;
-    }
-    /* OUKITEL clickable upper left ad */
-    .oukitel-ad {
-      position: fixed;
-      top: 32px;
-      left: 32px;
+      top: 22px; left: 22px;
       z-index: 10;
-      background: rgba(20,27,40,0.85);
-      color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px #0003;
-      padding: 1em 1.4em 1em 1.2em;
-      min-width: 190px;
-      max-width: 350px;
-      font-size: 1.04em;
-      line-height: 1.4;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      text-align: left;
+      display: flex; flex-direction: column; align-items: flex-start;
+      background: rgba(10,18,34,0.7);
+      border: 1px solid rgba(126,192,255,0.3);
+      border-radius: 12px;
+      padding: 12px 16px;
+      backdrop-filter: blur(4px);
+      max-width: 240px;
     }
-    .oukitel-ad a {
-      color: #fff;
-      background: #222e;
-      border: 2px solid #fff;
-      border-radius: 7px;
-      padding: 0.1em 0.55em;
-      font-weight: bold;
-      font-size: 1.15em;
-      margin-bottom: 0.18em;
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      box-shadow: 0 1px 6px #0004;
-      transition: background 0.15s, color 0.15s, border 0.15s;
-      display: inline-block;
+    .oukitel-badge a {
+      color: #fff; font-weight: 800; font-size: 1.15em; letter-spacing: 0.08em;
+      text-decoration: none; border-bottom: 2px solid transparent; transition: .2s;
     }
-    .oukitel-ad a:hover {
-      color: #06b6d4;
-      background: #fff;
-      border-color: #06b6d4;
+    .oukitel-badge a:hover { color: #7ec0ff; border-bottom-color: #7ec0ff; }
+    .oukitel-badge .tagline {
+      color: #9fb8d4; font-size: 0.82em; font-weight: 400; margin-top: 5px; line-height: 1.45;
     }
-    .oukitel-ad .promo-desc {
-      color: #fff;
-      font-weight: normal;
-      font-size: 0.98em;
-      margin-top: 0.25em;
-      margin-left: 0.1em;
-    }
-    .header-frame {
-      background: rgba(255,255,255,0.97);
-      color: #222;
-      border-radius: 14px;
-      box-shadow: 0 2px 16px #38bdf822;
-      margin: 2.2em auto 0 auto;
-      padding: 1.3em 1em 1.1em 1em;
-      max-width: 540px;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-    .header-frame h1 {
-      margin: 0 0 0.5em 0;
-      color: #0891b2;
-      font-size: 2em;
-      font-weight: bold;
-      letter-spacing: 0.02em;
-    }
-    .header-frame p {
-      font-size:1.04em;
-      color:#0369a1;
-      margin-top:0.5em;
-      margin-bottom:0;
-    }
-    header {
-      background: transparent;
-      color: #222;
-      text-align: center;
-      box-shadow: none;
-      font-size: 1.2em;
-      z-index: 2;
-      position: relative;
-      width: 100vw;
-      padding: 0;
-    }
+    /* D: one clean centered card */
     main {
       flex: 1 0 auto;
-      position: relative;
-      z-index: 2;
-      width: 100vw;
-      min-height: 0;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      width: 100%; padding: 0 16px 48px;
+      position: relative; z-index: 2;
     }
-    /* Remove right promo image */
-    .promo-block {
-      display: none;
+    .card {
+      background: rgba(8,14,26,0.78);
+      border: 1px solid rgba(126,192,255,0.22);
+      border-radius: 18px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      backdrop-filter: blur(6px);
+      max-width: 560px; width: 100%;
+      margin: 6vh auto 0;
+      padding: 34px 34px 30px;
+      text-align: center;
     }
-    .center-contents {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 0;
-      padding-bottom: 3.5em;
+    .card h1 {
+      margin: 0 0 8px; font-size: 2em; font-weight: 800;
+      color: #9fd0ff; letter-spacing: 0.01em;
+      text-shadow: 0 0 24px rgba(126,192,255,0.35);
     }
-    .instructions {
-      background: rgba(255,255,255,0.96);
-      color: #0369a1;
-      border-radius: 12px;
-      box-shadow: 0 2px 16px #38bdf822;
-      margin: 2.5em auto 0 auto;
-      padding: 1.5em 1em 1.2em 1em;
-      font-size: 1.13em;
-      max-width: 430px;
-      text-align: left;
-      backdrop-filter: blur(1.5px);
-    }
-    .instructions strong {
-      color: #0891b2;
-    }
-    ul {
-      margin: 1em 0 0 1.4em;
-      padding: 0;
-      color: #0369a1;
-      font-size: 1.07em;
-    }
-    li {
-      margin-bottom: 0.9em;
-    }
-    .browser-section {
-      margin-top: 1.5em;
-      margin-bottom: 1.5em;
-    }
-    .browser-section h3 {
-      color: #0891b2;
-      margin-bottom: 0.4em;
-      font-size: 1.1em;
-    }
+    .card .sub { color: #b8c8e0; font-size: 1.05em; margin: 0 0 24px; }
+    .instructions { text-align: left; }
+    .instructions > strong { color: #9fd0ff; font-size: 1.08em; display: block; margin-bottom: 6px; }
+    .browser-section { margin-top: 20px; }
+    .browser-section h3 { color: #7ec0ff; margin: 0 0 6px; font-size: 1.05em; }
+    .card ul { margin: 8px 0 0 1.3em; padding: 0; color: #d8e2f2; font-size: 1.0em; }
+    .card li { margin-bottom: 9px; line-height: 1.5; }
+    .card b { color: #fff; }
     .tip {
-      background: #fbbf24;
-      color: #422006;
-      border-radius: 8px;
-      padding: 0.7em 1em;
-      margin: 1.5em auto 0 auto;
-      font-size: 1em;
-      box-shadow: 0 1px 10px #fbbf2433;
-      max-width: 420px;
-      text-align: center;
-      z-index: 2;
-      position: relative;
+      background: rgba(251,191,36,0.15);
+      border: 1px solid rgba(251,191,36,0.45);
+      color: #ffe1a8;
+      border-radius: 10px; padding: 12px 16px; margin: 24px 0 0;
+      font-size: 0.98em; text-align: center;
     }
-    a.home-link {
-      display: inline-block;
-      margin-top: 2.5em;
-      padding: 0.9em 2.1em;
+    .nav-arrows { display:flex; gap:14px; justify-content:center; margin-top:18px; }
+    .nav-arrow {
+      background: rgba(8,14,26,0.7);
+      border: 1px solid rgba(126,192,255,0.4);
+      color: #9fd0ff; font-weight:700; font-size:0.98em;
+      padding: 10px 22px; border-radius: 12px; cursor: pointer;
+      transition: .2s; font-family:inherit;
+      backdrop-filter: blur(4px);
+    }
+    .nav-arrow:hover {
+      background: rgba(126,192,255,0.18);
+      border-color: #7ec0ff; color:#fff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(126,192,255,0.3);
+    }
+    .nav-arrow:active { transform: translateY(0); }
+    .home-link {
+      display: inline-block; margin-top: 26px; padding: 13px 30px;
       background: linear-gradient(90deg,#22c55e 60%,#06b6d4 100%);
-      color: #fff;
-      font-weight: bold;
-      border-radius: 12px;
-      font-size: 1.06em;
-      text-decoration: none;
-      box-shadow: 0 2px 12px #22c55e33;
-      transition: background 0.15s, color 0.15s;
-      border: none;
-      cursor: pointer;
-      position: relative;
-      z-index: 2;
+      color: #fff; font-weight: 700; border-radius: 12px; font-size: 1.04em;
+      text-decoration: none; box-shadow: 0 4px 18px rgba(34,197,94,0.3); transition: .2s;
     }
-    a.home-link:hover {
-      background: linear-gradient(90deg,#16a34a 70%,#0891b2 100%);
-      color: #fff;
-      box-shadow: 0 4px 18px #16a34a44;
-    }
+    .home-link:hover { background: linear-gradient(90deg,#16a34a 70%,#0891b2 100%); box-shadow: 0 6px 24px rgba(22,163,74,0.4); }
     footer {
-      background: #334155;
-      color: #e0e7ef;
-      text-align: center;
-      font-size: 1.04em;
-      padding: 1.25em 0 0.9em 0;
-      letter-spacing: 0.03em;
-      border-top: 1px solid #0891b222;
-      width: 100vw;
-      z-index: 5;
-      position: relative;
-      bottom: 0;
-      left: 0;
-      margin-top: auto;
+      text-align: center; color: #6f86a8; font-size: 0.95em;
+      padding: 20px 0 18px; border-top: 1px solid rgba(126,192,255,0.12);
+      width: 100%; z-index: 2; position: relative; margin-top: auto;
     }
     @media (max-width: 600px) {
-      .oukitel-ad {
-        top: 8px;
-        left: 4vw;
-        min-width: 140px;
-        max-width: 85vw;
-        padding: 0.7em 0.9em 0.7em 0.7em;
-        font-size: 0.93em;
-      }
-      .instructions, .tip {
-        max-width: 98vw;
-        font-size: 1em;
-      }
-      .header-frame, .center-contents {
-        width: 98vw;
-      }
+      .oukitel-badge { top: 10px; left: 10px; max-width: 60vw; padding: 9px 12px; }
+      .card { margin-top: 14vh; padding: 24px 20px; }
+      .card h1 { font-size: 1.6em; }
     }
   </style>
 </head>
 <body>
-  <div class="bg-img"></div>
-  <!-- OUKITEL clickable ad in upper left -->
-  <div class="oukitel-ad">
+  <!-- A: timeless OUKITEL values badge -->
+  <div class="oukitel-badge">
     <a href="https://oukitel.com/" target="_blank" rel="noopener">OUKITEL</a>
-    <span class="promo-desc">WP38<br>
-    The Ultimate in Power and Tech<br>
-    10600mAh Battery | 24GB RAM (6+18) | Triple Camera Setup | IP68 &amp; IP69K
-    </span>
+    <span class="tagline">Rugged. Independent.<br>Sovereign hardware you own.</span>
   </div>
-  <header>
-    <div class="header-frame">
-      <h1>Install OurApp on Your Device</h1>
-      <p>
-        Get an app-like experience—right from your browser!
-      </p>
-    </div>
-  </header>
+
   <main>
-    <div class="center-contents">
+    <div class="card">
+      <h1>Install OurApp on Your Device</h1>
+      <p class="sub">Get an app-like experience &mdash; right from your browser.</p>
+
       <div class="instructions">
         <strong>How to add OurApp to your Home Screen:</strong>
+
         <div class="browser-section">
-          <h3>For Android (Chrome, Edge, Brave, etc.):</h3>
+          <h3>Android (Chrome, Edge, Brave, etc.)</h3>
           <ul>
-            <li>Open <b>oururl</b> in your browser.</li>
-            <li>Tap the <b>Menu</b> (<span style="font-size:1.12em;">&#x22EE;</span> or <span style="font-size:1.12em;">&#x2630;</span>) in the top-right.</li>
+            <li>Open <b>godsend69.github.io/ourapp-site</b> in your browser.</li>
+            <li>Tap the <b>Menu</b> (&#8942; or &#9776;) in the top-right.</li>
             <li>Select <b>Add to Home screen</b> or <b>Install App</b>.</li>
-            <li>Confirm—OurApp will now appear on your home screen like a regular app!</li>
+            <li>Confirm &mdash; OurApp will appear on your home screen like a regular app.</li>
           </ul>
         </div>
+
         <div class="browser-section">
-          <h3>For iPhone/iPad (Safari):</h3>
+          <h3>iPhone / iPad (Safari)</h3>
           <ul>
-            <li>Open <b>oururl</b> in Safari.</li>
-            <li>Tap the <b>Share</b> button (<span style="font-size:1.12em;">&#x1f517;</span>).</li>
+            <li>Open <b>godsend69.github.io/ourapp-site</b> in Safari.</li>
+            <li>Tap the <b>Share</b> button (&#8593;).</li>
             <li>Scroll down and tap <b>Add to Home Screen</b>.</li>
-            <li>Tap <b>Add</b>—OurApp icon will appear on your home screen!</li>
+            <li>Tap <b>Add</b> &mdash; the OurApp icon will appear on your home screen.</li>
           </ul>
         </div>
       </div>
-      <div class="tip">
-        <strong>Tip:</strong> Using OurApp this way gives you instant access, full-screen mode, and a true app feel—without any downloads!
-      </div>
+
+      <div class="tip"><b>Tip:</b> Using OurApp this way gives you instant access, full-screen mode, and a true app feel &mdash; without any downloads.</div>
+
       <a class="home-link" href="index.html">Go to OurApp Home</a>
+      <div class="nav-arrows">
+        <a class="nav-arrow" href="index.html" title="Home">&#8592; Back</a>
+        <a class="nav-arrow" href="contact.html" title="Contact">Forward &#8594;</a>
+      </div>
     </div>
   </main>
+
   <footer>
-    &copy; 2025 Spiros Tsaconas. All rights reserved. | Enjoy freedom with OurApp
+    &copy; 2026 Spiros Tsaconas. All rights reserved. &nbsp;|&nbsp; Enjoy freedom with OurApp
   </footer>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="assets/ourapp-motion.js"></script>
-<script>OURAPP.mount("aurora",{colA:0x7c3aed,colB:0x2563eb,colC:0x34d399});</script>
+<script>OURAPP.mount("network",{dot:0xffffff,line:0x8888ff,count:90});</script>
 </body>
 </html>

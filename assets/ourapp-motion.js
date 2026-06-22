@@ -239,30 +239,323 @@
     var stage = makeStage();
     var W = global.innerWidth, H = global.innerHeight;
     var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(50, W / H, 0.1, 100);
-    camera.position.z = 5;
+    var camera = new THREE.PerspectiveCamera(45, W / H, 0.1, 100);
+    camera.position.z = 6;
     var renderer = baseRenderer(stage);
+
+    scene.add(new THREE.AmbientLight(0x46688f, 0.95));  // soft fill so night side stays visible
+    var sun = new THREE.DirectionalLight(0xfff6e8, 1.7);
+    sun.position.set(-4, 1.5, 3); scene.add(sun);
+
+    // ---- the 7 worlds (NASA / public-domain textures, sovereign-local) ----
+    var WORLDS = [
+      { name: 'Earth', tex: 'assets/earth_underskin.jpg', tint: 0xcfe6ff, ring: false, page: 'planet-earth.html' },
+      { name: 'Moon',  tex: 'assets/planet_moon.jpg',     tint: 0xffffff, ring: false, page: 'planet-moon.html' }
+    ];
+    var loader = new THREE.TextureLoader();
+    var R = 1.0;
     var grp = new THREE.Group(); scene.add(grp);
-    var globe = new THREE.Mesh(new THREE.SphereGeometry(1.6, 48, 48),
-      new THREE.MeshBasicMaterial({ color: opts.core || 0x0a2a66, transparent: true, opacity: 0.45 }));
-    grp.add(globe);
-    grp.add(new THREE.Mesh(new THREE.SphereGeometry(1.63, 28, 28),
-      new THREE.MeshBasicMaterial({ color: opts.wire || 0x34d399, wireframe: true, transparent: true, opacity: 0.28 })));
-    // orbiting points
-    var N = 220, g = new THREE.BufferGeometry(), p = new Float32Array(N*3);
-    for (var i=0;i<N;i++){ var ph=Math.acos(2*Math.random()-1), th=2*Math.PI*Math.random(), r=1.66;
-      p[i*3]=r*Math.sin(ph)*Math.cos(th); p[i*3+1]=r*Math.sin(ph)*Math.sin(th); p[i*3+2]=r*Math.cos(ph); }
-    g.setAttribute('position', new THREE.BufferAttribute(p,3));
-    grp.add(new THREE.Points(g, new THREE.PointsMaterial({ color: opts.dot || 0xfbbf24, size: 0.04, transparent: true, opacity: 0.9 })));
-    var ring = new THREE.Mesh(new THREE.RingGeometry(2.1, 2.13, 80),
-      new THREE.MeshBasicMaterial({ color: opts.ring || 0x60a5fa, transparent: true, opacity: 0.4, side: THREE.DoubleSide }));
-    ring.rotation.x = Math.PI*0.5; grp.add(ring);
-    var st = { targetAz: 0, targetPo: 0, az: 0, po: 0 }; orbitControls(st);
+    var idx = 0;
+
+    var earth = new THREE.Mesh(
+      new THREE.SphereGeometry(R, 64, 64),
+      new THREE.MeshPhongMaterial({ emissive: 0x16263d, emissiveIntensity: 0.85, shininess: 16, specular: 0x2a3947 })
+    );
+    grp.add(earth);
+
+    // Saturn ring (hidden unless Saturn)
+    var ringTex = loader.load('assets/saturn_ring.png');
+    var ring = new THREE.Mesh(
+      new THREE.RingGeometry(R * 1.3, R * 2.1, 64),
+      new THREE.MeshBasicMaterial({ map: ringTex, transparent: true, opacity: 0.9, side: THREE.DoubleSide })
+    );
+    ring.rotation.x = Math.PI * 0.46; ring.visible = false; grp.add(ring);
+
+    function loadWorld(i){
+      var w = WORLDS[i];
+      loader.load(w.tex, function(tx){
+        if (tx.colorSpace !== undefined) tx.colorSpace = THREE.SRGBColorSpace;
+        earth.material.map = tx; earth.material.color.setHex(w.tint);
+        earth.material.emissive.setHex(0x0a1422); earth.material.emissiveIntensity = 0.5;
+        earth.material.needsUpdate = true;
+      });
+      ring.visible = false;
+    }
+    loadWorld(0);
+
+    // grounded soft shadow
+    var shCanvas = document.createElement('canvas'); shCanvas.width = 256; shCanvas.height = 256;
+    var sx = shCanvas.getContext('2d');
+    var grad = sx.createRadialGradient(128,128,6,128,128,126);
+    grad.addColorStop(0.0,'rgba(0,0,0,0.82)'); grad.addColorStop(0.5,'rgba(0,0,0,0.5)');
+    grad.addColorStop(0.8,'rgba(0,0,0,0.18)'); grad.addColorStop(1.0,'rgba(0,0,0,0.0)');
+    sx.fillStyle=grad; sx.fillRect(0,0,256,256);
+    var shadow = new THREE.Mesh(
+      new THREE.PlaneGeometry(R*2.6, R*1.1),
+      new THREE.MeshBasicMaterial({ map:new THREE.CanvasTexture(shCanvas), transparent:true, opacity:0.85, depthWrite:false })
+    );
+    scene.add(shadow);
+
+    // ---- interaction state ----
+    var state = {
+      big: false,            // grown to near-screen?
+      dragging: false,
+      lastX: 0, lastY: 0,
+      spinY: 0.0018,         // very slow auto-rotation
+      velY: 0, velX: 0,
+      manualY: 0, manualX: 0,
+      zoom: 6,               // camera distance
+      posX: 0, posY: 0,
+      tPosX: 0, tPosY: 0
+    };
+    var dom = renderer.domElement;
+    var stageEl = dom.parentNode;
+    // small mode: behind content, clicks pass through. only contextmenu is captured globally.
+    dom.style.pointerEvents = 'none';
+
+    // ---- small-mode GRAB & DRAG ---------------------------------------
+    // The stage canvas is pointer-events:none, so we track everything at the
+    // window level using the globe's computed screen position. Hover the globe
+    // -> hand cursor. Press & hold -> grab her and drag her anywhere. Release
+    // -> she stays where you dropped her. Empty-space moves still let her roam.
+    if (!document.getElementById('orrery-cursor-css')) {
+      var ccss = document.createElement('style'); ccss.id = 'orrery-cursor-css';
+      ccss.textContent = 'body.orrery-grab{cursor:grab!important;} body.orrery-grabbing{cursor:grabbing!important;}';
+      document.head.appendChild(ccss);
+    }
+    state.placing = false;     // true while you hold & drag her
+    state.placed   = false;    // true once you have dropped her at a fixed spot
+    state.overGlobe = false;
+
+    // is the cursor currently over the globe on screen?
+    function cursorOverGlobe(cx, cy){
+      if (state.hidden || state.big) return false;
+      // project the globe centre to screen
+      var v = grp.position.clone(); v.project(camera);
+      var sx = (v.x * 0.5 + 0.5) * global.innerWidth;
+      var sy = (-v.y * 0.5 + 0.5) * global.innerHeight;
+      // approximate on-screen radius of the sphere
+      var rPx = (R / camera.position.z) * global.innerHeight * 0.55;
+      return Math.hypot(cx - sx, cy - sy) <= rPx;
+    }
+
+    global.addEventListener('mousemove', function(e){
+      if (state.hidden) return;
+      if (state.placing){
+        // dragging her: place her where the cursor is (convert screen -> scene units)
+        state.tPosX = ((e.clientX/global.innerWidth)*2-1) * 2.4;
+        state.tPosY = -((e.clientY/global.innerHeight)*2-1) * 1.3;
+        state.posX += (state.tPosX - state.posX) * 0.5;   // tight follow while held
+        state.posY += (state.tPosY - state.posY) * 0.5;
+        return;
+      }
+      if (state.dragging && state.big){
+        var dx = e.clientX - state.lastX, dy = e.clientY - state.lastY;
+        state.manualY += dx * 0.005; state.manualX += dy * 0.005;
+        state.velY = dx * 0.0008; state.velX = dy * 0.0008;
+        state.lastX = e.clientX; state.lastY = e.clientY;
+        return;
+      }
+      // hover detection -> hand cursor
+      var over = cursorOverGlobe(e.clientX, e.clientY);
+      state.overGlobe = over;
+      document.body.classList.toggle('orrery-grab', over);
+      // free roam only when she has NOT been placed and cursor is not on her
+      if (!state.big && !state.placed){
+        state.tPosX = ((e.clientX/global.innerWidth)*2-1) * 2.4;
+        state.tPosY = -((e.clientY/global.innerHeight)*2-1) * 1.3;
+      }
+    });
+
+    // press on the globe -> start placing (grab)
+    global.addEventListener('mousedown', function(e){
+      if (state.big || state.hidden) return;
+      if (cursorOverGlobe(e.clientX, e.clientY)){
+        state.placing = true; state.placed = true;
+        document.body.classList.add('orrery-grabbing');
+        e.preventDefault();
+      }
+    });
+    global.addEventListener('mouseup', function(){
+      if (state.placing){ state.placing = false; document.body.classList.remove('orrery-grabbing'); }
+      state.dragging = false;
+    });
+
+    // DOUBLE-CLICK ANYWHERE -> hide / show the globe (and free her to roam again)
+    global.addEventListener('dblclick', function(e){
+      if (state.big) return;
+      var el = e.target;
+      if (el && el.closest && el.closest('input,textarea,[contenteditable]')) return;
+      state.hidden = !state.hidden;
+      if (state.hidden){ state.placed = false; }   // when she returns, she roams again
+      if (grp) grp.visible = !state.hidden;
+      if (typeof shadow !== 'undefined' && shadow) shadow.visible = !state.hidden;
+    });
+    // wheel zoom (only when big)
+    dom.addEventListener('wheel', function(e){
+      if (state.big){ e.preventDefault(); state.zoom += e.deltaY * 0.002; state.zoom = Math.max(2.0, Math.min(8, state.zoom)); }
+    }, { passive:false });
+    // CLICK (no drag) = next world | DOUBLE-CLICK = open history page.
+    // A single click waits to see if a second follows, so the two never fight.
+    var downX=0, downY=0, clickTimer=null;
+    dom.addEventListener('mousedown', function(e){ downX=e.clientX; downY=e.clientY; });
+    dom.addEventListener('click', function(e){
+      if (!state.big) return;
+      var moved = Math.hypot(e.clientX-downX, e.clientY-downY);
+      if (moved >= 6) return;            // that was a drag, ignore
+      if (clickTimer){ return; }         // second click handled by dblclick
+      clickTimer = setTimeout(function(){
+        clickTimer = null;
+        idx = (idx+1) % WORLDS.length; loadWorld(idx);   // confirmed single click -> next world
+      }, 260);
+    });
+    dom.addEventListener('dblclick', function(e){
+      if (!state.big) return;
+      if (clickTimer){ clearTimeout(clickTimer); clickTimer = null; }  // cancel the cycle
+      var w = WORLDS[idx]; if (w.page){ global.location.href = w.page; } // open history
+    });
+
+    // ---- right-click -> REAL-TIME instrument panel (day/night, world clock, moon phase) ----
+    var box = document.createElement('div');
+    box.style.cssText = 'position:fixed;z-index:10000;display:none;background:rgba(8,14,26,0.96);border:1px solid rgba(126,192,255,0.5);border-radius:12px;padding:14px 16px;box-shadow:0 10px 40px rgba(0,0,0,0.7);font-family:Arial,sans-serif;width:280px;backdrop-filter:blur(4px);';
+    box.innerHTML =
+      '<div style="color:#7ec0ff;font-size:11px;letter-spacing:2px;margin-bottom:10px;border-bottom:1px solid rgba(126,192,255,0.25);padding-bottom:7px;">THE LIVING PLANET \u00b7 RIGHT NOW</div>'+
+      '<div style="color:#ffd27a;font-size:12px;margin-bottom:3px;">\u2600\ufe0f DAY &amp; NIGHT</div>'+
+      '<div id="orr-daynight" style="color:#dce8f8;font-size:12px;margin-bottom:11px;line-height:1.5;">\u2014</div>'+
+      '<div style="color:#9fd0ff;font-size:12px;margin-bottom:3px;">\u23f0 WORLD CLOCK</div>'+
+      '<div id="orr-clock" style="color:#dce8f8;font-size:12px;margin-bottom:11px;line-height:1.7;font-variant-numeric:tabular-nums;">\u2014</div>'+
+      '<div style="color:#cfd6e0;font-size:12px;margin-bottom:3px;">\U0001f311 MOON TONIGHT</div>'+
+      '<div id="orr-moon" style="color:#dce8f8;font-size:12px;line-height:1.5;">\u2014</div>';
+    document.body.appendChild(box);
+
+    // ---- pure-local astronomy (no cloud, true every second) ----
+    function subsolarLongitude(now){
+      // approximate longitude where the sun is directly overhead
+      var utcH = now.getUTCHours() + now.getUTCMinutes()/60 + now.getUTCSeconds()/3600;
+      return -15 * (utcH - 12); // degrees: +east
+    }
+    function dayNightText(now){
+      var lon = subsolarLongitude(now);
+      var side;
+      // which broad region currently has the sun overhead
+      if (lon > -30 && lon < 60) side = 'Europe, Africa &amp; the Middle East';
+      else if (lon >= 60 && lon < 150) side = 'Asia &amp; Australia';
+      else if (lon >= 150 || lon < -150) side = 'the Pacific';
+      else side = 'the Americas';
+      var lonStr = (Math.abs(lon)).toFixed(0) + '\u00b0' + (lon>=0?'E':'W');
+      return 'The Sun is overhead near <b style=\"color:#ffe1a8\">'+lonStr+'</b><br>It is midday over '+side+'.';
+    }
+    function clockText(now){
+      var zones = [['Athens','Europe/Athens'],['London','Europe/London'],['New York','America/New_York'],['Tokyo','Asia/Tokyo'],['Sydney','Australia/Sydney']];
+      var out = '';
+      for (var i=0;i<zones.length;i++){
+        var t;
+        try { t = now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:zones[i][1]}); }
+        catch(e){ t = '--:--'; }
+        out += '<span style=\"color:#8fb8e0;display:inline-block;width:78px;\">'+zones[i][0]+'</span> <b style=\"color:#fff;\">'+t+'</b><br>';
+      }
+      return out;
+    }
+    function moonPhase(now){
+      // days since known new moon 2000-01-06 18:14 UTC; synodic month 29.530588853
+      var ref = Date.UTC(2000,0,6,18,14,0);
+      var days = (now.getTime() - ref) / 86400000;
+      var syn = 29.530588853;
+      var age = ((days % syn) + syn) % syn;
+      var illum = Math.round((1 - Math.cos(2*Math.PI*age/syn))/2 * 100);
+      var name, em;
+      if (age < 1.85) { name='New Moon'; em='\U0001f311'; }
+      else if (age < 5.54) { name='Waxing Crescent'; em='\U0001f312'; }
+      else if (age < 9.23) { name='First Quarter'; em='\U0001f313'; }
+      else if (age < 12.91) { name='Waxing Gibbous'; em='\U0001f314'; }
+      else if (age < 16.61) { name='Full Moon'; em='\U0001f315'; }
+      else if (age < 20.30) { name='Waning Gibbous'; em='\U0001f316'; }
+      else if (age < 23.99) { name='Last Quarter'; em='\U0001f317'; }
+      else if (age < 27.68) { name='Waning Crescent'; em='\U0001f318'; }
+      else { name='New Moon'; em='\U0001f311'; }
+      return em+' <b style=\"color:#fff;\">'+name+'</b><br>'+illum+'% illuminated \u00b7 '+age.toFixed(1)+' days old';
+    }
+    var orrTimer=null;
+    function refreshPanel(){
+      var now = new Date();
+      var dn=document.getElementById('orr-daynight'), ck=document.getElementById('orr-clock'), mn=document.getElementById('orr-moon');
+      if(dn) dn.innerHTML = dayNightText(now);
+      if(ck) ck.innerHTML = clockText(now);
+      if(mn) mn.innerHTML = moonPhase(now);
+    }
+    global.addEventListener('contextmenu', function(e){
+      e.preventDefault();
+      box.style.left = Math.min(e.clientX, global.innerWidth-300) + 'px';
+      box.style.top = Math.min(e.clientY, global.innerHeight-230) + 'px';
+      box.style.display = 'block';
+      refreshPanel();
+      if(orrTimer) clearInterval(orrTimer);
+      orrTimer = setInterval(refreshPanel, 1000); // tick every second
+    });
+    document.addEventListener('click', function(e){
+      if (!box.contains(e.target)){ box.style.display='none'; if(orrTimer){clearInterval(orrTimer);orrTimer=null;} }
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape'){ box.style.display='none'; if(orrTimer){clearInterval(orrTimer);orrTimer=null;} }
+    });
+
+    function goBig(){
+      state.big = true; state.hidden = false; if(grp) grp.visible = true; state.zoom = 3.0; state.tPosX = 0; state.tPosY = 0;
+      if (stageEl){ stageEl.style.zIndex = '9998'; stageEl.style.pointerEvents = 'auto'; }
+      dom.style.pointerEvents = 'auto';
+      dom.style.cursor = 'grab';
+      document.body.classList.add('orrery-big');
+      // an exit button to come back
+      if (!document.getElementById('orrery-exit')){
+        var ex=document.createElement('div'); ex.id='orrery-exit';
+        ex.textContent='✕ close globe';
+        ex.style.cssText='position:fixed;top:14px;right:16px;z-index:10001;color:#9fc4ff;background:rgba(8,14,26,0.85);border:1px solid rgba(126,192,255,0.5);border-radius:8px;padding:7px 12px;font:13px Arial;cursor:pointer;';
+        ex.onclick=function(ev){ ev.stopPropagation(); goSmall(); };
+        document.body.appendChild(ex);
+      }
+      document.getElementById('orrery-exit').style.display='block';
+    }
+    function goSmall(){
+      state.big = false; state.zoom = 6; state.manualX = 0;
+      if (stageEl){ stageEl.style.zIndex = '0'; stageEl.style.pointerEvents = 'none'; }
+      dom.style.pointerEvents = 'none';
+      document.body.classList.remove('orrery-big');
+      var ex=document.getElementById('orrery-exit'); if(ex) ex.style.display='none';
+    }
+
+    var st = { targetAz:0, targetPo:0, az:0, po:0 }; orbitControls(st);
+
     (function animate(){
       requestAnimationFrame(animate);
-      st.az += (st.targetAz - st.az)*0.05; st.po += (st.targetPo - st.po)*0.05;
-      grp.rotation.y += 0.0025 + st.az*0.04; grp.rotation.x = st.po*0.5;
-      ring.rotation.z += 0.003;
+      // very slow constant rotation + manual spin + inertia
+      state.velY *= 0.95; state.velX *= 0.95;
+      state.manualY += state.velY; state.manualX += state.velX;
+      earth.rotation.y += state.spinY + (state.dragging?0:0) ;
+      earth.rotation.y += state.velY;
+      grp.rotation.y = state.manualY + earth.rotation.y*0; // manual yaw applied to group
+      grp.rotation.x = Math.max(-0.6, Math.min(0.6, state.manualX));
+      // actually rotate the planet itself for the slow spin
+      earth.rotation.y += 0;
+
+      // LIVE TERMINATOR: aim the sun at the real subsolar longitude right now
+      var nowS = new Date();
+      var utcH = nowS.getUTCHours() + nowS.getUTCMinutes()/60;
+      var sunLon = (-15 * (utcH - 12)) * Math.PI/180;  // radians, +east
+      sun.position.set(Math.sin(sunLon)*5, 1.2, Math.cos(sunLon)*5);
+
+      // camera zoom ease
+      camera.position.z += (state.zoom - camera.position.z) * 0.08;
+
+      // position: small mode follows cursor; big mode centers
+      if (state.big){ state.tPosX = 0; state.tPosY = 0; }
+      state.posX += (state.tPosX - state.posX) * 0.06;
+      state.posY += (state.tPosY - state.posY) * 0.06;
+      grp.position.x = state.posX; grp.position.y = state.posY;
+      shadow.position.x = state.posX + R*0.35;
+      shadow.position.y = state.posY - R*1.15;
+      shadow.position.z = -0.2;
+      shadow.visible = !state.big; // hide ground shadow in space-big mode
+
       renderer.render(scene, camera);
     })();
     onResize(renderer, camera);
@@ -373,9 +666,51 @@
   }
 
   // ---- public API ------------------------------------------------------
+  // ====================================================================
+  // CONFETTI - non-stop celebration, drifts down over the whole page,
+  // own canvas on TOP, pointer-events:none so clicks pass through.
+  // ====================================================================
+  function confetti(opts) {
+    opts = opts || {};
+    var cv = document.createElement('canvas');
+    cv.id = 'ourapp-confetti';
+    cv.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:9999;pointer-events:none;';
+    document.body.appendChild(cv);
+    var ctx = cv.getContext('2d');
+    function size(){ cv.width = global.innerWidth; cv.height = global.innerHeight; }
+    size(); global.addEventListener('resize', size);
+    var colors = opts.colors || ['#fbbf24','#34d399','#60a5fa','#f472b6','#f87171','#a78bfa','#ffffff'];
+    var N = opts.count || 280;
+    var bits = [];
+    function spawn(y){
+      return { x: Math.random()*cv.width,
+               y: (y===undefined ? Math.random()*cv.height : y),
+               w: 6+Math.random()*7, h: 9+Math.random()*9,
+               c: colors[(Math.random()*colors.length)|0],
+               rot: Math.random()*6.28, vr: (Math.random()-0.5)*0.2,
+               vy: 1.1+Math.random()*2.4, vx: (Math.random()-0.5)*1.2,
+               sway: Math.random()*6.28, sw: 0.02+Math.random()*0.04 };
+    }
+    for (var i=0;i<N;i++) bits.push(spawn());
+    (function loop(){
+      requestAnimationFrame(loop);
+      ctx.clearRect(0,0,cv.width,cv.height);
+      for (var i=0;i<bits.length;i++){
+        var b=bits[i];
+        b.sway+=b.sw; b.y+=b.vy; b.x+=b.vx+Math.sin(b.sway)*0.8; b.rot+=b.vr;
+        if (b.y > cv.height+20){ bits[i]=spawn(-20); }   // recycle -> NON-STOP
+        ctx.save();
+        ctx.translate(b.x,b.y); ctx.rotate(b.rot);
+        ctx.fillStyle=b.c; ctx.globalAlpha=0.9;
+        ctx.fillRect(-b.w/2,-b.h/2,b.w,b.h);
+        ctx.restore();
+      }
+    })();
+  }
+
   var FX = {
     starfield: fxStarfield, aurora: fxAurora, network: fxNetwork,
-    globe: fxGlobe, embers: fxEmbers, helix: fxHelix, grid: fxGrid
+    globe: fxGlobe, embers: fxEmbers, helix: fxHelix, grid: fxGrid, confetti: confetti
   };
 
   function mount(name, opts) {
@@ -389,7 +724,7 @@
     else go();
   }
 
-  global.OURAPP = { mount: mount, fx: FX };
+  global.OURAPP = { mount: mount, fx: FX, confetti: confetti };
 })(window);
 
 /* ============================================================

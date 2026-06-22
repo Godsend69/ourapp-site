@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE SUN — OurApp</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+*{box-sizing:border-box;}
+body{margin:0;background:#05060f url('assets/nebula_soft.jpg') center/cover fixed;color:#e8f0ff;font-family:'Segoe UI',Arial,sans-serif;min-height:100vh;}
+.wrap{max-width:1000px;margin:0 auto;padding:24px;}
+a.back{color:#9fc4ff;text-decoration:none;font-size:14px;} a.back:hover{text-decoration:underline;}
+.hero{display:flex;gap:30px;align-items:center;flex-wrap:wrap;margin:20px 0 30px;}
+#globe3d{width:340px;height:340px;flex-shrink:0;}
+.title h1{font-size:54px;margin:0;letter-spacing:6px;color:#ffaa33;text-shadow:0 0 24px #ffaa3388;}
+.title p{font-size:17px;color:#b8c8e0;margin:8px 0 0;}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:24px 0;}
+.fact{background:rgba(12,20,38,0.7);border:1px solid #ffaa3344;border-radius:10px;padding:12px 14px;}
+.fact .k{font-size:11px;color:#8aa0c0;letter-spacing:1px;} .fact .v{font-size:18px;color:#fff;font-weight:600;margin-top:3px;}
+.hist{background:rgba(8,14,26,0.6);border:1px solid #ffaa3333;border-radius:14px;padding:8px 26px;margin-top:10px;}
+.hist h2{color:#ffaa33;letter-spacing:2px;font-size:15px;} .hist p{line-height:1.7;color:#d8e2f2;font-size:15px;}
+footer{text-align:center;color:#3f5f7f;font-size:11px;padding:30px;}
+</style></head><body>
+<div class="wrap">
+  <a class="back" href="pricing.html">← Back to the living globe</a>
+  <div class="hero"><div id="globe3d"></div><div class="title"><h1>THE SUN</h1><p>Our star — the blazing heart of the solar system.</p></div></div>
+  <div class="facts"><div class="fact"><div class="k">Type</div><div class="v">G-type main-sequence star</div></div><div class="fact"><div class="k">Diameter</div><div class="v">1,392,700 km</div></div><div class="fact"><div class="k">Surface temp</div><div class="v">~5,500°C</div></div><div class="fact"><div class="k">Core temp</div><div class="v">~15 million °C</div></div><div class="fact"><div class="k">Age</div><div class="v">~4.6 billion years</div></div><div class="fact"><div class="k">Mass</div><div class="v">99.8% of the solar system</div></div></div>
+  <div class="hist"><h2>HISTORY</h2><p>The Sun was born about 4.6 billion years ago when a vast cloud of gas and dust collapsed under its own gravity, igniting nuclear fusion at its core and lighting the solar system into being.</p><p>It is a colossal sphere of hot plasma, fusing about 600 million tons of hydrogen into helium every second, releasing the light and warmth that make life on Earth possible.</p><p>Energy born in its core takes tens of thousands of years to struggle to the surface, then just eight minutes to cross space and reach us as sunlight.</p><p>The Sun holds 99.8% of all the mass in the solar system, and every planet, moon, comet, and speck of dust orbits it. In billions of years it will swell into a red giant, then fade into a white dwarf.</p></div>
+</div>
+<footer>© 2026 Spiridon Tsakonas (Cyrus Nash) — Light in the Dark Solutions — All Rights Reserved</footer>
+<script>
+(function(){
+  var rn=new THREE.WebGLRenderer({alpha:true,antialias:true}); rn.setSize(340,340); rn.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  var sc=new THREE.Scene(); var cam=new THREE.PerspectiveCamera(45,1,0.1,100); cam.position.z=3.2;
+  document.getElementById('globe3d').appendChild(rn.domElement);
+  sc.add(new THREE.AmbientLight(0xffffff,0.9));
+  var tex=new THREE.TextureLoader().load('assets/planet_sun.jpg'); if(tex.colorSpace!==undefined)tex.colorSpace=THREE.SRGBColorSpace;
+  var p=new THREE.Mesh(new THREE.SphereGeometry(1,64,64), new THREE.MeshBasicMaterial({map:tex}));
+  sc.add(p);
+  var halo=new THREE.Mesh(new THREE.SphereGeometry(1.12,48,48), new THREE.MeshBasicMaterial({color:0xffaa33,transparent:true,opacity:0.25,side:THREE.BackSide})); sc.add(halo);
+  (function a(){requestAnimationFrame(a); p.rotation.y+=0.0016; rn.render(sc,cam);})();
+})();
+</script></body></html>

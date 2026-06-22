@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE MOON — OurApp</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+*{box-sizing:border-box;}
+body{margin:0;background:#05060f url('assets/nebula_soft.jpg') center/cover fixed;color:#e8f0ff;font-family:'Segoe UI',Arial,sans-serif;min-height:100vh;}
+.topnav{display:flex;align-items:center;justify-content:space-between;padding:18px 26px;}
+.navbtn{display:inline-flex;align-items:center;gap:8px;color:#9fc4ff;text-decoration:none;font-size:15px;background:rgba(10,18,34,0.7);border:1px solid #cfd6e055;border-radius:10px;padding:9px 16px;transition:.2s;}
+.navbtn:hover{background:#cfd6e022;border-color:#cfd6e0;}
+.navbtn .ar{font-size:20px;line-height:1;}
+.wrap{max-width:1000px;margin:0 auto;padding:10px 24px 24px;}
+.hero{display:flex;gap:30px;align-items:center;flex-wrap:wrap;margin:10px 0 30px;}
+#globe3d{width:340px;height:340px;flex-shrink:0;}
+.title h1{font-size:54px;margin:0;letter-spacing:6px;color:#cfd6e0;text-shadow:0 0 24px #cfd6e066;}
+.title p{font-size:17px;color:#b8c8e0;margin:8px 0 0;}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:24px 0;}
+.fact{background:rgba(12,20,38,0.7);border:1px solid #cfd6e044;border-radius:10px;padding:12px 14px;}
+.fact .k{font-size:11px;color:#8aa0c0;letter-spacing:1px;}
+.fact .v{font-size:18px;color:#fff;font-weight:600;margin-top:3px;}
+.hist{background:rgba(8,14,26,0.6);border:1px solid #cfd6e033;border-radius:14px;padding:8px 26px;margin-top:10px;}
+.hist h2{color:#cfd6e0;letter-spacing:2px;font-size:15px;}
+.hist p{line-height:1.7;color:#d8e2f2;font-size:15px;}
+footer{text-align:center;color:#3f5f7f;font-size:11px;padding:30px;}
+</style></head><body>
+<div class="topnav">
+  <a class="navbtn" href="pricing.html"><span class="ar">&#8592;</span> Back to the living globe</a>
+  <a class="navbtn" href="https://spacetelescopelive.org/" target="_blank" rel="noopener">Live Space Telescope <span class="ar">&#8594;</span></a>
+</div>
+<div class="wrap">
+  <div class="hero">
+    <div id="globe3d"></div>
+    <div class="title"><h1>THE MOON</h1><p>Earth’s companion — born of fire, keeper of our nights.</p></div>
+  </div>
+  <div class="facts"><div class="fact"><div class="k">Type</div><div class="v">Earth’s only natural satellite</div></div><div class="fact"><div class="k">Diameter</div><div class="v">3,474 km</div></div><div class="fact"><div class="k">Day length</div><div class="v">29.5 Earth days</div></div><div class="fact"><div class="k">Distance</div><div class="v">384,400 km</div></div><div class="fact"><div class="k">Gravity</div><div class="v">1/6 of Earth’s</div></div><div class="fact"><div class="k">Age</div><div class="v">~4.51 billion years</div></div></div>
+  <div class="hist"><h2>HISTORY</h2><p>The Moon was born about 4.51 billion years ago, most likely when a Mars-sized world called Theia struck the young Earth and the debris flung into orbit gathered into our companion.</p><p>It is locked in step with Earth, always showing us the same face — the near side — while the far side stayed hidden until spacecraft first photographed it in 1959.</p><p>Its surface is a record of violence and time: dark plains of ancient hardened lava called maria, and bright highlands saturated with craters from billions of years of impacts.</p><p>In 1969 it became the only other world humans have walked upon. Its gravity raises Earth’s tides and slowly steadies our planet’s spin — a quiet guardian of the rhythm of life.</p></div>
+</div>
+<footer>© 2026 Spiridon Tsakonas (Cyrus Nash) — Light in the Dark Solutions — All Rights Reserved</footer>
+<script>
+(function(){
+  var rn=new THREE.WebGLRenderer({alpha:true,antialias:true}); rn.setSize(340,340); rn.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  var sc=new THREE.Scene(); var cam=new THREE.PerspectiveCamera(45,1,0.1,100); cam.position.z=3.2;
+  document.getElementById('globe3d').appendChild(rn.domElement);
+  sc.add(new THREE.AmbientLight(0x4a6a8a,0.7));
+  var su=new THREE.DirectionalLight(0xfff6e8,1.6); su.position.set(-3,1.5,3); sc.add(su);
+  var tex=new THREE.TextureLoader().load('assets/planet_moon.jpg'); if(tex.colorSpace!==undefined)tex.colorSpace=THREE.SRGBColorSpace;
+  var p=new THREE.Mesh(new THREE.SphereGeometry(1,64,64), new THREE.MeshPhongMaterial({map:tex,shininess:14,emissive:0x0a1422,emissiveIntensity:0.4}));
+  sc.add(p);
+  (function a(){requestAnimationFrame(a); p.rotation.y+=0.0016; rn.render(sc,cam);})();
+})();
+</script></body></html>

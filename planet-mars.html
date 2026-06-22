@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MARS — OurApp</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+*{box-sizing:border-box;}
+body{margin:0;background:#05060f url('assets/nebula_soft.jpg') center/cover fixed;color:#e8f0ff;font-family:'Segoe UI',Arial,sans-serif;min-height:100vh;}
+.wrap{max-width:1000px;margin:0 auto;padding:24px;}
+a.back{color:#9fc4ff;text-decoration:none;font-size:14px;}
+a.back:hover{text-decoration:underline;}
+.hero{display:flex;gap:30px;align-items:center;flex-wrap:wrap;margin:20px 0 30px;}
+#globe3d{width:340px;height:340px;flex-shrink:0;}
+.title h1{font-size:54px;margin:0;letter-spacing:6px;color:#e07b53;text-shadow:0 0 24px #e07b5366;}
+.title p{font-size:17px;color:#b8c8e0;margin:8px 0 0;}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:24px 0;}
+.fact{background:rgba(12,20,38,0.7);border:1px solid #e07b5344;border-radius:10px;padding:12px 14px;}
+.fact .k{font-size:11px;color:#8aa0c0;letter-spacing:1px;}
+.fact .v{font-size:18px;color:#fff;font-weight:600;margin-top:3px;}
+.hist{background:rgba(8,14,26,0.6);border:1px solid #e07b5333;border-radius:14px;padding:8px 26px;margin-top:10px;}
+.hist h2{color:#e07b53;letter-spacing:2px;font-size:15px;}
+.hist p{line-height:1.7;color:#d8e2f2;font-size:15px;}
+footer{text-align:center;color:#3f5f7f;font-size:11px;padding:30px;}
+</style></head><body>
+<div class="wrap">
+  <a class="back" href="pricing.html">← Back to the living globe</a>
+  <div class="hero">
+    <div id="globe3d"></div>
+    <div class="title"><h1>MARS</h1><p>The Red Planet — a frozen desert that once ran with water.</p></div>
+  </div>
+  <div class="facts"><div class="fact"><div class="k">Order from the Sun</div><div class="v">4th planet</div></div><div class="fact"><div class="k">Diameter</div><div class="v">6,779 km</div></div><div class="fact"><div class="k">Day length</div><div class="v">24.6 hours</div></div><div class="fact"><div class="k">Year length</div><div class="v">687 days</div></div><div class="fact"><div class="k">Moons</div><div class="v">2 (Phobos & Deimos)</div></div><div class="fact"><div class="k">Named after</div><div class="v">Roman god of war</div></div></div>
+  <div class="hist"><h2>HISTORY</h2><p>Mars formed about 4.5 billion years ago. Its rusty color comes from iron oxide — literal rust — covering its surface in fine red dust.</p><p>Billions of years ago Mars was warmer and wetter, with rivers, lakes, and possibly a northern ocean. Dry riverbeds and mineral deposits left by water are still visible today.</p><p>As its core cooled, Mars lost most of its magnetic field, and the solar wind stripped away its thick atmosphere, leaving the thin, cold world we see now.</p><p>Mars hosts Olympus Mons, the tallest known volcano in the solar system, and Valles Marineris, a canyon system stretching over 4,000 km. It is the most explored planet beyond Earth.</p></div>
+</div>
+<footer>© 2026 Spiridon Tsakonas (Cyrus Nash) — Light in the Dark Solutions — All Rights Reserved</footer>
+<script>
+(function(){
+  var W=340,H=340;
+  var sc=new THREE.Scene();
+  var cam=new THREE.PerspectiveCamera(45,1,0.1,100); cam.position.z=3.2;
+  var rn=new THREE.WebGLRenderer({alpha:true,antialias:true}); rn.setSize(W,H);
+  rn.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  document.getElementById('globe3d').appendChild(rn.domElement);
+  sc.add(new THREE.AmbientLight(0x4a6a8a,0.7));
+  var su=new THREE.DirectionalLight(0xfff6e8,1.6); su.position.set(-3,1.5,3); sc.add(su);
+  var tex=new THREE.TextureLoader().load('assets/planet_mars.jpg');
+  if(tex.colorSpace!==undefined)tex.colorSpace=THREE.SRGBColorSpace;
+  var p=new THREE.Mesh(new THREE.SphereGeometry(1,64,64),
+    new THREE.MeshPhongMaterial({map:tex,shininess:14,emissive:0x0a1422,emissiveIntensity:0.4}));
+  sc.add(p);
+  
+  (function a(){requestAnimationFrame(a); p.rotation.y+=0.0016; rn.render(sc,cam);})();
+})();
+</script>
+</body></html>
